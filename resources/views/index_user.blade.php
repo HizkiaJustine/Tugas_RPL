@@ -40,7 +40,7 @@
             <i class="bi bi-bell"></i>
             <span class="badge">3</span>
             <div class="dropdown-notifications">
-                <a href="#">Notifikasi 1</a>
+                <a href="#">Notifikasi 1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a>
                 <a href="#">Notifikasi 2</a>
                 <a href="#">Notifikasi 3</a>
             </div>
