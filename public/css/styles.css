@@ -1,0 +1,363 @@
+/* General Styles */
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+    background-color: #003366; /* Dark blue */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 15px 0;
+    font-size: large;
+    top: 0;
+    position: sticky;
+    z-index: 1000;
+    height: 80px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 50px;
+    display: block;
+}
+
+.navbar button {
+    padding: 0px;
+    display: block;
+}
+
+.navbar a:hover {
+    background-color: #005599; /* Lighter blue */
+}
+
+/* Notification */
+.notification-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.notification-icon .bi {
+    font-size: 24px;
+    color: white;
+}
+
+.notification-icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    padding: 1px 5px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 15px;
+}
+
+.dropdown-notifications {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.dropdown-notifications a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    border-radius: 5px;
+}
+
+.dropdown-notifications a:hover {
+    background-color: #ddd;
+}
+
+.notification-icon:hover .dropdown-notifications {
+    display: block;
+}
+
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+}
+
+/* Full-Width Dropdown Menu */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position dropdown below navbar */
+    left: 0;
+    width: 50vw; /* Full width of the viewport */
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex; /* Display the dropdown as flex */
+}
+
+/* Dropdown Content Columns */
+.dropdown-content .column {
+    flex: 1; /* Equal width for each column */
+    padding: 10px 20px;
+}
+
+.dropdown-content a {
+    color: #003366; /* Dark blue text */
+    text-decoration: none;
+    padding: 15px 0;
+    display: block;
+    font-size: medium;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f0f0; /* Light gray */
+}
+
+/* Flexbox for Two Columns */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    flex-wrap: nowrap; /* Prevent wrapping */
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Footer */
+footer {
+    background: #003366;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+
+.button-74 {
+  background-color: #005599;
+  border: 2px solid white;
+  border-radius: 30px;
+  box-shadow: white 4px 4px 0 0;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0 18px;
+  line-height: 40px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-74:hover {
+  background-color: #013e70;
+}
+
+.button-74:active {
+  box-shadow: #2169a4 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+.arrow {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 2px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.image-layanan {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    width: 1200px;
+    height: 500px;
+}
+
+.desc-content {
+    text-align: justify;
+    line-height: 1.6;
+    color: #005599;
+  }
+
+.desc-title {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+.accordion {
+    width: 100%;
+    max-width: 1200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.accordion-item {
+    border-top: 1px solid #ddd;
+}
+
+.accordion-header {
+    background-color: #005599;
+    color: white;
+    padding: 15px 20px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 16px;
+}
+
+.accordion-header:hover {
+    background-color: #004080;
+}
+
+.accordion-content {
+    display: none; /* Hidden by default */
+    padding: 20px 20px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    border-top: 1px solid #ddd;
+    line-height: 2;
+    color: #005599;
+
+}
+
+.accordion-content p {
+    margin: 0;
+}
+
+.accordion-header.active {
+    background-color: #003366;
+}
+
+/* From Uiverse.io by vinodjangid07 */ 
+.Btn-Container {
+    display: flex;
+    width: 200px;
+    height: fit-content;
+    background-color: #003366;
+    border-radius: 40px;
+    box-shadow: 0px 5px 10px #bebebe;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    margin-left: auto; /* Pushes the button to the right edge */
+    position: relative; /* Works with parent flexbox positioning */
+  }
+  .icon-Container {
+    width: 45px;
+    height: 45px;
+    background-color: #a4e4fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid #003366;
+  }
+  .text {
+    width: calc(170px - 45px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5em;
+    letter-spacing: 1.2px;
+  }
+  .icon-Container svg {
+    transition-duration: 1.5s;
+  }
+  .Btn-Container:hover .icon-Container svg {
+    transition-duration: 1.5s;
+    animation: arrow 1s linear infinite;
+  }
+  @keyframes arrow {
+    0% {
+      opacity: 0;
+      margin-left: 0px;
+    }
+    100% {
+      opacity: 1;
+      margin-left: 10px;
+    }
+}
+
+/* Carousel Styles */
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+  
+.gallery {
+    max-width: 100%;
+    margin: 50px auto;
+}
+
+.gallery-cell {
+    width: 1000px;
+    height: 400px;
+    margin-right: 10px;
+    /* background: #8C8;
+    counter-increment: gallery-cell; */
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+}
+
+/* cell number */
+.gallery-cell:before {
+    display: block;
+    text-align: center;
+    /* content: counter(gallery-cell); */
+    line-height: 200px;
+    font-size: 80px;
+    color: white;
+}
+
+.gallery-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile {
+    display: inline-block; /* Ensures the image stays in line with the navbar */
+    margin-left: 0px; /* Adjust spacing from the left */
+    width: 55px; /* Increase the size */
+    height: 55px; /* Keep aspect ratio consistent */
+    border-radius: 50%; /* Keep it circular */
+}
