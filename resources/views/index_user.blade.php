@@ -12,9 +12,14 @@
 <body>
     <!-- Navbar -->
     <div class="navbar">
-        <a href="#">
+        <div class="profile-icon">
             <img src="https://i.pinimg.com/736x/7f/c4/c6/7fc4c6ecc7738247aac61a60958429d4.jpg" alt="Profile" class="profile">
-        </a>
+            <div class="dropdown-profile">
+                <a href="#">Profil Saya</a>
+                <a href="#">Pengaturan</a>
+                <a href="#">Keluar</a>
+            </div>
+        </div>
         <a href="index_user.html">Home</a>
         <div class="dropdown">
             <a href="#">Layanan</a>
@@ -51,7 +56,7 @@
     <!-- Carousel -->
     <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true, "autoPlay": 3000 }'>
         <div class="gallery-cell">
-            <img src="welcome.png" alt="Image 1">
+            <img src="img/welcome.png" alt="Image 1">
         </div>
         <div class="gallery-cell">
             <img src="https://i.pinimg.com/736x/69/cb/b9/69cbb98ff0591e43312d9e1ee137fae7.jpg" alt="Image 1">
@@ -142,34 +147,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js"></script>
 
-    <script>
-        // Get all accordion headers
-        const headers = document.querySelectorAll(".accordion-header");
-    
-        headers.forEach(header => {
-            header.addEventListener("click", () => {
-                // Close all other accordions
-                headers.forEach(h => {
-                    if (h !== header) {
-                        h.classList.remove("active");
-                        h.nextElementSibling.style.display = "none";
-                    }
-                });
-    
-                // Toggle the clicked accordion
-                header.classList.toggle("active");
-                const content = header.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
-            });
-        });
-
-        function navigate_to_loginpage() {
-            window.location.href = "login.html";
-        }
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
