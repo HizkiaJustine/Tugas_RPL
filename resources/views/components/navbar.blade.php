@@ -7,7 +7,7 @@
             <a href="#">Keluar</a>
         </div>
     </div>
-    <a href="/">Home</a>
+    <a href="/" class="{{ request()->is('/') ? 'nav-active' : ''}}">Home</a>
     <div class="dropdown">
         <a href="#">Layanan</a>
         <div class="dropdown-content">
@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <a href="#">Tentang RSUI</a>
+    <a href="about" class="{{ request()->is('about') ? 'nav-active' : ''}}">Tentang RSUI</a>
     <a href="#">Berita</a>
     <a href="#">Kontak</a>
     <div class="notification-icon">

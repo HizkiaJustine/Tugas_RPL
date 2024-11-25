@@ -98,12 +98,7 @@
 
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>Contact us at +6281345678912</p>
-            <p>© 2024 Clinic Name. All Rights Reserved.</p>
-        </div>
-    </footer>
+    <x-footer></x-footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js"></script>
 

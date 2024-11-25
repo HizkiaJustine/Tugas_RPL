@@ -36,6 +36,11 @@ body {
     background-color: #005599; /* Lighter blue */
 }
 
+.nav-active {
+    background-color: black;
+    border-radius: 5px;
+}
+
 /* Notification and Profile*/
 .notification-icon, .profile-icon{
     position: relative;
