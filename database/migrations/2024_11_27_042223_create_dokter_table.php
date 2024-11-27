@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dokter', function (Blueprint $table) {
+        Schema::create('Dokter', function (Blueprint $table) {
             $table->string(column: 'DokterID')->primary();
             $table->string(column: 'NamaDokter', length: 100);
             $table->string(column: 'Departemen', length: 100);
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string(column: 'NomorHP', length: 15);
             $table->string(column: 'FotoDokter');
             $table->string('AccountID')->nullable()->index();
-            $table->foreign('AccountID')->references('AccountID')->on('account');
+            $table->foreign('AccountID')->references('AccountID')->on('Account');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dokter');
+        Schema::dropIfExists('Dokter');
     }
 };
