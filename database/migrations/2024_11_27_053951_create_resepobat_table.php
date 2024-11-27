@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rekammedis', function (Blueprint $table) {
-            $table->string('RekamMedisID')->primary();
-            $table->date(column: 'Tanggal');
-            $table->string(column: 'PasienID');
+        Schema::create('resepobat', function (Blueprint $table) {
+            $table->string('ResepObatID')->primary();
+            $table->date('Tanggal');
             $table->string(column: 'DokterID');
-            $table->text('HasilDiagnosa');
-            $table->text('Perawatan');
-            $table->text('ResepObat');
-            $table->text('HasilLab');
+            $table->string(column: 'PasienID');
+            $table->text('ListObat');
+            $table->text('DosisObat');
+            $table->text('InstruksiPenggunaanObat');
             $table->foreign(columns: 'DokterID')->references(columns: 'DokterID')->on(table: 'dokter')->onDelete('cascade');
             $table->foreign(columns: 'PasienID')->references(columns: 'PasienID')->on(table: 'pasien')->onDelete('cascade');
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rekammedis');
+        Schema::dropIfExists('resepobat');
     }
 };

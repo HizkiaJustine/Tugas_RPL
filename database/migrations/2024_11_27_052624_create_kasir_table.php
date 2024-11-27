@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dokter', function (Blueprint $table) {
-            $table->string(column: 'DokterID')->primary();
-            $table->string(column: 'NamaDokter', length: 100);
-            $table->string(column: 'Departemen', length: 100);
-            $table->string(column: 'AlamatDokter');
+        Schema::create('kasir', function (Blueprint $table) {
+            $table->string(column: 'KasirID')->primary();
+            $table->string(column: 'NamaKasir', length: 100);
             $table->string(column: 'NomorHP', length: 15);
-            $table->string(column: 'FotoDokter');
-            $table->string('LayananID');
+            $table->string(column: 'AlamatKasir');
+            $table->enum(column: 'JenisKelamin', allowed: ['L', 'P']);
             $table->string('AccountID')->nullable()->index();
-            $table->foreign('LayananID')->references('LayananID')->on('layanan');
             $table->foreign('AccountID')->references('AccountID')->on('account');
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dokter');
+        Schema::dropIfExists('kasir');
     }
 };

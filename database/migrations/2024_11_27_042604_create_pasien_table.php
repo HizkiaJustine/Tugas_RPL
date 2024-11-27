@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Pasien', function (Blueprint $table) {
+        Schema::create('pasien', function (Blueprint $table) {
             $table->string('PasienID')->primary();
             $table->string('NamaPasien', length:100);
             $table->integer(column: 'UmurPasien');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum(column: 'JenisKelamin', allowed: ['L', 'P']);
             $table->string(column: 'NomorHP', length: 15);
             $table->string('AccountID')->nullable()->index();
-            $table->foreign('AccountID')->references('AccountID')->on('Account');
+            $table->foreign('AccountID')->references('AccountID')->on('account');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Pasien');
+        Schema::dropIfExists('pasien');
     }
 };

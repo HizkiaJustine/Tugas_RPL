@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Account', function (Blueprint $table) {
+        Schema::create('account', function (Blueprint $table) {
             $table->string(column: 'AccountID')->primary();
             $table->string('email')->unique();
             $table->string('password');
@@ -20,10 +20,10 @@ return new class extends Migration
         });
 
 
-        Schema::create('Sessions', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('AccountID')->nullable()->index();
-            $table->foreign('AccountID')->references('AccountID')->on('Account');
+            $table->foreign('AccountID')->references('AccountID')->on('account');
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');
@@ -36,7 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Account');
-        Schema::dropIfExists('Sessions');
+        Schema::dropIfExists('account');
+        Schema::dropIfExists('sessions');
     }
 };
