@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -11,6 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::create('dokter', function (Blueprint $table) {
             $table->string(column: 'DokterID')->primary();
             $table->string(column: 'NamaDokter', length: 100);
@@ -23,6 +25,7 @@ return new class extends Migration
             $table->foreign('LayananID')->references('LayananID')->on('layanan');
             $table->foreign('AccountID')->references('AccountID')->on('account');
         });
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 
     /**
@@ -30,6 +33,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('dokter');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 };
