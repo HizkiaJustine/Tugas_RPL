@@ -25,6 +25,15 @@ return new class extends Migration
             $table->foreign(columns: 'PasienID')->references(columns: 'PasienID')->on(table: 'pasien')->onDelete('cascade');
         });
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        DB::unprepared('
+        CREATE TRIGGER before_insert_pembayaran
+        BEFORE INSERT ON pembayaran
+        FOR EACH ROW
+        BEGIN
+            SET NEW.PembayaranID = CONCAT("PY", (SELECT IFNULL(MAX(CAST(SUBSTRING(PembayaranID, 3) AS UNSIGNED)), 0) + 1 FROM pembayaran));
+        END
+        ');
     }
 
     /**
@@ -32,6 +41,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_pembayaran');
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         Schema::dropIfExists('pembayaran');

@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -21,6 +22,15 @@ return new class extends Migration
             $table->string('ResepObatID');
             $table->foreign('ResepObatID')->references('ResepObatID')->on('resepobat')->onDelete('cascade');
         });
+
+        DB::unprepared('
+        CREATE TRIGGER before_insert_obat
+        BEFORE INSERT ON obat
+        FOR EACH ROW
+        BEGIN
+            SET NEW.ObatID = CONCAT("O", (SELECT IFNULL(MAX(CAST(SUBSTRING(ObatID, 2) AS UNSIGNED)), 0) + 1 FROM obat));
+        END
+        ');
     }
 
     /**
@@ -28,6 +38,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_obat');
         Schema::dropIfExists('obat');
     }
 };

@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -29,6 +30,15 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        DB::unprepared('
+            CREATE TRIGGER before_insert_account
+            BEFORE INSERT ON account
+            FOR EACH ROW
+            BEGIN
+                SET NEW.AccountID = CONCAT("AC", (SELECT IFNULL(MAX(CAST(SUBSTRING(AccountID, 2) AS UNSIGNED)), 0) + 1 FROM account));
+            END
+        ');
     }
 
     /**
@@ -36,6 +46,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_account');
         Schema::dropIfExists('account');
         Schema::dropIfExists('sessions');
     }

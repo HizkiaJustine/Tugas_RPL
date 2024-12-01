@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -21,6 +22,15 @@ return new class extends Migration
             $table->string('AccountID')->nullable()->index();
             $table->foreign('AccountID')->references('AccountID')->on('account');
         });
+
+        DB::unprepared('
+        CREATE TRIGGER before_insert_karyawan
+        BEFORE INSERT ON karyawan
+        FOR EACH ROW
+        BEGIN
+            SET NEW.KaryawanID = CONCAT("KR", (SELECT IFNULL(MAX(CAST(SUBSTRING(KaryawanID, 3) AS UNSIGNED)), 0) + 1 FROM karyawan));
+        END
+        ');
     }
 
     /**
@@ -28,6 +38,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_karyawan');
         Schema::dropIfExists('karyawan');
     }
 };

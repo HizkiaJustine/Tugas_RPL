@@ -386,3 +386,39 @@ footer {
     height: 55px; /* Keep aspect ratio consistent */
     border-radius: 50%; /* Keep it circular */
 }
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f4f4f4;
+}
+.btn {
+    padding: 6px 12px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+.btn-edit {
+    background-color: #ffc107;
+    color: #000;
+}
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+}
+.action-buttons {
+    white-space: nowrap;
+}

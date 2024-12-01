@@ -26,6 +26,14 @@ return new class extends Migration
             $table->foreign('AccountID')->references('AccountID')->on('account');
         });
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        DB::unprepared('
+        CREATE TRIGGER before_insert_dokter
+        BEFORE INSERT ON dokter
+        FOR EACH ROW
+        BEGIN
+            SET NEW.DokterID = CONCAT("D", (SELECT IFNULL(MAX(CAST(SUBSTRING(DokterID, 2) AS UNSIGNED)), 0) + 1 FROM dokter));
+        END
+        ');
     }
 
     /**
@@ -33,6 +41,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_dokter');
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('dokter');
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
