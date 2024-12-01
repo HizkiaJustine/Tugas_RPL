@@ -9,5 +9,6 @@ class Kasir extends Model
 {
     protected $table = 'kasir';
     protected $primaryKey = 'KasirID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

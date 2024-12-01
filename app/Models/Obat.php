@@ -9,5 +9,6 @@ class Obat extends Model
 {
     protected $table = 'obat';
     protected $primaryKey = 'ObatID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

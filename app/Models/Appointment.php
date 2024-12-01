@@ -10,5 +10,7 @@ class appointment extends Model
     protected $table = 'appointment';
     
     protected $primaryKey = 'AppointmentID';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
 }

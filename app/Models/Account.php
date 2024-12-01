@@ -9,4 +9,6 @@ class Account extends Model
 {
     protected $table = 'account';
     protected $primaryKey = 'AccountID';
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

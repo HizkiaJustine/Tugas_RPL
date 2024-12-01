@@ -9,6 +9,7 @@ class Pembayaran extends Model
 {
     protected $table = 'pembayaran';
     protected $primaryKey = 'PembayaranID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }
 

@@ -9,5 +9,6 @@ class Pembelian extends Model
 {
     protected $table = 'pembelian';
     protected $primaryKey = 'PembelianID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

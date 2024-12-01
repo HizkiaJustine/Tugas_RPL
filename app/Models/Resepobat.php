@@ -9,5 +9,6 @@ class Resepobat extends Model
 {
     protected $table = 'resepobat';
     protected $primaryKey = 'ResepObatID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

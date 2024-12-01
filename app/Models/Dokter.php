@@ -9,5 +9,6 @@ class Dokter extends Model
 {
     protected $table = 'dokter';
     protected $primaryKey = 'DokterID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

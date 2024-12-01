@@ -9,5 +9,6 @@ class Layanan extends Model
 {
     protected $table = 'layanan';
     protected $primaryKey = 'LayananID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

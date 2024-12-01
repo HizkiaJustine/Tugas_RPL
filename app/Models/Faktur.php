@@ -9,5 +9,6 @@ class Faktur extends Model
 {
     protected $table = 'faktur';
     protected $primaryKey = 'FakturID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

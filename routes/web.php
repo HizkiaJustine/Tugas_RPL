@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Pasien;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,5 +12,5 @@ Route::get('/about', function () {
 });
 
 Route::get('/pasien', function () {
-    return view('info_pasien');
+    return view('info_pasien', ['pasien' => Pasien::all()]);
 });

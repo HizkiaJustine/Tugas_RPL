@@ -9,5 +9,6 @@ class Rekammedis extends Model
 {
     protected $table = 'rekammedis';
     protected $primaryKey = 'RekamMedisID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

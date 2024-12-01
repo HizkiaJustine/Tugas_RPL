@@ -9,5 +9,6 @@ class Supplier extends Model
 {
     protected $table = 'supplier';
     protected $primaryKey = 'SupplierID';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
 }
