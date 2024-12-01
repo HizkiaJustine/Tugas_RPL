@@ -12,5 +12,9 @@ Route::get('/about', function () {
 });
 
 Route::get('/pasien', function () {
-    return view('info_pasien', ['pasien' => Pasien::all()]);
+    return view('info_pasien', ['title' => 'Home Page', 'name' => 'Informasi Pasien', 'pasien' => Pasien::all()]);
 });
+
+// Route::get('/payment', function () {
+//     return view('payment', ['title' => 'Home Page / Payment Management', 'name' => 'Payment Management', 'records' => Payment::all()]);
+// });

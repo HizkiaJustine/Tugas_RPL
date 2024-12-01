@@ -8,9 +8,9 @@
             <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <x-nav-link href="/purchase" :active="request()->is('/purchase')">Pembelian</x-nav-link>
-                <x-nav-link href="/payment" :active="request()->is('/payment')">Pembayaran</x-nav-link>
-                <x-nav-link href="/cashier" :active="request()->is('/cashier')">Kasir</x-nav-link>
+                <x-nav-link href="/pembelian" :active="request()->is('/pembelian')">Pembelian</x-nav-link>
+                <x-nav-link href="/pembayaran" :active="request()->is('/pembayaran')">Pembayaran</x-nav-link>
+                <x-nav-link href="/kasir" :active="request()->is('/kasir')">Kasir</x-nav-link>
             </div>
             </div>
         </div>
