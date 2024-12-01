@@ -11,4 +11,14 @@ class Dokter extends Model
     protected $primaryKey = 'DokterID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'NamaDokter',
+        'Departemen',
+        'AlamatDokter',
+        'NomorHP',
+        'FotoDokter',
+        'LayananID',
+        'AccountID',
+    ];
+    public $timestamps = false;
 }

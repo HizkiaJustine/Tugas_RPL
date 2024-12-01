@@ -11,4 +11,12 @@ class Kasir extends Model
     protected $primaryKey = 'KasirID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'NamaKasir',
+        'NomorHP',
+        'AlamatKasir',
+        'JenisKelamin',
+        'AccountID',
+    ];
+    public $timestamps = false;
 }

@@ -14,5 +14,4 @@ class Account extends Model implements AuthenticatableContract
     protected $primaryKey = 'AccountID';
     public $incrementing = false;
     protected $keyType = 'string';
-    public $timestamps = false; // Disable automatic timestamps
 }

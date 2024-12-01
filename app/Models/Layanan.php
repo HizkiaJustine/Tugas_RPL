@@ -11,4 +11,9 @@ class Layanan extends Model
     protected $primaryKey = 'LayananID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'NamaLayanan',
+        'HargaLayanan',
+    ];
+    public $timestamps = false;
 }

@@ -11,5 +11,13 @@ class Pembayaran extends Model
     protected $primaryKey = 'PembayaranID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'TanggalPembayaran',
+        'JumlahPembayaran',
+        'MetodePembayaran',
+        'FakturID',
+        'PasienID',
+    ];
+    public $timestamps = false;
 }
 

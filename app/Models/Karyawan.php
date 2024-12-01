@@ -11,4 +11,13 @@ class Karyawan extends Model
     protected $primaryKey = 'KaryawanID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'NamaKaryawan',
+        'Jabatan',
+        'NomorHP',
+        'AlamatKaryawan',
+        'JenisKelamin',
+        'AccountID',
+    ];
+    public $timestamps = false;
 }

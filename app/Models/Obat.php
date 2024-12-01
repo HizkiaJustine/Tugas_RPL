@@ -11,4 +11,13 @@ class Obat extends Model
     protected $primaryKey = 'ObatID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'NamaObat',
+        'TipeObat',
+        'TanggalKadaluarsa',
+        'JumlahObat',
+        'HargaObat',
+        'ResepObatID',
+    ];
+    public $timestamps = false;
 }

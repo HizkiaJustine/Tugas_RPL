@@ -11,4 +11,12 @@ class Pembelian extends Model
     protected $primaryKey = 'PembelianID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'TanggalPembelian',
+        'SupplierID',
+        'ObatID',
+        'Kuantitas',
+        'Harga',
+    ];
+    public $timestamps = false;
 }
