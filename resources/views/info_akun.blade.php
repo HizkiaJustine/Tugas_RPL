@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informasi Dokter</title>
+    <title>Informasi Akun</title>
     <style>
         table {
             width: 100%;
@@ -62,7 +62,7 @@
                 <td></td>
                 <td class='action-buttons'>
                     <a href='' class='btn btn-edit'>Edit</a>
-                    <a href='' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus dokter ini?\")'>Delete</a>
+                    <a href='' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus akun ini?\")'>Delete</a>
                 </td>
             </tr>
         </tbody>
