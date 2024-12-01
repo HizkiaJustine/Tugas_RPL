@@ -16,9 +16,10 @@ class Account extends Model implements AuthenticatableContract
     protected $keyType = 'string';
 
     protected $fillable = [
+        'name', // Added 'name' to fillable attributes
         'email',
         'password',
         'Role',
     ];
-    public $timestamps = false;
+    public $timestamps = false; // Ensure timestamps are disabled
 }

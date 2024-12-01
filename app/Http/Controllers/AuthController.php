@@ -1,54 +1,49 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Account; // Changed from User to Account
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function showLoginForm()
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255|unique:account',
-            'password' => 'required|string|min:8|confirmed',
-            'Role' => 'required|in:Administrator,Dokter,Pasien,Kasir',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $account = Account::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'Role' => $request->Role,
-        ]);
-
-        return response()->json(['message' => 'Account registered successfully'], 201);
+        return view('login');
     }
 
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('/login')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             return redirect()->intended('/');
-        } else {
-            return redirect('/login')->withErrors(['email' => 'Invalid credentials'])->withInput();
         }
+
+        return back()->with('error', 'Invalid credentials');
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:account,email', // Changed validation to check 'account' table
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        Account::create([ // Changed from User to Account
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'Role' => 'Pasien', // Assuming a default role
+        ]);
+
+        return redirect()->route('login')->with('success', 'Registration successful. Please login.');
     }
 }
