@@ -11,4 +11,15 @@ class Pasien extends Model
     protected $primaryKey = 'PasienID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'NamaPasien',
+        'UmurPasien',
+        'AlamatPasien',
+        'BeratBadanPasien',
+        'TinggiBadanPasien',
+        'TanggalLahirPasien',
+        'JenisKelamin',
+        'NomorHP',
+    ];
+    public $timestamps = false;
 }
