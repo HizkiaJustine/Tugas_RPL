@@ -8,4 +8,6 @@ use illuminate\Support\Arr;
 class Pembelian extends Model
 {
     protected $table = 'pembelian';
+    protected $primaryKey = 'PembelianID';
+
 }

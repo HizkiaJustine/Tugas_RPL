@@ -8,4 +8,6 @@ use illuminate\Support\Arr;
 class Faktur extends Model
 {
     protected $table = 'faktur';
+    protected $primaryKey = 'FakturID';
+
 }

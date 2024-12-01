@@ -8,4 +8,5 @@ use illuminate\Support\Arr;
 class Account extends Model
 {
     protected $table = 'account';
+    protected $primaryKey = 'AccountID';
 }

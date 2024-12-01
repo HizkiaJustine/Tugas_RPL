@@ -8,4 +8,6 @@ use illuminate\Support\Arr;
 class Resepobat extends Model
 {
     protected $table = 'resepobat';
+    protected $primaryKey = 'ResepObatID';
+
 }
