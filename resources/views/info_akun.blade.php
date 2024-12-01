@@ -55,46 +55,16 @@
             </tr>
         </thead>
         <tbody>
-            <?php
-            // Koneksi ke database
-            $host = "localhost";  // ganti dengan host database Anda jika perlu
-            $user = "root";       // ganti dengan username database Anda
-            $password = "";       // ganti dengan password database Anda
-            $database = "ibda_family_clinic"; // ganti dengan nama database Anda
-
-            // Membuat koneksi
-            $conn = new mysqli($host, $user, $password, $database);
-
-            // Cek koneksi
-            if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-            }
-
-            // Query untuk mengambil data dokter
-            $sql = "SELECT * FROM account";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // Output data per baris
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                        <td>" . $row['AccountID'] . "</td>
-                        <td>" . $row['Name'] . "</td>
-                        <td>******</td>
-                        <td>" . $row['Role'] . "</td>
-                        <td class='action-buttons'>
-                            <a href='edit_dokter.php?id=" . $row['DokterID'] . "' class='btn btn-edit'>Edit</a>
-                            <a href='delete_dokter.php?id=" . $row['DokterID'] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus dokter ini?\")'>Delete</a>
-                        </td>
-                    </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>Tidak ada data</td></tr>";
-            }
-
-            // Tutup koneksi
-            $conn->close();
-            ?>
+            <tr>
+                <td></td>
+                <td>td>
+                <td></td>
+                <td></td>
+                <td class='action-buttons'>
+                    <a href='' class='btn btn-edit'>Edit</a>
+                    <a href='' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus dokter ini?\")'>Delete</a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>

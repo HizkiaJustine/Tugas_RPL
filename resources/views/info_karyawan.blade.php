@@ -57,48 +57,18 @@
             </tr>
         </thead>
         <tbody>
-            <?php
-            // Koneksi ke database
-            $host = "localhost";
-            $user = "root";
-            $password = "";
-            $database = "ibda_family_clinic";
-
-            // Membuat koneksi
-            $conn = new mysqli($host, $user, $password, $database);
-
-            // Cek koneksi
-            if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-            }
-
-            // Query untuk mengambil data pasien
-            $sql = "SELECT * FROM karyawan";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // Output data per baris
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                        <td>" . $row['KaryawanID'] . "</td>
-                        <td>" . $row['NamaKaryawan'] . "</td>
-                        <td>" . $row['Jabatan'] . "</td>
-                        <td>" . $row['NomorHP'] . "</td>
-                        <td>" . $row['Alamat'] . "</td>
-                        <td>" . $row['Gender'] . "</td>
-                        <td class='action-buttons'>
-                            <a href='edit_pasien.php?id=" . $row['PasienID'] . "' class='btn btn-edit'>Edit</a>
-                            <a href='delete_pasien.php?id=" . $row['PasienID'] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'>Delete</a>
-                        </td>
-                    </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='6'>Tidak ada data</td></tr>";
-            }
-
-            // Tutup koneksi
-            $conn->close();
-            ?>
+            <tr>
+                <td><!-- KaryawanID --></td>
+                <td><!-- NamaKaryawan --></td>
+                <td><!-- Jabatan --></td>
+                <td><!-- NomorHP --></td>
+                <td><!-- Alamat --></td>
+                <td><!-- Gender --></td>
+                <td class='action-buttons'>
+                    <a href='edit_pasien.php?id=<!-- PasienID -->' class='btn btn-edit'>Edit</a>
+                    <a href='delete_pasien.php?id=<!-- PasienID -->' class='btn btn-delete' onclick='return confirm("Apakah Anda yakin ingin menghapus pasien ini?")'>Delete</a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>
