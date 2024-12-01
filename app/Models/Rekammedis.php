@@ -11,4 +11,14 @@ class Rekammedis extends Model
     protected $primaryKey = 'RekamMedisID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'Tanggal',
+        'PasienID',
+        'DokterID',
+        'HasilDiagnosa',
+        'Perawatan',
+        'ResepObat',
+        'HasilLab',
+    ];
+    public $timestamps = false;
 }

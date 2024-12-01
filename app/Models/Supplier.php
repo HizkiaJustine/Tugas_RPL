@@ -11,4 +11,9 @@ class Supplier extends Model
     protected $primaryKey = 'SupplierID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'NamaSupplier',
+        'NomorHP',
+    ];
+    public $timestamps = false;
 }

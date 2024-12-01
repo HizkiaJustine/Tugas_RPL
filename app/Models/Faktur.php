@@ -11,4 +11,11 @@ class Faktur extends Model
     protected $primaryKey = 'FakturID';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = [
+        'Tanggal',
+        'TotalHarga',
+        'PasienID',
+        'LayananID',
+    ];
+    public $timestamps = false;
 }
