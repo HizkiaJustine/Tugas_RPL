@@ -66,7 +66,7 @@
                 <td><!-- Gender --></td>
                 <td class='action-buttons'>
                     <a href='edit_pasien.php?id=<!-- PasienID -->' class='btn btn-edit'>Edit</a>
-                    <a href='delete_pasien.php?id=<!-- PasienID -->' class='btn btn-delete' onclick='return confirm("Apakah Anda yakin ingin menghapus pasien ini?")'>Delete</a>
+                    <a href='delete_pasien.php?id=<!-- PasienID -->' class='btn btn-delete' onclick='return confirm("Apakah Anda yakin ingin menghapus karyawan ini?")'>Delete</a>
                 </td>
             </tr>
         </tbody>
