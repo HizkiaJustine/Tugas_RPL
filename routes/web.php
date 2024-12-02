@@ -1,5 +1,7 @@
 <?php
 use \App\Models\Account;
+use \App\Models\Pasien; // Add this line
+use \App\Models\Article; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +21,9 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AppointmentController;
-
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ForumController;
+use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return view('index_user');
@@ -446,7 +450,29 @@ Route::middleware(['auth'])->group(function () {
     })->name('store_account');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', function () {
+        $user = Auth::user();
+        $account = Account::where('email', $user->email)->first();
+        $pasien = Pasien::where('AccountID', $account->AccountID)->first();
+        return view('profile.show', compact('account', 'pasien'));
+    })->name('profile.show');
 
+    Route::get('/profile/edit', function () {
+        $user = Auth::user();
+        $account = Account::where('email', $user->email)->first();
+        $pasien = Pasien::where('AccountID', $account->AccountID)->first();
+        return view('profile.edit', compact('account', 'pasien'));
+    })->name('profile.edit');
+
+    Route::put('/profile', function (Request $request) {
+        $user = Auth::user();
+        $account = Account::where('email', $user->email)->first();
+        $pasien = Pasien::where('AccountID', $account->AccountID)->first();
+        $pasien->update($request->all());
+        return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
+    })->name('profile.update');
+});
 
 // Uncomment and adjust these routes as needed
 // Route::middleware(['auth'])->group(function () {
@@ -538,6 +564,12 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/forum', [ForumController::class, 'index'])->name('forum');
 
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+
+Route::get('/articles/{id}', function ($id) {
+    $article = Article::findOrFail($id);
+    return view('articles.show', compact('article'));
+})->name('articles.show');
 
 Route::post('/logout', function () {
     Auth::logout();

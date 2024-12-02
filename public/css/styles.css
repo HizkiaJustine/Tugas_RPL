@@ -596,3 +596,32 @@ header p {
 .reply {
     margin-left: 20px; /* Atur sesuai kebutuhan */
 }
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-group .form-control {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.input-group .btn {
+    padding: 10px 20px;
+    border: 1px solid #007bff;
+    border-left: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.input-group .btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
