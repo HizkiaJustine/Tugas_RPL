@@ -29,14 +29,28 @@ class ResepObatController extends Controller
     {
         $request->validate([
             'Tanggal' => 'required|date_format:Y-m-d',
-            'DokterID' => 'required|string|exists:dokter,DokterID',
-            'PasienID' => 'required|string|exists:pasien,PasienID',
+            'NamaDokter' => 'required|string',
+            'NamaPasien' => 'required|string',
             'ListObat' => 'required|string',
             'InstruksiPenggunaanObat' => 'required|string',
         ]);
-
-        ResepObat::create($request->all());
-
+    
+        $dokter = Dokter::where('NamaDokter', $request->NamaDokter)->first();
+        $pasien = Pasien::where('NamaPasien', $request->NamaPasien)->first();
+    
+        if (!$dokter || !$pasien) {
+            return redirect()->back()->withErrors(['error' => 'Dokter atau Pasien tidak ditemukan']);
+        }
+    
+        ResepObat::create([
+            'ResepObatID' => $request->ResepObatID,
+            'Tanggal' => $request->Tanggal,
+            'DokterID' => $dokter->DokterID,
+            'PasienID' => $pasien->PasienID,
+            'ListObat' => $request->ListObat,
+            'InstruksiPenggunaanObat' => $request->InstruksiPenggunaanObat,
+        ]);
+    
         return redirect()->route('info_resepobat')->with('success', 'Data resep obat berhasil ditambahkan');
     }
 
