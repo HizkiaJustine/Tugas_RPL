@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             PembayaranSeeder::class,
             PembelianSeeder::class,
             // ResepObatSeeder::class,
+            ArticleSeeder::class,
         ]);
 
         $dokter = Dokter::first();
