@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Dokter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DokterController extends Controller
 {
@@ -28,12 +29,18 @@ class DokterController extends Controller
             'Departemen' => 'required|string|max:100',
             'AlamatDokter' => 'required|string|max:255',
             'NomorHP' => 'required|string|max:15',
-            'FotoDokter' => 'nullable|image|max:2048', // File foto harus berupa gambar dengan ukuran maksimal 2 MB
-            'LayananID' => 'nullable|string|exists:layanan,LayananID',
-            'AccountID' => 'nullable|string|exists:account,AccountID',
+            'LayananID' => 'nullable|integer',
+            'AccountID' => 'nullable|integer',
+            'FotoDokter' => 'nullable|image|max:2048',
         ]);
 
-        Dokter::create($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('FotoDokter')) {
+            $data['FotoDokter'] = $request->file('FotoDokter')->store('foto_dokter', 'public');
+        }
+
+        Dokter::create($data);
 
         return redirect()->route('info_dokter')->with('success', 'Data dokter berhasil ditambahkan');
     }
@@ -46,13 +53,6 @@ class DokterController extends Controller
         return view('edit_dokter', compact('dokter', 'title', 'name'));
     }
 
-    public function destroy($id)
-    {
-        $dokter = Dokter::findOrFail($id);
-        $dokter->delete();
-        return redirect()->route('info_dokter')->with('success', 'Dokter berhasil dihapus');
-    }
-
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -60,14 +60,30 @@ class DokterController extends Controller
             'Departemen' => 'required|string|max:100',
             'AlamatDokter' => 'required|string|max:255',
             'NomorHP' => 'required|string|max:15',
-            'FotoDokter' => 'nullable|image|max:2048', // File foto harus berupa gambar dengan ukuran maksimal 2 MB
-            'LayananID' => 'nullable|string|exists:layanan,LayananID',
-            'AccountID' => 'nullable|string|exists:account,AccountID',
+            'LayananID' => 'nullable|integer',
+            'AccountID' => 'nullable|integer',
+            'FotoDokter' => 'nullable|image|max:2048',
         ]);
-    
+
         $dokter = Dokter::findOrFail($id);
-        $dokter->update($request->all());
-    
+        $data = $request->all();
+
+        if ($request->hasFile('FotoDokter')) {
+            $data['FotoDokter'] = $request->file('FotoDokter')->store('foto_dokter', 'public');
+        }
+
+        $dokter->update($data);
+
         return redirect()->route('info_dokter')->with('success', 'Data dokter berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $dokter = Dokter::findOrFail($id);
+        if ($dokter->FotoDokter) {
+            Storage::delete('public/' . $dokter->FotoDokter);
+        }
+        $dokter->delete();
+        return redirect()->route('info_dokter')->with('success', 'Dokter berhasil dihapus');
     }
 }
