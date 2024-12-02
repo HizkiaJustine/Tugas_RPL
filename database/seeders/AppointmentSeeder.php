@@ -23,7 +23,8 @@ class AppointmentSeeder extends Seeder
 
         // Buat appointment
         Appointment::create([
-            'TanggalJam' => Carbon::now()->addDays(7), // Waktu mendatang, misalnya 7 hari dari sekarang
+            'TanggalJanjiTemu' => Carbon::now()->addDays(7)->toDateString(), // Waktu mendatang, misalnya 7 hari dari sekarang
+            'JamJanjiTemu' => Carbon::now()->format('H:i'), // Make sure the format is correct for a time field
             'DokterID' => $dokter->DokterID,
             'PasienID' => $pasien->PasienID,
             'Tujuan' => 'Konsultasi ' . $dokter->Departemen,

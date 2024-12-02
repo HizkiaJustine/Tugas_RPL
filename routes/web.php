@@ -288,3 +288,7 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
+
+
+Route::get('/appointment', [AppointmentController::class, 'create'])->name('appointment.create');
+Route::post('/appointment/submitted', [AppointmentController::class, 'store'])->name('appointment.store');

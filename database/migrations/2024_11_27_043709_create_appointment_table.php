@@ -14,7 +14,8 @@ return new class extends Migration
     {
         Schema::create('appointment', function (Blueprint $table) {
             $table->string('AppointmentID')->primary();
-            $table->dateTime(column: 'TanggalJam');
+            $table->date('TanggalJanjiTemu');
+            $table->time('JamJanjiTemu');
             $table->string(column: 'DokterID');
             $table->string(column: 'PasienID');
             $table->string('Tujuan');
