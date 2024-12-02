@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PasienController;
-use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PasienController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepObatController;
+use App\Http\Controllers\RekamMedisController;
 
 Route::get('/', function () {
     return view('index_user');
@@ -28,6 +29,13 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/resepobat', [ResepObatController::class, 'store'])->name('store_resepobat');
 Route::get('/resepobat/create', [ResepObatController::class, 'create'])->name('create_resepobat');
 Route::post('/resepobat', [ResepObatController::class, 'store'])->name('info_resepobat');
+
+Route::get('/obat', [ObatController::class, 'index'])->name('info_obat');
+Route::get('/edit_obat/{id}', [ObatController::class, 'edit'])->name('edit_obat');
+Route::delete('/delete_obat/{id}', [ObatController::class, 'destroy'])->name('delete_obat');
+Route::put('/update_obat/{id}', [ObatController::class, 'update'])->name('update_obat');
+Route::get('/obat/create', [ObatController::class, 'create'])->name('create_obat');
+Route::post('/obat/store', [ObatController::class, 'store'])->name('store_obat');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/test', function () {
