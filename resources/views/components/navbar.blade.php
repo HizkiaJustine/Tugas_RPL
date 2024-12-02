@@ -1,12 +1,20 @@
 <div class="navbar">
-    <div class="profile-icon">
-        <img src="https://i.pinimg.com/736x/7f/c4/c6/7fc4c6ecc7738247aac61a60958429d4.jpg" alt="Profile" class="profile">
-        <div class="dropdown-profile">
-            <a href="#">Profil Saya</a>
-            <a href="#">Pengaturan</a>
-            <a href="#">Keluar</a>
+    @auth
+        <!-- Profile Icon -->
+        <div class="profile-icon">
+            <img src="https://i.pinimg.com/736x/7f/c4/c6/7fc4c6ecc7738247aac61a60958429d4.jpg" alt="Profile" class="profile">
+            <div class="dropdown-profile">
+                <a href="#">Profil Saya</a>
+                <a href="#">Pengaturan</a>
+                <a href="#">Keluar</a>
+            </div>
         </div>
-    </div>
+    @endauth
+
+    @guest
+        <!-- Login Button -->
+        <button class="button-74" onclick="navigate_to_loginpage" role="button">Log-in</button>
+    @endguest
     <a href="/" class="{{ request()->is('/') ? 'nav-active' : ''}}">Home</a>
     <div class="dropdown">
         <a href="#">Layanan</a>
@@ -38,5 +46,4 @@
             <a href="#">Notifikasi 3</a>
         </div>
     </div>
-    <button class="button-74" onclick="navigate_to_loginpage" role="button">Log-in</button>
 </div>
