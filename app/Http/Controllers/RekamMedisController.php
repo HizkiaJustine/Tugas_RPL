@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dokter;
+use App\Models\Pasien;
 use App\Models\Rekammedis;
 use Illuminate\Http\Request;
 
@@ -9,67 +11,81 @@ class RekamMedisController extends Controller
 {
     public function index()
     {
-        $rekamMedis = Rekammedis::all();
-        return view('rekammedis.index', compact('rekamMedis'));
+        $rekamMedis = RekamMedis::all();
+        $title = "Data";
+        $name = "Informasi Rekam Medis";
+        return view('info_rekammedis', compact('rekamMedis', 'title', 'name'));
     }
 
     public function create()
     {
-        return view('rekammedis.create');
+        $title = "Data";
+        $name = "Tambah Rekam Medis";
+        return view('add_rekammedis', compact('title', 'name'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'Tanggal' => 'required|date',
-            'PasienID' => 'required|string',
-            'DokterID' => 'required|string',
+            'Tanggal' => 'required|date_format:Y-m-d',
+            'NamaPasien' => 'required|string|max:100',
+            'NamaDokter' => 'required|string|max:100',
             'HasilDiagnosa' => 'required|string',
             'Perawatan' => 'required|string',
             'ResepObat' => 'required|string',
-            'HasilLab' => 'nullable|string',
+            'HasilLab' => 'required|string',
         ]);
 
-        Rekammedis::create($request->all());
+        $pasien = Pasien::where('NamaPasien', $request->NamaPasien)->first();
+        $dokter = Dokter::where('NamaDokter', $request->NamaDokter)->first();
 
-        return redirect()->route('rekammedis.index');
-    }
+        if (!$pasien || !$dokter) {
+            return redirect()->back()->withErrors(['error' => 'Pasien atau Dokter tidak ditemukan']);
+        }
 
-    public function show($id)
-    {
-        $rekamMedis = Rekammedis::findOrFail($id);
-        return view('rekammedis.show', compact('rekamMedis'));
+        RekamMedis::create([
+            'Tanggal' => $request->Tanggal,
+            'PasienID' => $pasien->PasienID,
+            'DokterID' => $dokter->DokterID,
+            'HasilDiagnosa' => $request->HasilDiagnosa,
+            'Perawatan' => $request->Perawatan,
+            'ResepObat' => $request->ResepObat,
+            'HasilLab' => $request->HasilLab,
+        ]);
+
+        return redirect()->route('info_rekammedis')->with('success', 'Data rekam medis berhasil ditambahkan');
     }
 
     public function edit($id)
     {
-        $rekamMedis = Rekammedis::findOrFail($id);
-        return view('rekammedis.edit', compact('rekamMedis'));
+        $rekamMedis = RekamMedis::findOrFail($id);
+        $title = "Data";
+        $name = "Edit Rekam Medis";
+        return view('edit_rekammedis', compact('rekamMedis', 'title', 'name'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'Tanggal' => 'required|date',
-            'PasienID' => 'required|string',
-            'DokterID' => 'required|string',
+            'Tanggal' => 'required|date_format:Y-m-d',
+            'PasienID' => 'required|string|max:100',
+            'DokterID' => 'required|string|max:100',
             'HasilDiagnosa' => 'required|string',
             'Perawatan' => 'required|string',
             'ResepObat' => 'required|string',
-            'HasilLab' => 'nullable|string',
+            'HasilLab' => 'required|string',
         ]);
 
-        $rekamMedis = Rekammedis::findOrFail($id);
+        $rekamMedis = RekamMedis::findOrFail($id);
         $rekamMedis->update($request->all());
 
-        return redirect()->route('rekammedis.index');
+        return redirect()->route('info_rekammedis')->with('success', 'Data rekam medis berhasil diperbarui');
     }
 
     public function destroy($id)
     {
-        $rekamMedis = Rekammedis::findOrFail($id);
+        $rekamMedis = RekamMedis::findOrFail($id);
         $rekamMedis->delete();
-
-        return redirect()->route('rekammedis.index');
+        return redirect()->route('info_rekammedis')->with('success', 'Rekam medis berhasil dihapus');
     }
 }

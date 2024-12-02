@@ -37,7 +37,7 @@ class AppointmentController extends Controller
         // dd($request->all());
         $request->validate([
             'NamaPasien' => 'required|string',
-            'TanggalJanjiTemu' => 'required|date',
+            'TanggalJanjiTemu' => 'required|date_format:Y-m-d',
             'JamJanjiTemu' => 'required|date_format:H:i',
             'NamaLayanan' => 'required|string',
             'CatatanTambahan' => 'nullable|string',

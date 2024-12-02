@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\ForumController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PaymentController;
@@ -17,7 +19,6 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\AccountController;
 
 
 Route::get('/', function () {
@@ -88,16 +89,6 @@ Route::middleware(['auth'])->group(function () {
             abort(403, 'Unauthorized action.');
         }
     })->name('store_pasien');
-
-    Route::get('/rekammedis/{id}', function ($id) {
-        $user = Auth::user();
-        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
-        if ($role === 'administrator') {
-            return app(RekamMedisController::class)->show($id);
-        } else {
-            abort(403, 'Unauthorized action.');
-        }
-    })->name('rekammedis');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -585,4 +576,66 @@ Route::get('/laboratorium', function () {
 
 Route::get('/gawat-darurat', function () {
     return view('darurat', ['title' => 'Home Page / Layanan / Gawat Darurat', 'name' => 'Layanan Gawat Darurat']);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/rekam-medis', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(RekamMedisController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_rekammedis');
+
+    Route::get('/rekam-medis/create', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(RekamMedisController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_rekammedis');
+
+    Route::post('/rekam-medis', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(RekamMedisController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_rekammedis');
+
+    Route::get('/rekam-medis/{id}/edit', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(RekamMedisController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_rekammedis');
+
+    Route::put('/rekam-medis/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(RekamMedisController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_rekammedis');
+
+    Route::delete('/rekam-medis/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(RekamMedisController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_rekammedis');
 });
