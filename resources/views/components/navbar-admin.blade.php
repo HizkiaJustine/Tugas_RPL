@@ -9,11 +9,13 @@
             <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <x-nav-link href="/obat" :active="request()->is('/obat')">Obat</x-nav-link>
-                <x-nav-link href="/pasien" :active="request()->is('/pasien')">Pasien</x-nav-link>
                 <x-nav-link href="/pembelian" :active="request()->is('/pembelian')">Pembelian</x-nav-link>
                 <x-nav-link href="/pembayaran" :active="request()->is('/pembayaran')">Pembayaran</x-nav-link>
                 <x-nav-link href="/kasir" :active="request()->is('/kasir')">Kasir</x-nav-link>
                 <x-nav-link href="/layanan" :active="request()->is('/layanan')">Layanan</x-nav-link>
+                <x-nav-link href="/pasien" :active="request()->is('/pasien')">Pasien</x-nav-link>
+                <x-nav-link href="/resepobat" :active="request()->is('/resepobat')">Resep Obat</x-nav-link>
+                <x-nav-link href="/pasien" :active="request()->is('/pasien')">Pasien</x-nav-link>
             </div>
             </div>
         </div>
