@@ -11,6 +11,7 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
@@ -428,3 +429,57 @@ Route::post('/suppliers/update/{supplier}', [SupplierController::class, 'update'
 Route::get('/suppliers/delete/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
 Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create');
 Route::post('/suppliers/submitted', [SupplierController::class, 'store'])->name('suppliers.store');
+
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+Route::get('/payment/edit/{record}', [PaymentController::class, 'edit'])->name('payment.edit');
+Route::post('/payment/update/{record}', [PaymentController::class, 'update'])->name('payment.update');
+Route::get('/payment/delete/{record}', [PaymentController::class, 'destroy'])->name('payment.destroy');
+Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
+Route::post('/payment/submitted', [PaymentController::class, 'store'])->name('payment.store');
+
+Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index');
+Route::get('/purchase/edit/{record}', [PurchaseController::class, 'edit'])->name('purchase.edit');
+Route::post('/purchase/update/{record}', [PurchaseController::class, 'update'])->name('purchase.update');
+Route::get('/purchase/delete/{record}', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
+Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchase.create');
+Route::post('purchase/submitted', [PurchaseController::class, 'store'])->name('purchase.store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/forum', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if (in_array($role, ['pasien', 'dokter', 'administrator', 'kasir'])) {
+            return app(ForumController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('forum');
+
+    Route::post('/forum/question', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'pasien') {
+            return app(ForumController::class)->storeQuestion($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('forum.storeQuestion');
+
+    Route::post('/forum/answer/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'dokter') {
+            return app(ForumController::class)->storeAnswer($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('forum.storeAnswer');
+});
+
+Route::get('/forum', [ForumController::class, 'index'])->name('forum');
+
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');

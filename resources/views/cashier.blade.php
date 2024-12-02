@@ -1,31 +1,20 @@
 <x-layout-admin>
     <x-slot:name>{{ $name }}</x-slot:name>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <div class="container">
-        <div class="filter-bar">
-            <input type="text" placeholder="Search by product, supplier, or ID...">
-            <select>
-              <option>Category</option>
-              <option>Medicine</option>
-              <option>Appointment</option>
-            </select>
-            <button>Filter</button>
-        </div>
-    </div>
 
     <!-- Stats Cards -->
     <div class="stats">
         <div class="stat-card">
-            <h2>{{ number_format($totalCashiers, 0, '.', ',') }}</h2>
+            <h2>{{ number_format($countCashiers, 0, '.', ',') }}</h2>
             <p>Total Kasir</p>
         </div>
         <div class="stat-card">
-            <h2>12</h2>
-            <p>Total Pendapatan Hari ini</p>
+            <h2>{{ number_format($totalFemaleCashiers, 0, ',', '.') }}</h2>
+            <p>Total Kasir Perempuan</p>
         </div>
         <div class="stat-card">
-            <h2>15/11/2024</h2>
-            <p>Tanggal Kasir</p>
+            <h2>{{ number_format($totalMaleCashiers, 0, ',', '.') }}</h2>
+            <p>Total Kasir Laki-laki</p>
         </div>
     </div>
 

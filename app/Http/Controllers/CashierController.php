@@ -19,9 +19,13 @@ class CashierController extends Controller
         $title = 'Home Page / Cashier Management';
         $name = 'Cashier Management';
 
-        $totalCashiers = DB::table('kasir')->count();
+        $countCashiers = DB::table('kasir')->count();
 
-        return view('cashier', compact('title', 'name', 'records', 'totalCashiers'));
+        $totalMaleCashiers = DB::table('kasir')->where('JenisKelamin', 'L')->count();
+
+        $totalFemaleCashiers = DB::table('kasir')->where('JenisKelamin', 'P')->count();
+
+        return view('cashier', compact('title', 'name', 'records', 'countCashiers', 'totalMaleCashiers', 'totalFemaleCashiers'));
     }
 
     /**
