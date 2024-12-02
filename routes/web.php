@@ -1,17 +1,18 @@
 <?php
+use \App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
-use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\DokterController;
-use \App\Models\Account;
+use App\Http\Controllers\AppointmentController;
 
 Route::get('/', function () {
     return view('index_user');
