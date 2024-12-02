@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use App\Models\Dokter;
-use App\Models\Layanan;
 use App\Models\Pasien;
+use App\Models\Layanan;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -106,5 +106,29 @@ class AppointmentController extends Controller
     public function destroy(appointment $appointment)
     {
         //
+    }
+
+    public function showAppointments()
+    {
+        $user = Auth::user();
+        $appointments = [];
+    
+        if ($user->Role == 'pasien') {
+            $patient = Pasien::where('AccountID', $user->AccountID)->first();
+            if ($patient) {
+                $appointments = Appointment::where('PasienID', $patient->PasienID)
+                    ->with('dokter') // Eager load the doctor relationship
+                    ->get();
+            }
+        } elseif ($user->Role == 'dokter') {
+            $doctor = Dokter::where('AccountID', $user->AccountID)->first();
+            if ($doctor) {
+                $appointments = Appointment::where('DokterID', $doctor->DokterID)
+                    ->with('pasien') // Eager load the patient relationship
+                    ->get();
+            }
+        }
+    
+        return view('my_appointment', compact('appointments'));
     }
 }

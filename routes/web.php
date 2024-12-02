@@ -842,3 +842,5 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('admin.articles.destroy');
 });
+
+Route::get('/my-appointments', [AppointmentController::class, 'showAppointments'])->name('appointments.show');
