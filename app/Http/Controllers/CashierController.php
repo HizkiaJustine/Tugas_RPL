@@ -45,7 +45,7 @@ class CashierController extends Controller
             'NomorHP' => 'required|string',
             'AlamatKasir' => 'required|string',
             'JenisKelamin' => 'required|string',
-            'AccountID' => 'required|string',
+            'AccountID' => 'nullable|string',
         ]);
 
         $account = Account::where('AccountID', $request->AccountID)->first();
@@ -100,7 +100,7 @@ class CashierController extends Controller
             'NomorHP' => 'required|string',
             'AlamatKasir' => 'required|string',
             'JenisKelamin' => 'required|string',
-            'AccountID' => 'required|string',
+            'AccountID' => 'nullable|string',
         ]);
     
         $cashier = Kasir::find($KasirID);
