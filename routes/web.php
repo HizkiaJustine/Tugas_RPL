@@ -670,3 +670,65 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('delete_rekammedis');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/supplier', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(SupplierController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_supplier');
+
+    Route::get('/supplier/create', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(SupplierController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_supplier');
+
+    Route::post('/supplier', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(SupplierController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_supplier');
+
+    Route::get('/supplier/{id}/edit', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(SupplierController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_supplier');
+
+    Route::put('/supplier/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(SupplierController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_supplier');
+
+    Route::delete('/supplier/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(SupplierController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_supplier');
+});
