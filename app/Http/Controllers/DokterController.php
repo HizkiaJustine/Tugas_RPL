@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Dokter;
 use Illuminate\Http\Request;
 
@@ -24,18 +25,19 @@ class DokterController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'DokterID' => 'required|string|max:255',
             'NamaDokter' => 'required|string|max:100',
             'Departemen' => 'required|string|max:100',
-            'AlamatDokter' => 'required|string|max:255',
+            'AlamatDokter' => 'required|string',
             'NomorHP' => 'required|string|max:15',
-            'FotoDokter' => 'nullable|image|max:2048', // File foto harus berupa gambar dengan ukuran maksimal 2 MB
-            'LayananID' => 'nullable|string|exists:layanan,LayananID',
+            'FotoDokter' => 'required|string',
+            'LayananID' => 'required|string|exists:layanan,LayananID',
             'AccountID' => 'nullable|string|exists:account,AccountID',
         ]);
 
         Dokter::create($request->all());
 
-        return redirect()->route('info_dokter')->with('success', 'Data dokter berhasil ditambahkan');
+        return redirect('/')->with('success', 'Data dokter berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -56,18 +58,19 @@ class DokterController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'DokterID' => 'required|string|max:255',
             'NamaDokter' => 'required|string|max:100',
             'Departemen' => 'required|string|max:100',
-            'AlamatDokter' => 'required|string|max:255',
+            'AlamatDokter' => 'required|string',
             'NomorHP' => 'required|string|max:15',
-            'FotoDokter' => 'nullable|image|max:2048', // File foto harus berupa gambar dengan ukuran maksimal 2 MB
-            'LayananID' => 'nullable|string|exists:layanan,LayananID',
+            'FotoDokter' => 'required|string',
+            'LayananID' => 'required|string|exists:layanan,LayananID',
             'AccountID' => 'nullable|string|exists:account,AccountID',
         ]);
-    
+
         $dokter = Dokter::findOrFail($id);
         $dokter->update($request->all());
-    
+
         return redirect()->route('info_dokter')->with('success', 'Data dokter berhasil diperbarui');
     }
 }
