@@ -25,10 +25,9 @@ class ObatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ObatID' => 'required|string|max:50|unique:obat,ObatID',
             'NamaObat' => 'required|string|max:100',
             'TipeObat' => 'required|string|max:50',
-            'TanggalKadaluarsa' => 'required|date',
+            'TanggalKadaluarsa' => 'required|date_format:Y-m-d',
             'JumlahObat' => 'required|integer',
             'HargaObat' => 'required|numeric|between:0,999999.99',
         ]);

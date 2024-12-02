@@ -30,6 +30,13 @@ Route::post('/resepobat', [ResepObatController::class, 'store'])->name('store_re
 Route::get('/resepobat/create', [ResepObatController::class, 'create'])->name('create_resepobat');
 Route::post('/resepobat', [ResepObatController::class, 'store'])->name('info_resepobat');
 
+Route::get('/obat', [ObatController::class, 'index'])->name('info_obat');
+Route::get('/edit_obat/{id}', [ObatController::class, 'edit'])->name('edit_obat');
+Route::delete('/delete_obat/{id}', [ObatController::class, 'destroy'])->name('delete_obat');
+Route::put('/update_obat/{id}', [ObatController::class, 'update'])->name('update_obat');
+Route::get('/obat/create', [ObatController::class, 'create'])->name('create_obat');
+Route::post('/obat/store', [ObatController::class, 'store'])->name('store_obat');
+
 Route::middleware(['auth', 'can:access-pasien'])->group(function () {
     Route::get('/test', function () {
         return view('test_middleware');
