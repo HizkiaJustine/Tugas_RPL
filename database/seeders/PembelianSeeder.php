@@ -15,24 +15,24 @@ class PembelianSeeder extends Seeder
     {
         Pembelian::create([
             'TanggalPembelian' => now(),
-            'SupplierID' => 'S001', // Ensure this SupplierID exists in the `supplier` table
-            'ObatID' => 'O001', // Ensure this ObatID exists in the `obat` table
+            'SupplierID' => 'S1', // Ensure this SupplierID exists in the `supplier` table
+            'ObatID' => 'O1', // Ensure this ObatID exists in the `obat` table
             'Kuantitas' => 100,
             'Harga' => 5000.00,
         ]);
 
         Pembelian::create([
             'TanggalPembelian' => now(),
-            'SupplierID' => 'S002',
-            'ObatID' => 'O002',
+            'SupplierID' => 'S2',
+            'ObatID' => 'O2',
             'Kuantitas' => 50,
             'Harga' => 12000.00,
         ]);
 
         Pembelian::create([
             'TanggalPembelian' => now(),
-            'SupplierID' => 'S003',
-            'ObatID' => 'O003',
+            'SupplierID' => 'S3',
+            'ObatID' => 'O3',
             'Kuantitas' => 200,
             'Harga' => 3000.00,
         ]);
