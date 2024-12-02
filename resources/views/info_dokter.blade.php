@@ -11,13 +11,14 @@
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Departemen</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor HP</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Foto</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">ID</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Nama</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Departemen</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Alamat</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Nomor HP</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Layanan ID</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Account ID</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Aksi</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -28,9 +29,8 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['Departemen'] }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['AlamatDokter'] }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['NomorHP'] }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <img src="{{ asset('storage/' . $dokter['FotoDokter']) }}" alt="Foto {{ $dokter['NamaDokter'] }}" class="h-12 w-12 rounded-full object-cover">
-                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['LayananID'] ?? 'N/A' }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['AccountID'] ?? 'N/A' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <a href="{{ route('edit_dokter', $dokter->DokterID) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                         <form action="{{ route('delete_dokter', $dokter->DokterID) }}" method="POST" style="display:inline;">
@@ -42,7 +42,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7" class="px-6 py-4 whitespace-nowrap text-center text-lg font-bold text-red-500">Belum ada data</td>
+                    <td colspan="8" class="px-6 py-4 whitespace-nowrap text-center text-lg font-bold text-red-500">Belum ada data</td>
                 </tr>
             @endforelse
         </tbody>

@@ -30,8 +30,8 @@
                             <input type="text" name="LayananID" id="LayananID" class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full">
                         </div>
                         <div class="w-full px-4 mb-3">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="FotoDokter">Foto Dokter</label>
-                            <input type="file" name="FotoDokter" id="FotoDokter" class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full">
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="AccountID">Account ID</label>
+                            <input type="text" name="AccountID" id="AccountID" class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full">
                         </div>
                         <div class="w-full px-4 mt-4">
                             <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Tambah</button>

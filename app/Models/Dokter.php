@@ -19,7 +19,6 @@ class Dokter extends Model
         'Departemen',
         'AlamatDokter',
         'NomorHP',
-        'FotoDokter',
         'LayananID',
         'AccountID',
     ];

@@ -18,7 +18,7 @@ class DokterController extends Controller
     public function create()
     {
         $title = "Data";
-        $name = "Informasi Dokter";
+        $name = "Tambah Dokter";
         return view('add_dokter', compact('title', 'name'));
     }
 
@@ -29,9 +29,8 @@ class DokterController extends Controller
             'Departemen' => 'required|string|max:100',
             'AlamatDokter' => 'required|string|max:255',
             'NomorHP' => 'required|string|max:15',
-            'LayananID' => 'nullable|integer',
-            'AccountID' => 'nullable|integer',
-            'FotoDokter' => 'nullable|image|max:2048',
+            'LayananID' => 'nullable|string|exists:layanan,LayananID',
+            'AccountID' => 'nullable|string|exists:account,AccountID',
         ]);
 
         $data = $request->all();
@@ -49,7 +48,7 @@ class DokterController extends Controller
     {
         $dokter = Dokter::findOrFail($id);
         $title = "Data";
-        $name = "Informasi Dokter";
+        $name = "Edit Dokter";
         return view('edit_dokter', compact('dokter', 'title', 'name'));
     }
 
@@ -60,17 +59,12 @@ class DokterController extends Controller
             'Departemen' => 'required|string|max:100',
             'AlamatDokter' => 'required|string|max:255',
             'NomorHP' => 'required|string|max:15',
-            'LayananID' => 'nullable|integer',
-            'AccountID' => 'nullable|integer',
-            'FotoDokter' => 'nullable|image|max:2048',
+            'LayananID' => 'nullable|string|exists:layanan,LayananID',
+            'AccountID' => 'nullable|string|exists:account,AccountID',
         ]);
 
         $dokter = Dokter::findOrFail($id);
         $data = $request->all();
-
-        if ($request->hasFile('FotoDokter')) {
-            $data['FotoDokter'] = $request->file('FotoDokter')->store('foto_dokter', 'public');
-        }
 
         $dokter->update($data);
 

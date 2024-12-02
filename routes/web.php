@@ -377,12 +377,67 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::get('/dokter', [DokterController::class, 'index'])->name('info_dokter')->middleware('can:access-dokter');
-Route::get('/edit_dokter/{id}', [DokterController::class, 'edit'])->name('edit_dokter')->middleware('can:access-dokter');
-Route::delete('/delete_dokter/{id}', [DokterController::class, 'destroy'])->name('delete_dokter')->middleware('can:access-dokter');
-Route::put('/update_dokter/{id}', [DokterController::class, 'update'])->name('update_dokter')->middleware('can:access-dokter');
-Route::get('/dokter/create', [DokterController::class, 'create'])->name('create_dokter')->middleware('can:access-dokter');
-Route::post('/dokter', [DokterController::class, 'store'])->name('store_dokter')->middleware('can:access-dokter');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dokter', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_dokter');
+
+    Route::get('/dokter/create', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_dokter');
+
+    Route::post('/dokter', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_dokter');
+
+    Route::get('/dokter/{id}/edit', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_dokter');
+
+    Route::put('/dokter/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_dokter');
+
+    Route::delete('/dokter/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_dokter');
+});
 
 
 
@@ -507,13 +562,6 @@ Route::post('/cashier/update/{record}', [CashierController::class, 'update'])->n
 Route::get('/cashier/delete/{record}', [CashierController::class, 'destroy'])->name('cashier.destroy');
 Route::get('/cashier/create', [CashierController::class, 'create'])->name('cashier.create');
 Route::post('/cashier/submitted', [CashierController::class, 'store'])->name('cashier.store');
-
-Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
-Route::get('/suppliers/edit/{supplier}', [SupplierController::class, 'edit'])->name('suppliers.edit');
-Route::post('/suppliers/update/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
-Route::get('/suppliers/delete/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
-Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create');
-Route::post('/suppliers/submitted', [SupplierController::class, 'store'])->name('suppliers.store');
 
 Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
 Route::get('/payment/edit/{record}', [PaymentController::class, 'edit'])->name('payment.edit');
