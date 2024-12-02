@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\LayananController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AppointmentController;
+
 
 Route::get('/', function () {
     return view('index_user');
@@ -293,3 +295,5 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/appointment', [AppointmentController::class, 'create'])->name('appointment.create');
 Route::post('/appointment/submitted', [AppointmentController::class, 'store'])->name('appointment.store');
+
+Route::resource('suppliers', SupplierController::class);
