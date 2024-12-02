@@ -12,12 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resepobat', function (Blueprint $table) {
+        Schema::create('resep_obat', function (Blueprint $table) {
             $table->string('ResepObatID')->primary();
             $table->date('Tanggal');
             $table->string(column: 'DokterID');
             $table->string(column: 'PasienID');
-            $table->text('ListObat');
             $table->text('DosisObat');
             $table->text('InstruksiPenggunaanObat');
             $table->foreign(columns: 'DokterID')->references(columns: 'DokterID')->on(table: 'dokter')->onDelete('cascade');
@@ -25,11 +24,11 @@ return new class extends Migration
         });
 
         DB::unprepared('
-        CREATE TRIGGER before_insert_resepobat
-        BEFORE INSERT ON resepobat
+        CREATE TRIGGER before_insert_resep_obat
+        BEFORE INSERT ON resep_obat
         FOR EACH ROW
         BEGIN
-            SET NEW.ResepObatID = CONCAT("R", (SELECT IFNULL(MAX(CAST(SUBSTRING(ResepObatID, 2) AS UNSIGNED)), 0) + 1 FROM resepobat));
+            SET NEW.ResepObatID = CONCAT("R", (SELECT IFNULL(MAX(CAST(SUBSTRING(ResepObatID, 2) AS UNSIGNED)), 0) + 1 FROM resep_obat));
         END
         ');
     }
@@ -39,7 +38,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_resepobat');
-        Schema::dropIfExists('resepobat');
+        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_resep_obat');
+        Schema::dropIfExists('resep_obat');
     }
 };

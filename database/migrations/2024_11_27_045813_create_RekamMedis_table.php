@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rekammedis', function (Blueprint $table) {
+        Schema::create('rekam_medis', function (Blueprint $table) {
             $table->string('RekamMedisID')->primary();
             $table->date(column: 'Tanggal');
             $table->string(column: 'PasienID');
@@ -27,10 +27,10 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE TRIGGER before_insert_rekam_medis
-        BEFORE INSERT ON rekammedis
+        BEFORE INSERT ON rekam_medis
         FOR EACH ROW
         BEGIN
-            SET NEW.RekamMedisID = CONCAT("RM", (SELECT IFNULL(MAX(CAST(SUBSTRING(RekamMedisID, 3) AS UNSIGNED)), 0) + 1 FROM rekammedis));
+            SET NEW.RekamMedisID = CONCAT("RM", (SELECT IFNULL(MAX(CAST(SUBSTRING(RekamMedisID, 3) AS UNSIGNED)), 0) + 1 FROM rekam_medis));
         END
         ');
     }
@@ -40,7 +40,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_rekammedis');
-        Schema::dropIfExists('rekammedis');
+        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_rekam_medis');
+        Schema::dropIfExists('rekam_medis');
     }
 };

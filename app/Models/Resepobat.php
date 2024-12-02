@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Resepobat extends Model
 {
-    protected $table = 'resepobat';
+    use HasFactory;
+    protected $table = 'resep_obat';
     protected $primaryKey = 'ResepObatID';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -20,4 +21,11 @@ class Resepobat extends Model
         'InstruksiPenggunaanObat',
     ];
     public $timestamps = false;
+
+
+    public function obat()
+    {
+        return $this->belongsToMany(Obat::class, 'obat_resep', 'ResepObatID', 'ObatID')
+                    ->withPivot('DosisObat');
+    }
 }

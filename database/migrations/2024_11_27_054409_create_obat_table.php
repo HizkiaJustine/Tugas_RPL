@@ -19,8 +19,6 @@ return new class extends Migration
             $table->date('TanggalKadaluarsa');
             $table->integer('JumlahObat');
             $table->decimal('HargaObat', 10, 2);
-            $table->string('ResepObatID');
-            $table->foreign('ResepObatID')->references('ResepObatID')->on('resepobat')->onDelete('cascade');
         });
 
         DB::unprepared('

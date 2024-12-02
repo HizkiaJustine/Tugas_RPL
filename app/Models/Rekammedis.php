@@ -7,7 +7,7 @@ use illuminate\Support\Arr;
 
 class Rekammedis extends Model
 {
-    protected $table = 'rekammedis';
+    protected $table = 'rekam_medis';
     protected $primaryKey = 'RekamMedisID';
     public $incrementing = false;
     protected $keyType = 'string';
