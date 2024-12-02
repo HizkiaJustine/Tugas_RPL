@@ -297,7 +297,7 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('create_dokter');
 
-    Route::post('/dokter', function (Request $request) {
+    Route::post('/dokter/store', function (Request $request) {
         $user = Auth::user();
         $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
@@ -307,6 +307,14 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('store_dokter');
 });
+
+
+Route::get('/layanan', [LayananController::class, 'index'])->name('info_layanan');
+Route::get('/edit_layanan/{id}', [LayananController::class, 'edit'])->name('edit_layanan');
+Route::delete('/delete_layanan/{id}', [LayananController::class, 'destroy'])->name('delete_layanan');
+Route::put('/update_layanan/{id}', [LayananController::class, 'update'])->name('update_layanan');
+Route::get('/layanan/create', [LayananController::class, 'create'])->name('create_layanan');
+Route::post('/layanan/store', [LayananController::class, 'store'])->name('store_layanan');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/karyawan', function () {
@@ -359,7 +367,7 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('create_karyawan');
 
-    Route::post('/karyawan', function (Request $request) {
+    Route::post('/karyawan/store', function (Request $request) {
         $user = Auth::user();
         $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
@@ -370,14 +378,6 @@ Route::middleware(['auth'])->group(function () {
     })->name('store_karyawan');
 });
 
-
-
-Route::get('/layanan', [LayananController::class, 'index'])->name('info_layanan');
-Route::get('/edit_layanan/{id}', [LayananController::class, 'edit'])->name('edit_layanan');
-Route::delete('/delete_layanan/{id}', [LayananController::class, 'destroy'])->name('delete_layanan');
-Route::put('/update_layanan/{id}', [LayananController::class, 'update'])->name('update_layanan');
-Route::get('/layanan/create', [LayananController::class, 'create'])->name('create_layanan');
-Route::post('/layanan/store', [LayananController::class, 'store'])->name('store_layanan');
 
 
 

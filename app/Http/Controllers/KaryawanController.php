@@ -22,22 +22,7 @@ class KaryawanController extends Controller
         return view('add_karyawan', compact('title', 'name'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'KaryawanID' => 'required|string|max:255',
-            'NamaKaryawan' => 'required|string|max:100',
-            'Jabatan' => 'required|string|max:100',
-            'NomorHP' => 'required|string|max:15',
-            'AlamatKaryawan' => 'required|string',
-            'JenisKelamin' => 'required|in:L,P',
-            'AccountID' => 'nullable|string|exists:account,AccountID',
-        ]);
-
-        Karyawan::create($request->all());
-
-        return redirect('/')->with('success', 'Data karyawan berhasil ditambahkan');
-    }
+    public function store(Request $request) { $request->validate([ 'KaryawanID' => 'required|string|max:255', 'NamaKaryawan' => 'required|string|max:100', 'Jabatan' => 'required|string|max:100', 'NomorHP' => 'required|string|max:15', 'AlamatKaryawan' => 'required|string', 'JenisKelamin' => 'required|in:L,P', 'AccountID' => 'nullable|string|exists:account,AccountID', ]); Karyawan::create($request->all()); return redirect('/')->with('success', 'Data karyawan berhasil ditambahkan'); }
 
     public function edit($id)
     {
