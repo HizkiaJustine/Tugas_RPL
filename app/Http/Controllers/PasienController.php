@@ -64,7 +64,7 @@ class PasienController extends Controller
             'AlamatPasien' => 'required|string|max:255',
             'BeratBadanPasien' => 'required|numeric|between:0,999.99',
             'TinggiBadanPasien' => 'required|numeric|between:0,999.99',
-            'TanggalLahirPasien' => 'required|date',
+            'TanggalLahirPasien' => 'required|date_format:Y-m-d',
             'JenisKelamin' => 'required|in:L,P',
             'NomorHP' => 'required|string|max:15',
             'AccountID' => 'nullable|string|exists:account,AccountID',
