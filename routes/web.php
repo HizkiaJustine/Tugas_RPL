@@ -29,10 +29,13 @@ Route::post('/resepobat', [ResepObatController::class, 'store'])->name('store_re
 Route::get('/resepobat/create', [ResepObatController::class, 'create'])->name('create_resepobat');
 Route::post('/resepobat', [ResepObatController::class, 'store'])->name('info_resepobat');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'can:access-pasien'])->group(function () {
     Route::get('/test', function () {
         return view('test_middleware');
-    })->middleware('can:access-pasien');
+    });
+    Route::get('/test/pasien', function () {
+        return view('test_middleware', ['component' => 'auth-pasien']);
+    });
 });
 
 // Uncomment and adjust these routes as needed
