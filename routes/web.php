@@ -337,3 +337,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/forum', [ForumController::class, 'index'])->name('forum');
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
