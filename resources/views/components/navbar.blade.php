@@ -35,7 +35,7 @@
     </div>
     <a href="about" class="{{ request()->is('about') ? 'nav-active' : ''}}">Tentang RSUI</a>
     <a href="#">Artikel</a>
-    <a href="#">Forum</a>
+    <a href="/forum">Forum</a>
     <a href="{{ route('appointment.create') }}">Reservasi</a>
     <div class="notification-icon">
         <i class="bi bi-bell"></i>

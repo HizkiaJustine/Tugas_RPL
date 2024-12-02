@@ -16,5 +16,7 @@ class LayananSeeder extends Seeder
         Layanan::create(['NamaLayanan' => 'Layanan Jantung', 'HargaLayanan' => 1000000.00]);
         Layanan::create(['NamaLayanan' => 'Layanan Obgyn', 'HargaLayanan' => 300000.00]);
         Layanan::create(['NamaLayanan' => 'Layanan THT', 'HargaLayanan' => 200000.00]);
+        Layanan::create(['NamaLayanan' => 'Layanan Radiologi', 'HargaLayanan' => 300000.00]);
+        Layanan::create(['NamaLayanan' => 'Layanan Paru-paru', 'HargaLayanan' => 500000.00]);
     }
 }

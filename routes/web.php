@@ -5,7 +5,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
+<<<<<<< HEAD
 use App\Http\Controllers\SupplierController;
+=======
+use App\Http\Controllers\ForumController;
+>>>>>>> f2d2ee4ac37da646950face4459c9b21a03039cd
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\CashierController;
@@ -306,4 +310,42 @@ Route::post('/cashier/update/{record}', [CashierController::class, 'update'])->n
 Route::get('/cashier/delete/{record}', [CashierController::class, 'destroy'])->name('cashier.destroy');
 Route::get('/cashier/create', [CashierController::class, 'create'])->name('cashier.create');
 Route::post('/cashier/submitted', [CashierController::class, 'store'])->name('cashier.store');
+<<<<<<< HEAD
 >>>>>>> 6f02ea9760e1ccd9156f948f0ebc237fd45d6cff
+=======
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/forum', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if (in_array($role, ['pasien', 'dokter', 'administrator', 'kasir'])) {
+            return app(ForumController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('forum');
+
+    Route::post('/forum/question', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'pasien') {
+            return app(ForumController::class)->storeQuestion($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('forum.storeQuestion');
+
+    Route::post('/forum/answer/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'dokter') {
+            return app(ForumController::class)->storeAnswer($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('forum.storeAnswer');
+});
+
+Route::get('/forum', [ForumController::class, 'index'])->name('forum');
+>>>>>>> f2d2ee4ac37da646950face4459c9b21a03039cd
