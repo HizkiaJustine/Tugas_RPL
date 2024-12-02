@@ -1,5 +1,6 @@
 <?php
 use \App\Models\Account;
+use \App\Models\Pasien; // Add this line
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,7 @@ use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AccountController;
-
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('index_user');
@@ -455,7 +456,29 @@ Route::middleware(['auth'])->group(function () {
     })->name('store_account');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', function () {
+        $user = Auth::user();
+        $account = Account::where('email', $user->email)->first();
+        $pasien = Pasien::where('AccountID', $account->AccountID)->first();
+        return view('profile.show', compact('account', 'pasien'));
+    })->name('profile.show');
 
+    Route::get('/profile/edit', function () {
+        $user = Auth::user();
+        $account = Account::where('email', $user->email)->first();
+        $pasien = Pasien::where('AccountID', $account->AccountID)->first();
+        return view('profile.edit', compact('account', 'pasien'));
+    })->name('profile.edit');
+
+    Route::put('/profile', function (Request $request) {
+        $user = Auth::user();
+        $account = Account::where('email', $user->email)->first();
+        $pasien = Pasien::where('AccountID', $account->AccountID)->first();
+        $pasien->update($request->all());
+        return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
+    })->name('profile.update');
+});
 
 // Uncomment and adjust these routes as needed
 // Route::middleware(['auth'])->group(function () {
