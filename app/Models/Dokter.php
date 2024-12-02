@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dokter extends Model
 {
-    use HasFactory;
 
     protected $table = 'dokter';
     protected $primaryKey = 'DokterID';
     public $incrementing = false;
+    public $timestamps = false;
     protected $keyType = 'string';
 
     protected $fillable = [
-        'DokterID',
         'NamaDokter',
         'Departemen',
         'AlamatDokter',

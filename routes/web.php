@@ -244,6 +244,69 @@ Route::middleware(['auth'])->group(function () {
     })->name('store_resepobat');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dokter', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_dokter');
+
+    Route::get('/edit_dokter/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_dokter');
+
+    Route::delete('/delete_dokter/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_dokter');
+
+    Route::put('/update_dokter/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_dokter');
+
+    Route::get('/dokter/create', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_dokter');
+
+    Route::post('/dokter/store', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(DokterController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_dokter');
+});
+
+
 Route::get('/layanan', [LayananController::class, 'index'])->name('info_layanan');
 Route::get('/edit_layanan/{id}', [LayananController::class, 'edit'])->name('edit_layanan');
 Route::delete('/delete_layanan/{id}', [LayananController::class, 'destroy'])->name('delete_layanan');
@@ -251,13 +314,69 @@ Route::put('/update_layanan/{id}', [LayananController::class, 'update'])->name('
 Route::get('/layanan/create', [LayananController::class, 'create'])->name('create_layanan');
 Route::post('/layanan/store', [LayananController::class, 'store'])->name('store_layanan');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/karyawan', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(KaryawanController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_karyawan');
 
-Route::get('/karyawan', [KaryawanController::class, 'index'])->name('info_karyawan')->middleware('can:access-karyawan');
-Route::get('/edit_karyawan/{id}', [KaryawanController::class, 'edit'])->name('edit_karyawan')->middleware('can:access-karyawan');
-Route::delete('/delete_karyawan/{id}', [KaryawanController::class, 'destroy'])->name('delete_karyawan')->middleware('can:access-karyawan');
-Route::put('/update_karyawan/{id}', [KaryawanController::class, 'update'])->name('update_karyawan')->middleware('can:access-karyawan');
-Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('create_karyawan')->middleware('can:access-karyawan');
-Route::post('/karyawan', [KaryawanController::class, 'store'])->name('store_karyawan')->middleware('can:access-karyawan');
+    Route::get('/edit_karyawan/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(KaryawanController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_karyawan');
+
+    Route::delete('/delete_karyawan/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(KaryawanController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_karyawan');
+
+    Route::put('/update_karyawan/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(KaryawanController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_karyawan');
+
+    Route::get('/karyawan/create', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(KaryawanController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_karyawan');
+
+    Route::post('/karyawan/store', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(KaryawanController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_karyawan');
+});
+
+
 
 
 Route::get('/dokter', [DokterController::class, 'index'])->name('info_dokter')->middleware('can:access-dokter');
