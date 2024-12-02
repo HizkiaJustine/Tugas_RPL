@@ -22,7 +22,6 @@ use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
