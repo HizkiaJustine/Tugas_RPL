@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
@@ -36,6 +37,14 @@ Route::delete('/delete_obat/{id}', [ObatController::class, 'destroy'])->name('de
 Route::put('/update_obat/{id}', [ObatController::class, 'update'])->name('update_obat');
 Route::get('/obat/create', [ObatController::class, 'create'])->name('create_obat');
 Route::post('/obat/store', [ObatController::class, 'store'])->name('store_obat');
+
+Route::get('/layanan', [LayananController::class, 'index'])->name('info_layanan');
+Route::get('/edit_layanan/{id}', [LayananController::class, 'edit'])->name('edit_layanan');
+Route::delete('/delete_layanan/{id}', [LayananController::class, 'destroy'])->name('delete_layanan');
+Route::put('/update_layanan/{id}', [LayananController::class, 'update'])->name('update_layanan');
+Route::get('/layanan/create', [LayananController::class, 'create'])->name('create_layanan');
+Route::post('/layanan/store', [LayananController::class, 'store'])->name('store_layanan');
+
 
 Route::middleware(['auth', 'can:access-pasien'])->group(function () {
     Route::get('/test', function () {
