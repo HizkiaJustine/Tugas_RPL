@@ -592,3 +592,7 @@ header p {
     transition: 0s;
     transform: translate(0, 5%);
 }
+
+.reply {
+    margin-left: 20px; /* Atur sesuai kebutuhan */
+}

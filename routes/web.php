@@ -261,7 +261,6 @@ Route::put('/update_karyawan/{id}', [KaryawanController::class, 'update'])->name
 Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('create_karyawan')->middleware('can:access-karyawan');
 Route::post('/karyawan', [KaryawanController::class, 'store'])->name('store_karyawan')->middleware('can:access-karyawan');
 
-
 Route::get('/dokter', [DokterController::class, 'index'])->name('info_dokter')->middleware('can:access-dokter');
 Route::get('/edit_dokter/{id}', [DokterController::class, 'edit'])->name('edit_dokter')->middleware('can:access-dokter');
 Route::delete('/delete_dokter/{id}', [DokterController::class, 'destroy'])->name('delete_dokter')->middleware('can:access-dokter');

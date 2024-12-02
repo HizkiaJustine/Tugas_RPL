@@ -61,7 +61,7 @@
                         </div>
                         @auth
                             @if(Auth::user()->Role == 'dokter')
-                                <form action="{{ route('forum.storeAnswer', $question->QuestionID) }}" method="POST">
+                                <form action="{{ route('forum.storeAnswer', $question->QuestionID) }}" method="POST" class="reply">
                                     @csrf
                                     <div class="relative w-full mb-3 mt-3">
                                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="answer">
@@ -78,7 +78,7 @@
                             @endif
                         @endauth
                         @foreach($question->answers as $answer)
-                            <div class="relative w-full mb-3 mt-3">
+                            <div class="relative w-full mb-3 mt-3 reply">
                                 <div class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                     {{ $answer->account->email }} menjawab:
                                 </div>
