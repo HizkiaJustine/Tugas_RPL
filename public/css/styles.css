@@ -79,12 +79,27 @@ body {
     background: transparent;
 }
 
-.dropdown-notifications, .dropdown-profile {
+.dropdown-notifications {
     display: none;
     position: absolute;
     top: 30px; /* Menempatkan dropdown di bawah ikon */
     left: 50%;
     transform: translateX(-50%);
+    width: 200px;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden; /* Menyembunyikan konten yang melampaui batas */
+}
+
+.dropdown-profile {
+    display: none;
+    position: absolute;
+    top: 50px; /* Menempatkan dropdown di bawah ikon */
+    left: 50%;
+    transform: translateX(-80%);
     width: 200px;
     background-color: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -187,7 +202,7 @@ footer {
   font-weight: 500;
   font-size: 16px;
   padding: 0 18px;
-  line-height: 40px;
+  line-height: 30px;
   text-align: center;
   text-decoration: none;
   user-select: none;

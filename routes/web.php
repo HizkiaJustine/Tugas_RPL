@@ -5,17 +5,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
-<<<<<<< HEAD
-use App\Http\Controllers\SupplierController;
-=======
 use App\Http\Controllers\ForumController;
->>>>>>> f2d2ee4ac37da646950face4459c9b21a03039cd
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AppointmentController;
@@ -301,19 +298,14 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/appointment', [AppointmentController::class, 'create'])->name('appointment.create');
 Route::post('/appointment/submitted', [AppointmentController::class, 'store'])->name('appointment.store');
 
-<<<<<<< HEAD
 Route::resource('suppliers', SupplierController::class);
-=======
+
 Route::get('/cashier', [CashierController::class, 'index'])->name('cashier.index');
 Route::get('/cashier/edit/{record}', [CashierController::class, 'edit'])->name('cashier.edit');
 Route::post('/cashier/update/{record}', [CashierController::class, 'update'])->name('cashier.update');
 Route::get('/cashier/delete/{record}', [CashierController::class, 'destroy'])->name('cashier.destroy');
 Route::get('/cashier/create', [CashierController::class, 'create'])->name('cashier.create');
 Route::post('/cashier/submitted', [CashierController::class, 'store'])->name('cashier.store');
-<<<<<<< HEAD
->>>>>>> 6f02ea9760e1ccd9156f948f0ebc237fd45d6cff
-=======
-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/forum', function () {
@@ -348,4 +340,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/forum', [ForumController::class, 'index'])->name('forum');
->>>>>>> f2d2ee4ac37da646950face4459c9b21a03039cd
+
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
