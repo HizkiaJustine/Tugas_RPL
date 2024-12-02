@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PasienController;
-use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PasienController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepObatController;
+use App\Http\Controllers\RekamMedisController;
 
 Route::get('/', function () {
     return view('index_user');

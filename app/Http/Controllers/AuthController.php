@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User; // Revert back to User model
 use Illuminate\Support\Facades\Hash;
+use App\Models\User; // Revert back to User model
 
 class AuthController extends Controller
 {
