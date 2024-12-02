@@ -14,16 +14,16 @@ class KaryawanSeeder extends Seeder
     public function run(): void
     {
         // Buat akun karyawan
-        $account1 = Account::where('Role', 'karyawan')->first();
-        $account2 = Account::where('Role', 'karyawan')->skip(1)->first();
-        $account3 = Account::where('Role', 'karyawan')->skip(2)->first();
-        $account4 = Account::where('Role', 'karyawan')->skip(3)->first();
-        $account5 = Account::where('Role', 'karyawan')->skip(4)->first();
+        $account1 = Account::where('Role', 'administrator')->first();
+        // $account2 = Account::where('Role', 'karyawan')->skip(1)->first();
+        // $account3 = Account::where('Role', 'karyawan')->skip(2)->first();
+        // $account4 = Account::where('Role', 'karyawan')->skip(3)->first();
+        // $account5 = Account::where('Role', 'karyawan')->skip(4)->first();
 
         // Buat karyawan
         Karyawan::create([
             'NamaKaryawan' => 'Jane Doe',
-            'Jabatan' => 'Manager',
+            'Jabatan' => 'Administrator',
             'AlamatKaryawan' => '456 Elm St',
             'NomorHP' => '08123456780',
             'JenisKelamin' => 'P',
@@ -36,7 +36,7 @@ class KaryawanSeeder extends Seeder
             'AlamatKaryawan' => '789 Oak St',
             'NomorHP' => '08123456781',
             'JenisKelamin' => 'L',
-            'AccountID' => $account2->AccountID,
+            // 'AccountID' => $account2->AccountID,
         ]);
 
         Karyawan::create([
@@ -45,7 +45,7 @@ class KaryawanSeeder extends Seeder
             'AlamatKaryawan' => '123 Pine St',
             'NomorHP' => '08123456782',
             'JenisKelamin' => 'P',
-            'AccountID' => $account3->AccountID,
+            // 'AccountID' => $account3->AccountID,
         ]);
 
         Karyawan::create([
@@ -54,7 +54,7 @@ class KaryawanSeeder extends Seeder
             'AlamatKaryawan' => '321 Maple St',
             'NomorHP' => '08123456783',
             'JenisKelamin' => 'L',
-            'AccountID' => $account4->AccountID,
+            // 'AccountID' => $account4->AccountID,
         ]);
 
         Karyawan::create([
@@ -63,7 +63,7 @@ class KaryawanSeeder extends Seeder
             'AlamatKaryawan' => '654 Cedar St',
             'NomorHP' => '08123456784',
             'JenisKelamin' => 'P',
-            'AccountID' => $account5->AccountID,
+            // 'AccountID' => $account5->AccountID,
         ]);
     }
 }
