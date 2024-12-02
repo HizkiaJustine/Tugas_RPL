@@ -20,6 +20,7 @@ use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ForumController;
 
 Route::get('/', function () {
     return view('index_user');
