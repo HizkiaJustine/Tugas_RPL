@@ -42,7 +42,7 @@
                     <a href="">Rekam Medis</a>
                 @endcan
                 @can('viewAppointment', Auth::user())
-                    <a href="#">Appointment</a>
+                    <a href="{{ route('appointments.show') }}">Appointment</a>
                 @endcan
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
