@@ -31,6 +31,16 @@ class AuthServiceProvider extends ServiceProvider
             return $account && $account->Role === 'pasien';
         });
 
+        Gate::define('access-administrator', function ($user) {
+            $account = Account::where('email', $user->email)->first();
+            return $account && $account->Role === 'administrator';
+        });
+
+        Gate::define('access-kasir', function ($user) {
+            $account = Account::where('email', $user->email)->first();
+            return $account && $account->Role === 'kasir';
+        });
+
         // ...existing code...
     }
 }

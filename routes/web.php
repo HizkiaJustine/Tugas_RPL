@@ -16,17 +16,76 @@ Route::get('/about', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/pasien', [PasienController::class, 'index'])->name('info_pasien')->middleware('can:access-pasien');
-    Route::get('/edit_pasien/{id}', [PasienController::class, 'edit'])->name('edit_pasien')->middleware('can:access-pasien');
-    Route::delete('/delete_pasien/{id}', [PasienController::class, 'destroy'])->name('delete_pasien')->middleware('can:access-pasien');
-    Route::put('/update_pasien/{id}', [PasienController::class, 'update'])->name('update_pasien')->middleware('can:access-pasien');
-    Route::get('/pasien/create', [PasienController::class, 'create'])->name('create_pasien')->middleware('can:access-pasien');
-    Route::post('/pasien', [PasienController::class, 'store'])->name('store_pasien')->middleware('can:access-pasien');
-    Route::get('/rekammedis/{id}', [RekamMedisController::class, 'show'])->name('rekammedis')->middleware('can:access-pasien');
+    Route::get('/pasien', function () {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(PasienController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_pasien');
+
+    Route::get('/edit_pasien/{id}', function ($id) {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(PasienController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_pasien');
+
+    Route::delete('/delete_pasien/{id}', function ($id) {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(PasienController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_pasien');
+
+    Route::put('/update_pasien/{id}', function ($id) {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(PasienController::class)->update($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_pasien');
+
+    Route::get('/pasien/create', function () {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(PasienController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_pasien');
+
+    Route::post('/pasien', function () {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(PasienController::class)->store();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_pasien');
+
+    Route::get('/rekammedis/{id}', function ($id) {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(RekamMedisController::class)->show($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('rekammedis');
 });
-
-
-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/test', function () {

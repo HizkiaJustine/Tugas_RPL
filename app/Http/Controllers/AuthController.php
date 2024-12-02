@@ -36,10 +36,10 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        Account::create([ // Changed from User to Account
+        Account::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'Role' => 'Pasien', // Assuming a default role
+            'Role' => 'Pasien',
         ]);
 
         return redirect()->route('login')->with('success', 'Registration successful. Please login.');
