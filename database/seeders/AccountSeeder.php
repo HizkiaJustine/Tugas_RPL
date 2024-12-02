@@ -17,7 +17,7 @@ class AccountSeeder extends Seeder
         Account::create([
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
-            'Role' => 'Administrator',
+            'Role' => 'administrator',
         ]);
 
     }

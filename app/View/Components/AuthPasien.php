@@ -27,7 +27,7 @@ class AuthPasien extends Component
         if ($user && $user->role == 'pasien') {
             return view('components.auth-pasien');
         } else {
-            return redirect()->route('login');
+            abort(403, 'This action is unauthorized.');
         }
     }
 }
