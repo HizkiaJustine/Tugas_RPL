@@ -6,11 +6,6 @@ use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-namespace App\Http\Controllers;
-
-use App\Models\Account;
-use Illuminate\Http\Request;
-
 class AccountController extends Controller
 {
     public function index()
@@ -25,7 +20,7 @@ class AccountController extends Controller
     {
         $title = "Tambah Akun";
         $name = "Tambah Akun Baru";
-        return view('create_account', compact('title', 'name'));
+        return view('add_account', compact('title', 'name'));
     }
 
     public function store(Request $request)
@@ -44,31 +39,37 @@ class AccountController extends Controller
             'Role' => $request->Role,
         ]);
 
-        return redirect()->route('accounts.index')->with('success', 'Account created successfully.');
+        return redirect()->route('info_accounts')->with('success', 'Account created successfully.');
     }
 
     public function edit($id)
     {
         $account = Account::findOrFail($id);
-        return view('accounts.edit', compact('account'));
+        $title = "Edit Akun";
+        $name = "Edit Akun";
+        return view('edit_account', compact('account', 'title', 'name'));
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'email' => 'required|string|email|unique:account,email,' . $id . ',AccountID',
-            'Role' => 'required|in:administrator,dokter,pasien,kasir',
-        ]);
+{
+    $request->validate([
+        'email' => 'required|string|email|unique:account,email,' . $id . ',AccountID',
+        'Role' => 'required|in:administrator,dokter,pasien,kasir',
+    ]);
 
-        $account = Account::findOrFail($id);
-        $account->update([
-            'email' => $request->email,
-            'Role' => $request->Role,
-            'password' => $request->password ? Hash::make($request->password) : $account->password,
-        ]);
+    $account = Account::findOrFail($id);
+    $account->email = $request->email;
+    $account->Role = $request->Role;
 
-        return redirect()->route('accounts.index')->with('success', 'Account updated successfully.');
+    if ($request->filled('password')) {
+        $account->password = Hash::make($request->password);
     }
+
+    $account->save();
+
+    return redirect()->route('info_accounts')->with('success', 'Account updated successfully.');
+}
+
 
     public function show($id)
     {
@@ -81,6 +82,6 @@ class AccountController extends Controller
         $account = Account::findOrFail($id);
         $account->delete();
 
-        return redirect()->route('accounts.index')->with('success', 'Account deleted successfully.');
+        return redirect()->route('info_accounts')->with('success', 'Account deleted successfully.');
     }
 }
