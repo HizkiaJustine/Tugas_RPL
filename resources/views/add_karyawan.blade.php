@@ -39,7 +39,6 @@
                         </div>
                         <div class="w-full px-4 mt-4">
                             <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Simpan Karyawan</button>
-                            <a href="{{ route('index_karyawan') }}" class="bg-gray-500 text-white font-bold py-2 px-4 rounded">Kembali</a>
                         </div>
                     </div>
                 </form>

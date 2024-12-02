@@ -25,18 +25,18 @@ class KaryawanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'KaryawanID' => 'required|string|unique:karyawan,KaryawanID',
+            'KaryawanID' => 'required|string|max:255',
             'NamaKaryawan' => 'required|string|max:100',
             'Jabatan' => 'required|string|max:100',
             'NomorHP' => 'required|string|max:15',
-            'AlamatKaryawan' => 'required|string|max:255',
+            'AlamatKaryawan' => 'required|string',
             'JenisKelamin' => 'required|in:L,P',
             'AccountID' => 'nullable|string|exists:account,AccountID',
         ]);
 
         Karyawan::create($request->all());
 
-        return redirect()->route('info_karyawan')->with('success', 'Data karyawan berhasil ditambahkan');
+        return redirect('/')->with('success', 'Data karyawan berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -57,17 +57,18 @@ class KaryawanController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'KaryawanID' => 'required|string|max:255',
             'NamaKaryawan' => 'required|string|max:100',
             'Jabatan' => 'required|string|max:100',
             'NomorHP' => 'required|string|max:15',
-            'AlamatKaryawan' => 'required|string|max:255',
+            'AlamatKaryawan' => 'required|string',
             'JenisKelamin' => 'required|in:L,P',
             'AccountID' => 'nullable|string|exists:account,AccountID',
         ]);
-    
+
         $karyawan = Karyawan::findOrFail($id);
         $karyawan->update($request->all());
-    
+
         return redirect()->route('info_karyawan')->with('success', 'Data karyawan berhasil diperbarui');
     }
 }

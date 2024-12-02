@@ -31,10 +31,11 @@
                             <input type="file" name="FotoDokter" id="fotoDokter" class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" accept="image/*">
                             <p class="text-xs text-gray-500 mt-2">Biarkan kosong jika tidak ingin mengganti foto</p>
                         </div>
-                        <div class="w-full px-4 mt-4">
-                            <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Simpan Perubahan</button>
-                            <a href="{{ route('index_dokter') }}" class="bg-gray-500 text-white font-bold py-2 px-4 rounded">Kembali</a>
-                        </div>
+                        <div class="flex justify-end" style="margin-right: 55px; margin-bottom: 20px">
+                    <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                        Update
+                    </button>
+                </div>
                     </div>
                 </form>
             </div>

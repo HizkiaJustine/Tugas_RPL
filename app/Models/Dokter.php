@@ -12,10 +12,10 @@ class Dokter extends Model
     protected $table = 'dokter';
     protected $primaryKey = 'DokterID';
     public $incrementing = false;
+    public $timestamps = false;
     protected $keyType = 'string';
 
     protected $fillable = [
-        'DokterID',
         'NamaDokter',
         'Departemen',
         'AlamatDokter',
