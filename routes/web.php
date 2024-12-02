@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
@@ -113,6 +114,19 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/resepobat', [ResepObatController::class, 'store'])->name('info_resepobat');
 });
 
+Route::get('/obat', [ObatController::class, 'index'])->name('info_obat');
+Route::get('/edit_obat/{id}', [ObatController::class, 'edit'])->name('edit_obat');
+Route::delete('/delete_obat/{id}', [ObatController::class, 'destroy'])->name('delete_obat');
+Route::put('/update_obat/{id}', [ObatController::class, 'update'])->name('update_obat');
+Route::get('/obat/create', [ObatController::class, 'create'])->name('create_obat');
+Route::post('/obat/store', [ObatController::class, 'store'])->name('store_obat');
+
+Route::get('/layanan', [LayananController::class, 'index'])->name('info_layanan');
+Route::get('/edit_layanan/{id}', [LayananController::class, 'edit'])->name('edit_layanan');
+Route::delete('/delete_layanan/{id}', [LayananController::class, 'destroy'])->name('delete_layanan');
+Route::put('/update_layanan/{id}', [LayananController::class, 'update'])->name('update_layanan');
+Route::get('/layanan/create', [LayananController::class, 'create'])->name('create_layanan');
+Route::post('/layanan/store', [LayananController::class, 'store'])->name('store_layanan');
 // Uncomment and adjust these routes as needed
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/test/dokter', function () {
