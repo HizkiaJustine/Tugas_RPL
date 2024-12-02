@@ -1,4 +1,4 @@
-
+<x-auth></x-authDokter>
 <!DOCTYPE html>
 <html>
 <head>
