@@ -41,7 +41,7 @@
                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="BeratBadanPasien">
                             Berat Badan Pasien
                         </label>
-                        <input type="number" id="BeratBadanPasien" name="BeratBadanPasien" step="0.01" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="{{ $pasien->BeratBadanPasien }}">
+                        <input type="number" id="BeratBadanPasien" name="BeratBadanPasien" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="{{ $pasien->BeratBadanPasien }}">
                         </div>
                     </div>
                     <div class="w-full lg:w-12/12 px-4">
@@ -49,7 +49,7 @@
                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="TinggiBadanPasien">
                             Tinggi Badan Pasien
                         </label>
-                        <input type="number" id="TinggiBadanPasien" name="TinggiBadanPasien" step="0.01" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="{{ $pasien->TinggiBadanPasien }}">
+                        <input type="number" id="TinggiBadanPasien" name="TinggiBadanPasien" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="{{ $pasien->TinggiBadanPasien }}">
                         </div>
                     </div>
                     <div class="w-full lg:w-12/12 px-4">
@@ -66,14 +66,6 @@
                             Nomor HP
                         </label>
                         <input type="text" id="NomorHP" name="NomorHP" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="{{ $pasien->NomorHP }}">
-                        </div>
-                    </div>
-                    <div class="w-full lg:w-12/12 px-4">
-                        <div class="relative w-full mb-3">
-                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="AccountID">
-                            Account ID (Opsional)
-                        </label>
-                        <input type="text" id="AccountID" name="AccountID" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="{{ $pasien->AccountID }}">
                         </div>
                     </div>
                 </div>

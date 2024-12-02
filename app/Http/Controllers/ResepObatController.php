@@ -10,38 +10,64 @@ use Illuminate\Http\Request;
 
 class ResepObatController extends Controller
 {
+    public function index()
+    {
+        $resepObat = ResepObat::all();
+        $title = "Data Resep Obat";
+        $name = "Informasi Resep Obat";
+        return view('info_resepobat', compact('resepObat', 'title', 'name'));
+    }
+
     public function create()
     {
-        $dokters = Dokter::all();
-        $pasiens = Pasien::all();
-        $obats = Obat::all();
-        
-        return view('add_resepobat', compact('dokters', 'pasiens', 'obats'));
+        $title = "Tambah Resep Obat";
+        $name = "Tambah Informasi Resep Obat";
+        return view('add_resepobat', compact('title', 'name'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'DokterID' => 'required',
-            'PasienID' => 'required',
-            'InstruksiPenggunaanObat' => 'required',
-            'ObatID' => 'required|array',
-            'DosisObat' => 'required|array',
+        $request->validate([
+            'Tanggal' => 'required|date_format:Y-m-d',
+            'DokterID' => 'required|string|exists:dokter,DokterID',
+            'PasienID' => 'required|string|exists:pasien,PasienID',
+            'ListObat' => 'required|string',
+            'InstruksiPenggunaanObat' => 'required|string',
         ]);
 
-        // Insert data resep obat
-        $resep = Resepobat::create([
-            'DokterID' => $request->DokterID,
-            'PasienID' => $request->PasienID,
-            'InstruksiPenggunaanObat' => $request->InstruksiPenggunaanObat,
-            'Tanggal' => now(),  // Assuming today's date as the prescription date
+        ResepObat::create($request->all());
+
+        return redirect()->route('info_resepobat')->with('success', 'Data resep obat berhasil ditambahkan');
+    }
+
+    public function edit($id)
+    {
+        $resepObat = ResepObat::findOrFail($id);
+        $title = "Edit Resep Obat";
+        $name = "Edit Informasi Resep Obat";
+        return view('edit_resepobat', compact('resepObat', 'title', 'name'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'Tanggal' => 'required|date_format:Y-m-d',
+            'DokterID' => 'required|string|exists:dokter,DokterID',
+            'PasienID' => 'required|string|exists:pasien,PasienID',
+            'ListObat' => 'required|string',
+            'InstruksiPenggunaanObat' => 'required|string',
         ]);
 
-        // Insert data obat ke tabel pivot
-        foreach ($request->ObatID as $key => $obatID) {
-            $resep->obat()->attach($obatID, ['DosisObat' => $request->DosisObat[$key]]);
-        }
+        $resepObat = ResepObat::findOrFail($id);
+        $resepObat->update($request->all());
 
-        return redirect()->route('info_resepobat')->with('success', 'Resep Obat berhasil ditambahkan!');
+        return redirect()->route('info_resepobat')->with('success', 'Data resep obat berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $resepObat = ResepObat::findOrFail($id);
+        $resepObat->delete();
+        return redirect()->route('info_resepobat')->with('success', 'Resep obat berhasil dihapus');
     }
 }

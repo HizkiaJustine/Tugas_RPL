@@ -11,6 +11,7 @@ use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\DokterController;
+use \App\Models\Account;
 
 Route::get('/', function () {
     return view('index_user');
@@ -23,7 +24,7 @@ Route::get('/about', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/pasien', function () {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(PasienController::class)->index();
         } else {
@@ -33,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/edit_pasien/{id}', function ($id) {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(PasienController::class)->edit($id);
         } else {
@@ -43,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/delete_pasien/{id}', function ($id) {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(PasienController::class)->destroy($id);
         } else {
@@ -53,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('/update_pasien/{id}', function (Request $request, $id) {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(PasienController::class)->update($request, $id);
         } else {
@@ -63,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/pasien/create', function () {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(PasienController::class)->create();
         } else {
@@ -73,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/pasien', function (Request $request) {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(PasienController::class)->store($request);
         } else {
@@ -83,7 +84,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/rekammedis/{id}', function ($id) {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(RekamMedisController::class)->show($id);
         } else {
@@ -95,7 +96,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/test', function () {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'pasien' or $role === 'administrator') {
             return view('test_middleware', ['user' => $user, 'role' => $role]);
         } else {
@@ -104,7 +105,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::get('/test/pasien', function () {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'pasien') {
             return view('test_middleware', ['user' => $user, 'role' => $role]);
         } else {
@@ -119,7 +120,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/obat', function () {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(ObatController::class)->index();
         } else {
@@ -129,7 +130,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/edit_obat/{id}', function ($id) {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(ObatController::class)->edit($id);
         } else {
@@ -139,7 +140,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/delete_obat/{id}', function ($id) {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(ObatController::class)->destroy($id);
         } else {
@@ -149,7 +150,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('/update_obat/{id}', function (Request $request, $id) {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(ObatController::class)->update($request, $id);
         } else {
@@ -159,7 +160,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/obat/create', function () {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(ObatController::class)->create();
         } else {
@@ -169,7 +170,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/obat/store', function (Request $request) {
         $user = Auth::user();
-        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
             return app(ObatController::class)->store($request);
         } else {
@@ -178,6 +179,67 @@ Route::middleware(['auth'])->group(function () {
     })->name('store_obat');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/resepobat', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ResepObatController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_resepobat');
+
+    Route::get('/edit_resepobat/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ResepObatController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_resepobat');
+
+    Route::delete('/delete_resepobat/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ResepObatController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_resepobat');
+
+    Route::put('/update_resepobat/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ResepObatController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_resepobat');
+
+    Route::get('/resepobat/create', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ResepObatController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_resepobat');
+
+    Route::post('/resepobat/store', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ResepObatController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_resepobat');
+});
 
 Route::get('/layanan', [LayananController::class, 'index'])->name('info_layanan');
 Route::get('/edit_layanan/{id}', [LayananController::class, 'edit'])->name('edit_layanan');
