@@ -3,7 +3,7 @@
     <x-slot:name>{{ $name }}</x-slot:name>
 
     <div class="flex justify-end mb-4">
-        <a href="{{ route('add_dokter') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <a href="{{ route('create_dokter') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Tambah Dokter
         </a>
     </div>
