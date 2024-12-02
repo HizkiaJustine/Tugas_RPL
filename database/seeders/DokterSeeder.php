@@ -46,7 +46,7 @@ class DokterSeeder extends Seeder
         // Buat dokter
         Dokter::create([
             'NamaDokter' => 'Dr. John Doe',
-            'Departemen' => 'Obgyn',
+            'Departemen' => $layanan1->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
             'FotoDokter' => 'path/to/photo.jpg',
@@ -56,7 +56,7 @@ class DokterSeeder extends Seeder
 
         Dokter::create([
             'NamaDokter' => 'Dr. John Dae',
-            'Departemen' => 'Obgyn',
+            'Departemen' => $layanan2->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
             'FotoDokter' => 'path/to/photo.jpg',
@@ -66,7 +66,7 @@ class DokterSeeder extends Seeder
 
         Dokter::create([
             'NamaDokter' => 'Dr. John Due',
-            'Departemen' => 'Obgyn',
+            'Departemen' => $layanan3->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
             'FotoDokter' => 'path/to/photo.jpg',
@@ -76,7 +76,7 @@ class DokterSeeder extends Seeder
 
         Dokter::create([
             'NamaDokter' => 'Dr. John Die',
-            'Departemen' => 'Obgyn',
+            'Departemen' => $layanan4->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
             'FotoDokter' => 'path/to/photo.jpg',
@@ -86,7 +86,7 @@ class DokterSeeder extends Seeder
 
         Dokter::create([
             'NamaDokter' => 'Dr. John Dee',
-            'Departemen' => 'Obgyn',
+            'Departemen' => $layanan5->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
             'FotoDokter' => 'path/to/photo.jpg',
