@@ -16,9 +16,6 @@ class AppointmentSeeder extends Seeder
      */
     public function run(): void
     {
-        // Pastikan dokter dan pasien sudah ada di database
-        $this->call(DokterSeeder::class);
-        $this->call(PasienSeeder::class);
 
         // Ambil DokterID dan PasienID dari dokter dan pasien yang sudah ada
         $dokter = Dokter::first();

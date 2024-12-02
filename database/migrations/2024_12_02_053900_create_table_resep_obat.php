@@ -15,12 +15,11 @@ return new class extends Migration
         Schema::create('resep_obat', function (Blueprint $table) {
             $table->string('ResepObatID')->primary();
             $table->date('Tanggal');
-            $table->string(column: 'DokterID');
-            $table->string(column: 'PasienID');
-            $table->text('DosisObat');
+            $table->string('DokterID');
+            $table->string('PasienID');
             $table->text('InstruksiPenggunaanObat');
-            $table->foreign(columns: 'DokterID')->references(columns: 'DokterID')->on(table: 'dokter')->onDelete('cascade');
-            $table->foreign(columns: 'PasienID')->references(columns: 'PasienID')->on(table: 'pasien')->onDelete('cascade');
+            $table->foreign('DokterID')->references('DokterID')->on('dokter')->onDelete('cascade');
+            $table->foreign('PasienID')->references('PasienID')->on('pasien')->onDelete('cascade');
         });
 
         DB::unprepared('

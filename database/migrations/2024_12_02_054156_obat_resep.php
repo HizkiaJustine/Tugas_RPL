@@ -12,11 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('obat_resep', function (Blueprint $table) {
-            $table->id();
-            $table->string('ObatID');
-            $table->string('ResepObatID');
+            $table->string('ObatID');  // Mengacu ke Obat
+            $table->string('ResepObatID');  // Mengacu ke ResepObat
+            $table->string('DosisObat');  // Kolom tambahan untuk dosis obat
+
+            // Menambahkan foreign keys
             $table->foreign('ObatID')->references('ObatID')->on('obat')->onDelete('cascade');
             $table->foreign('ResepObatID')->references('ResepObatID')->on('resep_obat')->onDelete('cascade');
+
+            // Menentukan composite key (gabungan primary key)
+            $table->primary(['ObatID', 'ResepObatID']);
         });
     }
 
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('obat_resep');
     }
 };

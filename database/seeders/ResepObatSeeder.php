@@ -3,47 +3,56 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Obat;
 use App\Models\Dokter;
 use App\Models\Pasien;
-use App\Models\ResepObat;
-use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Resepobat;
 
 class ResepObatSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Pastikan dokter, pasien, dan obat sudah ada di database
-        $this->call(DokterSeeder::class);
-        $this->call(PasienSeeder::class);
-        $this->call(ObatSeeder::class);
-
-        // Ambil DokterID dari dokter yang ada secara acak
-        $dokter = Dokter::inRandomOrder()->first();
-
-        // Ambil PasienID dari pasien yang pertama kali dibuat
+        // Ambil DokterID dan PasienID yang ada di database
+        $dokter = Dokter::first();
         $pasien = Pasien::first();
 
+        if (!$dokter || !$pasien) {
+            echo "Dokter atau Pasien tidak ditemukan. Seeder dihentikan.";
+            return;
+        }
+
         // Buat resep obat
-        $resepObat = ResepObat::create([
+        $resepObat = Resepobat::create([
             'Tanggal' => Carbon::now(),
             'DokterID' => $dokter->DokterID,
             'PasienID' => $pasien->PasienID,
             'InstruksiPenggunaanObat' => 'Paracetamol: 3 kali sehari setelah makan, Amoxicillin: 2 kali sehari sebelum makan',
         ]);
 
+        if (!$resepObat) {
+            echo "Gagal menyimpan ResepObat.";
+            return;
+        }
+
         // Ambil daftar obat dari tabel obat
         $obatList = Obat::all();
 
-        // Tambahkan obat ke resep obat
+        if ($obatList->isEmpty()) {
+            echo "Tidak ada obat yang tersedia.";
+            return;
+        }
+
+        // Tambahkan obat ke resep obat dengan dosis
         foreach ($obatList as $obat) {
-            $resepObat->obat()->attach($obat->ObatID, [
-                'DosisObat' => $obat->Dosis,
+            DB::table('obat_resep')->insert([
+                'ObatID' => $obat->ObatID,
+                'ResepObatID' => $resepObat->ResepObatID,
+                'DosisObat' => '2 tablet per hari', // Dosis default
             ]);
         }
+
+        echo "Seeder ResepObat berhasil dijalankan.";
     }
 }

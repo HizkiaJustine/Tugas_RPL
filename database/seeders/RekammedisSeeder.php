@@ -16,9 +16,6 @@ class RekammedisSeeder extends Seeder
      */
     public function run(): void
     {
-        // Pastikan dokter dan pasien sudah ada di database
-        $this->call(DokterSeeder::class);
-        $this->call(PasienSeeder::class);
 
         $dokter = Dokter::first();
         $pasien = Pasien::first();

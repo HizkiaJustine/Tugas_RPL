@@ -16,12 +16,9 @@ class Resepobat extends Model
         'Tanggal',
         'DokterID',
         'PasienID',
-        'ListObat',
-        'DosisObat',
         'InstruksiPenggunaanObat',
     ];
     public $timestamps = false;
-
 
     public function obat()
     {

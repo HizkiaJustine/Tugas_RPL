@@ -20,11 +20,5 @@ class AccountSeeder extends Seeder
             'Role' => 'Administrator',
         ]);
 
-        Account::create([
-            'email' => 'pasien1@example.com',
-            'password' => Hash::make('password'),
-            'Role' => 'Pasien',
-        ]);
-
     }
 }

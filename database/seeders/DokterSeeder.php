@@ -16,7 +16,6 @@ class DokterSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(LayananSeeder::class);
 
         // Buat akun dokter
         $account1 = Account::create([
