@@ -19,7 +19,7 @@ class CreateAccountTable extends Migration
                 $table->string('AccountID')->primary();
                 $table->string('email')->unique();
                 $table->string('password');
-                $table->enum('Role', ['Administrator', 'Dokter', 'Pasien', 'Kasir']);
+                $table->enum('Role', ['administrator', 'dokter', 'pasien', 'kasir']);
                 $table->rememberToken();
             });
         }
