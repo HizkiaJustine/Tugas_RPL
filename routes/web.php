@@ -51,11 +51,11 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('delete_pasien');
 
-    Route::put('/update_pasien/{id}', function ($id) {
+    Route::put('/update_pasien/{id}', function (\Illuminate\Http\Request $request, $id) {
         $user = Auth::user();
         $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
-            return app(PasienController::class)->update($id);
+            return app(PasienController::class)->update($request, $id);
         } else {
             abort(403, 'Unauthorized action.');
         }
@@ -116,12 +116,68 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/resepobat', [ResepObatController::class, 'store'])->name('info_resepobat');
 });
 
-Route::get('/obat', [ObatController::class, 'index'])->name('info_obat');
-Route::get('/edit_obat/{id}', [ObatController::class, 'edit'])->name('edit_obat');
-Route::delete('/delete_obat/{id}', [ObatController::class, 'destroy'])->name('delete_obat');
-Route::put('/update_obat/{id}', [ObatController::class, 'update'])->name('update_obat');
-Route::get('/obat/create', [ObatController::class, 'create'])->name('create_obat');
-Route::post('/obat/store', [ObatController::class, 'store'])->name('store_obat');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/obat', function () {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ObatController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_obat');
+
+    Route::get('/edit_obat/{id}', function ($id) {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ObatController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_obat');
+
+    Route::delete('/delete_obat/{id}', function ($id) {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ObatController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_obat');
+
+    Route::put('/update_obat/{id}', function (\Illuminate\Http\Request $request, $id) {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ObatController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_obat');
+
+    Route::get('/obat/create', function () {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ObatController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_obat');
+
+    Route::post('/obat/store', function (\Illuminate\Http\Request $request) {
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ObatController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_obat');
+});
+
 
 Route::get('/layanan', [LayananController::class, 'index'])->name('info_layanan');
 Route::get('/edit_layanan/{id}', [LayananController::class, 'edit'])->name('edit_layanan');
