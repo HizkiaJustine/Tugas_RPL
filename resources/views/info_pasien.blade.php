@@ -20,6 +20,7 @@
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Lahir</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Kelamin</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor HP</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Account ID</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
             </tr>
         </thead>
@@ -35,6 +36,7 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{ $pasien['TanggalLahirPasien'] }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $pasien['JenisKelamin'] }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $pasien['NomorHP'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $pasien['AccountID'] }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <a href="{{ route('edit_pasien', $pasien->PasienID) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                         <form action="{{ route('delete_pasien', $pasien->PasienID) }}" method="POST" style="display:inline;">
@@ -46,7 +48,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="9" class="px-6 py-4 whitespace-nowrap text-center text-lg font-bold text-red-500">Belum ada data</td>
+                    <td colspan="11" class="px-6 py-4 whitespace-nowrap text-center text-lg font-bold text-red-500">Belum ada data</td>
                 </tr>
             @endforelse
         </tbody>

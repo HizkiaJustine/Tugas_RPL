@@ -20,6 +20,7 @@ class Pasien extends Model
         'TanggalLahirPasien',
         'JenisKelamin',
         'NomorHP',
+        'AccountID',
     ];
     public $timestamps = false;
 }

@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('delete_pasien');
 
-    Route::put('/update_pasien/{id}', function (\Illuminate\Http\Request $request, $id) {
+    Route::put('/update_pasien/{id}', function (Request $request, $id) {
         $user = Auth::user();
         $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
@@ -71,7 +71,7 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('create_pasien');
 
-    Route::post('/pasien', function (\Illuminate\Http\Request $request) {
+    Route::post('/pasien', function (Request $request) {
         $user = Auth::user();
         $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
@@ -147,7 +147,7 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('delete_obat');
 
-    Route::put('/update_obat/{id}', function (\Illuminate\Http\Request $request, $id) {
+    Route::put('/update_obat/{id}', function (Request $request, $id) {
         $user = Auth::user();
         $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
@@ -167,7 +167,7 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('create_obat');
 
-    Route::post('/obat/store', function (\Illuminate\Http\Request $request) {
+    Route::post('/obat/store', function (Request $request) {
         $user = Auth::user();
         $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
