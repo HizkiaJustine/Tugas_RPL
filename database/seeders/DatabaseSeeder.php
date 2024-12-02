@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'Tanggal' => now(),
             'DokterID' => $dokter->DokterID,
             'PasienID' => $pasien->PasienID,
+            'ListObat' => 'paracetamol, amoxicilin',
             'InstruksiPenggunaanObat' => 'Gunakan sehari dua kali',
         ]);
 
