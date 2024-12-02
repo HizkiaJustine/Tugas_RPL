@@ -1,72 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informasi Dokter</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        .btn {
-            padding: 6px 12px;
-            margin: 0 4px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-        }
-        .btn-edit {
-            background-color: #ffc107;
-            color: #000;
-        }
-        .btn-delete {
-            background-color: #dc3545;
-            color: #fff;
-        }
-        .action-buttons {
-            white-space: nowrap;
-        }
-    </style>
-</head>
-<body>
-    <h1>Informasi Dokter</h1>
-    <hr>
-    <table>
-        <thead>
+<x-layout-admin>
+    <x-slot:title>{{ $title }}</x-slot:title>
+    <x-slot:name>{{ $name }}</x-slot:name>
+
+    <div class="flex justify-end mb-4">
+        <a href="{{ route('add_dokter') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Tambah Dokter
+        </a>
+    </div>
+
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
             <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>Departemen</th>
-                <th>Alamat</th>
-                <th>Nomor HP</th>
-                <th>Action</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Departemen</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor HP</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Foto</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td><!-- DokterID --></td>
-                <td><!-- NamaDokter --></td>
-                <td><!-- Departemen --></td>
-                <td><!-- AlamatDokter --></td>
-                <td><!-- NomorHP --></td>
-                <td class='action-buttons'>
-                    <a href='edit_dokter.php?id=<!-- DokterID -->' class='btn btn-edit'>Edit</a>
-                    <a href='delete_dokter.php?id=<!-- DokterID -->' class='btn btn-delete' onclick='return confirm("Apakah Anda yakin ingin menghapus dokter ini?")'>Delete</a>
-                </td>
+        <tbody class="bg-white divide-y divide-gray-200">
+            @forelse ($dokter as $dokter)
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['DokterID'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['NamaDokter'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['Departemen'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['AlamatDokter'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $dokter['NomorHP'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <img src="{{ asset('storage/' . $dokter['FotoDokter']) }}" alt="Foto {{ $dokter['NamaDokter'] }}" class="h-12 w-12 rounded-full object-cover">
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <a href="{{ route('edit_dokter', $dokter->DokterID) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        <form action="{{ route('delete_dokter', $dokter->DokterID) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4" onclick="return confirm('Apakah Anda yakin ingin menghapus dokter ini?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7" class="px-6 py-4 whitespace-nowrap text-center text-lg font-bold text-red-500">Belum ada data</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
-</body>
-</html>
+</x-layout-admin>

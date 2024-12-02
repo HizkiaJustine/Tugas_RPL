@@ -5,6 +5,7 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResepObatController;
 
 Route::get('/', function () {
     return view('index_user');
@@ -23,6 +24,10 @@ Route::middleware(['auth', 'role:pasien'])->group(function () {
     Route::post('/pasien', [PasienController::class, 'store'])->name('store_pasien');
     Route::get('/rekammedis/{id}', [RekamMedisController::class, 'show'])->name('rekammedis');
 });
+
+Route::post('/resepobat', [ResepObatController::class, 'store'])->name('store_resepobat');
+Route::get('/resepobat/create', [ResepObatController::class, 'create'])->name('create_resepobat');
+Route::post('/resepobat', [ResepObatController::class, 'store'])->name('info_resepobat');
 
 Route::middleware(['auth', 'role:pasien'])->group(function () {
     Route::get('/test', function () {
