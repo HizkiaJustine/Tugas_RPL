@@ -20,8 +20,8 @@
             <p>Total Pembayaran</p>
         </div>
         <div class="stat-card">
-            <h2>12</h2>
-            <p>Pembayaran Tertunda</p>
+            <h2>{{ number_format($countPayments, 0, '.', ',') }}</h2>
+            <p>Pembayaran Terjadi</p>
         </div>
         <div class="stat-card">
             <h2>{{ date_format($latestDate, 'Y-m-d') }}</h2>

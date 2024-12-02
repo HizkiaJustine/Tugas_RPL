@@ -29,5 +29,13 @@ class ObatSeeder extends Seeder
             'JumlahObat' => 200,
             'HargaObat' => 10000.00,
         ]);
+
+        Obat::create([
+            'NamaObat' => 'Ibuprofen',
+            'TipeObat' => 'Sirup',
+            'TanggalKadaluarsa' => Carbon::now()->addYear(),
+            'JumlahObat' => 100,
+            'HargaObat' => 15000.00,
+        ]);
     }
 }

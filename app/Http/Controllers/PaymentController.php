@@ -23,7 +23,9 @@ class PaymentController extends Controller
         $latestDate = DB::table('pembayaran')->latest('TanggalPembayaran')->first();
         $latestDate = new \DateTime($latestDate->TanggalPembayaran);
 
-        return view('payment', compact('title', 'name', 'records', 'totalPayments', 'latestDate'));
+        $countPayments = DB::table('pembayaran')->count();
+
+        return view('payment', compact('title', 'name', 'records', 'totalPayments', 'latestDate', 'countPayments'));
     }
 
     /**

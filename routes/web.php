@@ -5,19 +5,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
-use App\Http\Controllers\ForumController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\LayananController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AppointmentController;
-
 
 Route::get('/', function () {
     return view('index_user');
@@ -382,6 +380,14 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+Route::get('/dokter', [DokterController::class, 'index'])->name('info_dokter')->middleware('can:access-dokter');
+Route::get('/edit_dokter/{id}', [DokterController::class, 'edit'])->name('edit_dokter')->middleware('can:access-dokter');
+Route::delete('/delete_dokter/{id}', [DokterController::class, 'destroy'])->name('delete_dokter')->middleware('can:access-dokter');
+Route::put('/update_dokter/{id}', [DokterController::class, 'update'])->name('update_dokter')->middleware('can:access-dokter');
+Route::get('/dokter/create', [DokterController::class, 'create'])->name('create_dokter')->middleware('can:access-dokter');
+Route::post('/dokter', [DokterController::class, 'store'])->name('store_dokter')->middleware('can:access-dokter');
+
+
 // Uncomment and adjust these routes as needed
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/test/dokter', function () {
@@ -410,8 +416,6 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/appointment', [AppointmentController::class, 'create'])->name('appointment.create');
 Route::post('/appointment/submitted', [AppointmentController::class, 'store'])->name('appointment.store');
 
-Route::resource('suppliers', SupplierController::class);
-
 Route::get('/cashier', [CashierController::class, 'index'])->name('cashier.index');
 Route::get('/cashier/edit/{record}', [CashierController::class, 'edit'])->name('cashier.edit');
 Route::post('/cashier/update/{record}', [CashierController::class, 'update'])->name('cashier.update');
@@ -419,12 +423,26 @@ Route::get('/cashier/delete/{record}', [CashierController::class, 'destroy'])->n
 Route::get('/cashier/create', [CashierController::class, 'create'])->name('cashier.create');
 Route::post('/cashier/submitted', [CashierController::class, 'store'])->name('cashier.store');
 
+Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
+Route::get('/suppliers/edit/{supplier}', [SupplierController::class, 'edit'])->name('suppliers.edit');
+Route::post('/suppliers/update/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
+Route::get('/suppliers/delete/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
+Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create');
+Route::post('/suppliers/submitted', [SupplierController::class, 'store'])->name('suppliers.store');
+
 Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
 Route::get('/payment/edit/{record}', [PaymentController::class, 'edit'])->name('payment.edit');
 Route::post('/payment/update/{record}', [PaymentController::class, 'update'])->name('payment.update');
 Route::get('/payment/delete/{record}', [PaymentController::class, 'destroy'])->name('payment.destroy');
 Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
 Route::post('/payment/submitted', [PaymentController::class, 'store'])->name('payment.store');
+
+Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index');
+Route::get('/purchase/edit/{record}', [PurchaseController::class, 'edit'])->name('purchase.edit');
+Route::post('/purchase/update/{record}', [PurchaseController::class, 'update'])->name('purchase.update');
+Route::get('/purchase/delete/{record}', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
+Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchase.create');
+Route::post('purchase/submitted', [PurchaseController::class, 'store'])->name('purchase.store');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/forum', function () {

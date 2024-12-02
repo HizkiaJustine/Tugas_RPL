@@ -7,7 +7,9 @@ use App\Models\Obat;
 use App\Models\User;
 use App\Models\Dokter;
 use App\Models\Pasien;
+use App\Models\Pembelian;
 use App\Models\Resepobat;
+use App\Models\Supplier;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,12 +24,14 @@ class DatabaseSeeder extends Seeder
             AccountSeeder::class,
             DokterSeeder::class,
             PasienSeeder::class,
-            // ObatSeeder::class,
+            SupplierSeeder::class,
+            ObatSeeder::class,
             AppointmentSeeder::class,
             RekamMedisSeeder::class,
             KasirSeeder::class,
             KaryawanSeeder::class,
             PembayaranSeeder::class,
+            PembelianSeeder::class,
             // ResepObatSeeder::class,
         ]);
 

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use illuminate\Support\Arr;
+use Illuminate\Support\Arr;
 
 class Supplier extends Model
 {
