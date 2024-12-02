@@ -21,12 +21,8 @@
         </div>
     @endif
 
-    <form action="{{ url('/register') }}" method="POST">
+    <form action="{{ route('register') }}" method="POST">
         @csrf
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
         <div>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>

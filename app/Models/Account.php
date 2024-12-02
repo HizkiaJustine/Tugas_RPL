@@ -12,11 +12,11 @@ class Account extends Model implements AuthenticatableContract
 
     protected $table = 'account';
     protected $primaryKey = 'AccountID';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    public $incrementing = false; // Ensure incrementing is disabled for string primary key
+    protected $keyType = 'string'; // Ensure the primary key is of type string
 
     protected $fillable = [
-        'name', // Added 'name' to fillable attributes
+        'AccountID', // Ensure AccountID is fillable
         'email',
         'password',
         'Role',
