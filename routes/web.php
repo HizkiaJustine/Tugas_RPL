@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\CashierController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\RegisterController;
@@ -293,3 +294,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/appointment', [AppointmentController::class, 'create'])->name('appointment.create');
 Route::post('/appointment/submitted', [AppointmentController::class, 'store'])->name('appointment.store');
+
+Route::get('/cashier', [CashierController::class, 'index'])->name('cashier.index');
+Route::get('/cashier/edit/{record}', [CashierController::class, 'edit'])->name('cashier.edit');
+Route::post('/cashier/update/{record}', [CashierController::class, 'update'])->name('cashier.update');
+Route::get('/cashier/delete/{record}', [CashierController::class, 'destroy'])->name('cashier.destroy');
+Route::get('/cashier/create', [CashierController::class, 'create'])->name('cashier.create');
+Route::post('/cashier/submitted', [CashierController::class, 'store'])->name('cashier.store');
