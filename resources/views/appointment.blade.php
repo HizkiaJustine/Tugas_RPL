@@ -31,12 +31,6 @@
       <p>Isi formulir di bawah ini untuk membuat janji temu dengan dokter kami.</p>
       <form action="{{ route('appointment.store') }}" method="POST" class="reservation-form">
         @csrf
-          <!-- Patient Information -->
-          <div class="form-group">
-              <label for="name">Nama Pasien:</label>
-              <input type="text" id="name" name="NamaPasien" placeholder="Masukkan nama Anda" required>
-          </div>
-
           <!-- Appointment Details -->
           <div class="form-group">
               <label for="date">Tanggal Janji Temu:</label>
