@@ -780,3 +780,65 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('delete_supplier');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/article', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ArticleController::class)->adminIndex($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('admin.articles.index');
+
+    Route::get('/admin/article/create', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ArticleController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('admin.articles.create');
+
+    Route::post('/admin/article', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ArticleController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('admin.articles.store');
+
+    Route::get('/admin/article/{id}/edit', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ArticleController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('admin.articles.edit');
+
+    Route::put('/admin/article/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ArticleController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('admin.articles.update');
+
+    Route::delete('/admin/article/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(ArticleController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('admin.articles.destroy');
+});

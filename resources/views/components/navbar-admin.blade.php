@@ -15,10 +15,11 @@
                 <x-nav-link href="/layanan" :active="request()->is('/layanan')">Layanan</x-nav-link>
                 <x-nav-link href="/pasien" :active="request()->is('/pasien')">Pasien</x-nav-link>
                 <x-nav-link href="/resepobat" :active="request()->is('/resepobat')">Resep Obat</x-nav-link>
-                <x-nav-link href="/pasien" :active="request()->is('/pasien')">Pasien</x-nav-link>
                 <x-nav-link href="/rekam-medis" :active="request()->is('/rekam-medis')">Rekam Medis</x-nav-link>
                 <x-nav-link href="/supplier" :active="request()->is('/supplier')">Supplier</x-nav-link>
                 <x-nav-link href="/dokter" :active="request()->is('/dokter')">Dokter</x-nav-link>
+                <x-nav-link href="/admin/article" :active="request()->is('/admin/article')">Articles</x-nav-link>
+                <x-nav-link></x-nav-link>
             </div>
             </div>
         </div>
