@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string(column: 'Departemen', length: 100);
             $table->string(column: 'AlamatDokter');
             $table->string(column: 'NomorHP', length: 15);
-            $table->string(column: 'FotoDokter');
-            $table->string('LayananID');
-            $table->string('AccountID')->nullable()->index();
-            $table->foreign('LayananID')->references('LayananID')->on('layanan');
-            $table->foreign('AccountID')->references('AccountID')->on('account');
+            $table->string(column: 'FotoDokter')->nullable(); // Bisa null
+            $table->string('LayananID')->nullable(); // Bisa null
+            $table->string('AccountID')->nullable()->index(); // Bisa null
+            $table->foreign('LayananID')->references('LayananID')->on('layanan')->nullOnDelete(); // Set null on delete
+            $table->foreign('AccountID')->references('AccountID')->on('account')->nullOnDelete(); // Set null on delete
         });
+        
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         DB::unprepared('
         CREATE TRIGGER before_insert_dokter
