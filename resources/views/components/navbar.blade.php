@@ -35,7 +35,7 @@
         <div class="profile-icon">
             <img src="https://i.pinimg.com/736x/7f/c4/c6/7fc4c6ecc7738247aac61a60958429d4.jpg" alt="Profile" class="profile">
             <div class="dropdown-profile">
-                <a href="#">Profil Saya</a>
+                <a href="profile">Profil Saya</a>
                 <a href="#">Appointment Saya</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
