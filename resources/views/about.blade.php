@@ -11,5 +11,15 @@
 </head>
 <body>
     <x-navbar></x-navbar>
+    <h1>About Page</h1>
+    <p>This is the about page.</p>
+    @if(Auth::check())
+        @php
+            $account = \App\Models\Account::where('email', Auth::user()->email)->first();
+        @endphp
+        <p>You are logged in as: {{ Auth::user()->email }} with role: {{ $account->Role ?? 'Role not set' }}</p>
+    @else
+        <p>You are not logged in.</p>
+    @endif
 </body>
 </html>

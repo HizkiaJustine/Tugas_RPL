@@ -25,17 +25,31 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rekammedis/{id}', [RekamMedisController::class, 'show'])->name('rekammedis')->middleware('can:access-pasien');
 });
 
-Route::post('/resepobat', [ResepObatController::class, 'store'])->name('store_resepobat');
-Route::get('/resepobat/create', [ResepObatController::class, 'create'])->name('create_resepobat');
-Route::post('/resepobat', [ResepObatController::class, 'store'])->name('info_resepobat');
 
-Route::middleware(['auth', 'can:access-pasien'])->group(function () {
+
+
+Route::middleware(['auth'])->group(function () {
     Route::get('/test', function () {
-        return view('test_middleware');
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'pasien' or $role === 'administrator') {
+            return view('test_middleware', ['user' => $user, 'role' => $role]);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     });
     Route::get('/test/pasien', function () {
-        return view('test_middleware', ['component' => 'auth-pasien']);
+        $user = Auth::user();
+        $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'pasien') {
+            return view('test_middleware', ['user' => $user, 'role' => $role]);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     });
+    Route::post('/resepobat', [ResepObatController::class, 'store'])->name('store_resepobat');
+    Route::get('/resepobat/create', [ResepObatController::class, 'create'])->name('create_resepobat');
+    Route::post('/resepobat', [ResepObatController::class, 'store'])->name('info_resepobat');
 });
 
 // Uncomment and adjust these routes as needed
