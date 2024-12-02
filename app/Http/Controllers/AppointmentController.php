@@ -34,12 +34,13 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'NamaPasien' => 'required|string',
             'TanggalJanjiTemu' => 'required|date',
             'JamJanjiTemu' => 'required|date_format:H:i',
             'NamaLayanan' => 'required|string',
-            'CatatanTambahan' => 'required|string',
+            'CatatanTambahan' => 'nullable|string',
         ]);
         
 

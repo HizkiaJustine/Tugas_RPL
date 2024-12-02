@@ -50,14 +50,14 @@
               <label for="doctor">Dokter/Spesialis:</label>
               <select id="doctor" name="NamaLayanan" required>
                   <option value="">Pilih Dokter/Spesialis</option>
-                  <option value="Layanan Paru-paru">Paru-paru</option>
-                  <option value="Layanan Jantung">Jantung</option>
-                  <option value="Layanan Obgyn">Obgyn</option>
-                  <option value="Layanan Radiologi">Radiologi</option>
-                  <option value="Layanan Okupasi">Okupasi</option>
-                  <option value="Layanan Rehabilitasi">Rehabilitasi Medik</option>
-                  <option value="Layanan Laboratorium">Laboratorium</option>
-                  <option value="Layanan Gawat Darurat">Gawat Darurat</option>
+                  <option value="Paru-paru">Paru-paru</option>
+                  <option value="Jantung">Jantung</option>
+                  <option value="Obgyn">Obgyn</option>
+                  <option value="Radiologi">Radiologi</option>
+                  <option value="Okupasi">Okupasi</option>
+                  <option value="Rehabilitasi">Rehabilitasi Medik</option>
+                  <option value="Laboratorium">Laboratorium</option>
+                  <option value="Gawat Darurat">Gawat Darurat</option>
               </select>
           </div>
 
