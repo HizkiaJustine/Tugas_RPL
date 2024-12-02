@@ -5,14 +5,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\AppointmentController;
@@ -551,3 +552,37 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
+
+
+
+Route::get('/jantung', function () {
+    return view('jantung', ['title' => 'Home Page / Layanan / Jantung', 'name' => 'Layanan Jantung']);
+});
+
+Route::get('/paru', function () {
+    return view('paru', ['title' => 'Home Page / Layanan / Paru-paru', 'name' => 'Layanan Paru-paru']);
+});
+
+Route::get('/obgyn', function () {
+    return view('obgyn', ['title' => 'Home Page / Layanan / Obgyn', 'name' => 'Layanan Obgyn']);
+});
+
+Route::get('/radiologi', function () {
+    return view('radiologi', ['title' => 'Home Page / Layanan / Radiologi', 'name' => 'Layanan Radiologi']);
+});
+
+Route::get('/okupasi', function () {
+    return view('okupasi', ['title' => 'Home Page / Layanan / Okupasi', 'name' => 'Layanan Okupasi']);
+});
+
+Route::get('/rehabilitasi-medik', function () {
+    return view('rehabilitasi', ['title' => 'Home Page / Layanan / Rehabilitasi Medik', 'name' => 'Layanan Rehabilitasi Medik']);
+});
+
+Route::get('/laboratorium', function () {
+    return view('laboratorium', ['title' => 'Home Page / Layanan / Laboratorium', 'name' => 'Layanan Laboratorium']);
+});
+
+Route::get('/gawat-darurat', function () {
+    return view('darurat', ['title' => 'Home Page / Layanan / Gawat Darurat', 'name' => 'Layanan Gawat Darurat']);
+});

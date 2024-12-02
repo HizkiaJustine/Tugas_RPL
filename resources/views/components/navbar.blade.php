@@ -4,16 +4,16 @@
         <a href="#">Layanan</a>
         <div class="dropdown-content">
             <div class="column">
-                <a href="#">Paru-paru</a>
-                <a href="/layanan_jantung">Jantung</a>
-                <a href="#">Dokter Gigi</a>
-                <a href="#">Radiologi</a>
+                <a href="/paru">Paru-paru</a>
+                <a href="/jantung">Jantung</a>
+                <a href="/obgyn">Obgyn</a>
+                <a href="/radiologi">Radiologi</a>
             </div>
             <div class="column">
-                <a href="#">Okupasi</a>
-                <a href="#">Rehabilitasi Medik</a>
-                <a href="#">Laboratorium</a>
-                <a href="#">Gawat Darurat</a>
+                <a href="/okupasi">Okupasi</a>
+                <a href="/rehabilitasi-medik">Rehabilitasi Medik</a>
+                <a href="/laboratorium">Laboratorium</a>
+                <a href="/gawat-darurat">Unit Gawat Darurat</a>
             </div>
         </div>
     </div>
