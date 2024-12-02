@@ -10,6 +10,7 @@ use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SupplierController;
@@ -363,6 +364,13 @@ Route::post('/cashier/update/{record}', [CashierController::class, 'update'])->n
 Route::get('/cashier/delete/{record}', [CashierController::class, 'destroy'])->name('cashier.destroy');
 Route::get('/cashier/create', [CashierController::class, 'create'])->name('cashier.create');
 Route::post('/cashier/submitted', [CashierController::class, 'store'])->name('cashier.store');
+
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+Route::get('/payment/edit/{record}', [PaymentController::class, 'edit'])->name('payment.edit');
+Route::post('/payment/update/{record}', [PaymentController::class, 'update'])->name('payment.update');
+Route::get('/payment/delete/{record}', [PaymentController::class, 'destroy'])->name('payment.destroy');
+Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
+Route::post('/payment/submitted', [PaymentController::class, 'store'])->name('payment.store');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/forum', function () {
