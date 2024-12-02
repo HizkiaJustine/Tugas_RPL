@@ -50,8 +50,5 @@ class DatabaseSeeder extends Seeder
             'HargaObat' => 5000,
         ]);
 
-        // Menambahkan obat ke resep dengan dosis
-        $resep->obat()->attach($obat->ObatID, ['DosisObat' => '2 tablet per hari']);
-
     }
 }
