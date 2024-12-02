@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             AppointmentSeeder::class,
             RekamMedisSeeder::class,
             KasirSeeder::class,
+            KaryawanSeeder::class,
             PembayaranSeeder::class,
             // ResepObatSeeder::class,
         ]);
