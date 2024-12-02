@@ -17,6 +17,7 @@ class Pembayaran extends Model
         'MetodePembayaran',
         'FakturID',
         'PasienID',
+        'LayananID',
     ];
     public $timestamps = false;
 }

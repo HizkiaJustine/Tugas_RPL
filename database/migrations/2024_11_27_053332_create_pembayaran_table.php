@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('PembayaranID')->primary();
             $table->date('TanggalPembayaran');
             $table->decimal('JumlahPembayaran', 10, places: 2);
-            $table->enum('MetodePembayaran', ['Cash', 'Debit Card', 'Credit', 'QRIS']);
-            $table->string('FakturID');
+            $table->enum('MetodePembayaran', ['Cash', 'Debit Card', 'Credit', 'Online']);
             $table->string('PasienID');
-            $table->foreign(columns: 'FakturID')->references(columns: 'FakturID')->on(table: 'faktur')->onDelete('cascade');
+            $table->string('LayananID');
             $table->foreign(columns: 'PasienID')->references(columns: 'PasienID')->on(table: 'pasien')->onDelete('cascade');
+            $table->foreign(columns: 'LayananID')->references(columns: 'LayananID')->on(table: 'layanan')->onDelete('cascade');
         });
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
