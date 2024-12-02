@@ -16,23 +16,12 @@ class PasienSeeder extends Seeder
     public function run(): void
     {
         // Buat akun pasien
-        $account1 = Account::create([
-            'email' => 'pasien1@example.com',
-            'password' => Hash::make('123'), // Password diatur sebagai "123"
-            'Role' => 'Pasien',
-        ]);
+        $account1 = Account::where('Role', 'pasien')->first();
 
-        $account2 = Account::create([
-            'email' => 'pasien2@example.com',
-            'password' => Hash::make('123'), // Password diatur sebagai "123"
-            'Role' => 'Pasien',
-        ]);
 
-        $account3 = Account::create([
-            'email' => 'pasien3@example.com',
-            'password' => Hash::make('123'), // Password diatur sebagai "123"
-            'Role' => 'Pasien',
-        ]);
+        $account2 = Account::where('Role', 'pasien')->skip(1)->first();
+
+        $account3 = Account::where('Role', 'pasien')->skip(2)->first();
 
         // Buat pasien
         Pasien::create([

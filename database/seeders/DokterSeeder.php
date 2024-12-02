@@ -18,42 +18,30 @@ class DokterSeeder extends Seeder
     {
 
         // Buat akun dokter
-        $account1 = Account::create([
-            'email' => 'dokter1@example.com',
-            'password' => Hash::make('123'),
-            'Role' => 'Dokter',
-        ]);
+        $account1 = Account::where('Role', 'dokter')->first();
 
-        $account2 = Account::create([
-            'email' => 'dokter2@example.com',
-            'password' => Hash::make('123'),
-            'Role' => 'Dokter',
-        ]);
+        $account2 = Account::where('Role', 'dokter')->skip(1)->first();
 
-        $account3 = Account::create([
-            'email' => 'dokter3@example.com',
-            'password' => Hash::make('123'),
-            'Role' => 'Dokter',
-        ]);
+        $account3 = Account::where('Role', 'dokter')->skip(2)->first();
 
-        $account4 = Account::create([
-            'email' => 'dokter4@example.com',
-            'password' => Hash::make('123'),
-            'Role' => 'Dokter',
-        ]);
+        $account4 = Account::where('Role', 'dokter')->skip(3)->first();
 
-        $account5 = Account::create([
-            'email' => 'dokter5@example.com',
-            'password' => Hash::make('123'),
-            'Role' => 'Dokter',
-        ]);
+        $account5 = Account::where('Role', 'dokter')->skip(4)->first();
 
-        // Ambil LayananID dari layanan yang sudah ada
-        $layanan1 = Layanan::where('NamaLayanan', 'Layanan Obgyn')->first();
-        $layanan2 = Layanan::where('NamaLayanan', 'Layanan Obgyn')->first();
-        $layanan3 = Layanan::where('NamaLayanan', 'Layanan Obgyn')->first();
-        $layanan4 = Layanan::where('NamaLayanan', 'Layanan Obgyn')->first();
-        $layanan5 = Layanan::where('NamaLayanan', 'Layanan Obgyn')->first();
+        // Mendapatkan data pertama
+        $layanan1 = Layanan::skip(0)->first();
+
+        // Mendapatkan data kedua
+        $layanan2 = Layanan::skip(1)->first();
+
+        // Mendapatkan data ketiga
+        $layanan3 = Layanan::skip(2)->first();
+
+        // Mendapatkan data keempat
+        $layanan4 = Layanan::skip(3)->first();
+
+        // Mendapatkan data kelima
+        $layanan5 = Layanan::skip(4)->first();
 
         // Buat dokter
         Dokter::create([

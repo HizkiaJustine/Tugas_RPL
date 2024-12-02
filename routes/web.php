@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\ForumController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\LayananController;
@@ -293,3 +294,38 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/appointment', [AppointmentController::class, 'create'])->name('appointment.create');
 Route::post('/appointment/submitted', [AppointmentController::class, 'store'])->name('appointment.store');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/forum', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if (in_array($role, ['pasien', 'dokter', 'administrator', 'kasir'])) {
+            return app(ForumController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('forum');
+
+    Route::post('/forum/question', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'pasien') {
+            return app(ForumController::class)->storeQuestion($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('forum.storeQuestion');
+
+    Route::post('/forum/answer/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'dokter') {
+            return app(ForumController::class)->storeAnswer($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('forum.storeAnswer');
+});
+
+Route::get('/forum', [ForumController::class, 'index'])->name('forum');
