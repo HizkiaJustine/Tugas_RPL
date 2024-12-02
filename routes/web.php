@@ -71,11 +71,11 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('create_pasien');
 
-    Route::post('/pasien', function () {
+    Route::post('/pasien', function (\Illuminate\Http\Request $request) {
         $user = Auth::user();
         $role = \App\Models\Account::where('email', $user->email)->first()->Role ?? 'Role not set';
         if ($role === 'administrator') {
-            return app(PasienController::class)->store();
+            return app(PasienController::class)->store($request);
         } else {
             abort(403, 'Unauthorized action.');
         }
