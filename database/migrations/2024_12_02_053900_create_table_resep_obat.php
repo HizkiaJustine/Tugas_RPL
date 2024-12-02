@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('Tanggal');
             $table->string('DokterID');
             $table->string('PasienID');
+            $table->string('ListObat');
             $table->text('InstruksiPenggunaanObat');
             $table->foreign('DokterID')->references('DokterID')->on('dokter')->onDelete('cascade');
             $table->foreign('PasienID')->references('PasienID')->on('pasien')->onDelete('cascade');

@@ -16,13 +16,9 @@ class Resepobat extends Model
         'Tanggal',
         'DokterID',
         'PasienID',
+        'ListObat',
         'InstruksiPenggunaanObat',
     ];
     public $timestamps = false;
 
-    public function obat()
-    {
-        return $this->belongsToMany(Obat::class, 'obat_resep', 'ResepObatID', 'ObatID')
-                    ->withPivot('DosisObat');
-    }
 }
