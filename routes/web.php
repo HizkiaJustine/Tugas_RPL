@@ -9,6 +9,8 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\RekamMedisController;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\DokterController;
 
 Route::get('/', function () {
     return view('index_user');
@@ -127,6 +129,24 @@ Route::delete('/delete_layanan/{id}', [LayananController::class, 'destroy'])->na
 Route::put('/update_layanan/{id}', [LayananController::class, 'update'])->name('update_layanan');
 Route::get('/layanan/create', [LayananController::class, 'create'])->name('create_layanan');
 Route::post('/layanan/store', [LayananController::class, 'store'])->name('store_layanan');
+
+
+Route::get('/karyawan', [KaryawanController::class, 'index'])->name('info_karyawan')->middleware('can:access-karyawan');
+Route::get('/edit_karyawan/{id}', [KaryawanController::class, 'edit'])->name('edit_karyawan')->middleware('can:access-karyawan');
+Route::delete('/delete_karyawan/{id}', [KaryawanController::class, 'destroy'])->name('delete_karyawan')->middleware('can:access-karyawan');
+Route::put('/update_karyawan/{id}', [KaryawanController::class, 'update'])->name('update_karyawan')->middleware('can:access-karyawan');
+Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('create_karyawan')->middleware('can:access-karyawan');
+Route::post('/karyawan', [KaryawanController::class, 'store'])->name('store_karyawan')->middleware('can:access-karyawan');
+
+
+Route::get('/dokter', [DokterController::class, 'index'])->name('info_dokter')->middleware('can:access-dokter');
+Route::get('/edit_dokter/{id}', [DokterController::class, 'edit'])->name('edit_dokter')->middleware('can:access-dokter');
+Route::delete('/delete_dokter/{id}', [DokterController::class, 'destroy'])->name('delete_dokter')->middleware('can:access-dokter');
+Route::put('/update_dokter/{id}', [DokterController::class, 'update'])->name('update_dokter')->middleware('can:access-dokter');
+Route::get('/dokter/create', [DokterController::class, 'create'])->name('create_dokter')->middleware('can:access-dokter');
+Route::post('/dokter', [DokterController::class, 'store'])->name('store_dokter')->middleware('can:access-dokter');
+
+
 // Uncomment and adjust these routes as needed
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/test/dokter', function () {
