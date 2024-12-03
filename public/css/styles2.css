@@ -31,6 +31,7 @@ h1 {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    width: 430px;
   }
 
   .filter-bar button {

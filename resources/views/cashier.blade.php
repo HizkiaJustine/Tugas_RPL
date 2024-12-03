@@ -2,6 +2,13 @@
     <x-slot:name>{{ $name }}</x-slot:name>
     <x-slot:title>{{ $title }}</x-slot:title>
 
+    <div class="container">
+        <div class="filter-bar">
+            <input id="searchInput" type="text" placeholder="Search by ID Kasir, Nama, Jenis Kelamin ...">
+            <button id="filterButton">Filter</button>
+        </div>
+    </div>
+
     <!-- Stats Cards -->
     <div class="stats">
         <div class="stat-card">
@@ -21,7 +28,7 @@
     <!-- Add New Purchase Button -->
     <a href="{{ route('cashier.create') }}"><button class="add-btn">Tambah Data Kasir</button></a>
     <!-- Purchase Table -->
-    <table>
+    <table id="Table">
         <thead>
             <tr>
                 <th>ID Kasir</th>

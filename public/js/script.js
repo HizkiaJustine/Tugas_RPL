@@ -50,6 +50,26 @@ const dateInput = document.getElementById('date-input');
         input.classList.remove('placeholder-active');
     }
 
-    // Initialize placeholder
-    dateInput.classList.add('placeholder-active');
-    addPlaceholder(dateInput);
+document.getElementById('filterButton').addEventListener('click', function () {
+    const searchQuery = document.getElementById('searchInput').value.toLowerCase(); // Get input value
+    const rows = document.querySelectorAll('#Table tbody tr'); // Select all table rows
+    let visibleRows = 0; // Counter for visible rows
+
+    rows.forEach(row => {
+        const rowText = row.textContent.toLowerCase();
+        if (rowText.includes(searchQuery)) {
+            row.style.display = ''; // Show matching rows
+            visibleRows++;
+        } else {
+            row.style.display = 'none'; // Hide non-matching rows
+        }
+    });
+
+    // Show or hide "no results" message
+    const noResultsMessage = document.getElementById('noResults');
+    if (noResultsMessage) {
+        noResultsMessage.style.display = visibleRows === 0 ? 'block' : 'none';
+    }
+});
+
+    

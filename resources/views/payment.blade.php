@@ -3,13 +3,8 @@
     <x-slot:name>{{ $name }}</x-slot:name>
     <div class="container">
         <div class="filter-bar">
-            <input type="text" placeholder="Search by product, supplier, or ID...">
-            <select>
-              <option>Category</option>
-              <option>Medicine</option>
-              <option>Appointment</option>
-            </select>
-            <button>Filter</button>
+            <input id="searchInput" type="text" placeholder="Search by ID pembayaran, ID Layanan, atau ID Pasien">
+            <button id="filterButton">Filter</button>
         </div>
     </div>
 
@@ -31,8 +26,10 @@
 
     <!-- Add New Purchase Button -->
     <a href="{{ route('payment.create') }}"><button class="add-btn">Tambah Data Pembayaran</button></a>
+    <p id="noResults" style="display: none; text-align: center; color: red;">No matching results found.</p>
+
     <!-- Purchase Table -->
-    <table>
+    <table id="Table">
         <thead>
             <tr>
                 <th>ID Pembayaran</th>
@@ -65,4 +62,5 @@
             @endforeach
         </tbody>
     </table>
+    
 </x-layout-admin>

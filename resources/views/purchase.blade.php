@@ -3,19 +3,8 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="container">
         <div class="filter-bar">
-            <input type="text" placeholder="Search by product, supplier, or ID...">
-            <select>
-              <option>Category</option>
-              <option>Medical Supplies</option>
-              <option>Pharmaceuticals</option>
-            </select>
-            <select>
-              <option>Status</option>
-              <option>Pending</option>
-              <option>Delivered</option>
-              <option>Cancelled</option>
-            </select>
-            <button>Filter</button>
+            <input id="searchInput" type="text" placeholder="Search by ID Pembelian, ID Supplier, ID Obat ...">
+            <button id="filterButton">Filter</button>
         </div>
     </div>
     <!-- Stats Cards -->
@@ -36,7 +25,7 @@
     <!-- Add New Purchase Button -->
     <a href="{{ route('purchase.create') }}"><button class="add-btn">Tambah Data Pembelian</button></a>
     <!-- Purchase Table -->
-    <table>
+    <table id="Table">
         <thead>
             <tr>
                 <th>ID Pembelian</th>
