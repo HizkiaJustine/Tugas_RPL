@@ -39,7 +39,7 @@
                     <a href="profile">Profil Saya</a>
                 @endcan
                 @can('viewRekamMedis', Auth::user())
-                    <a href="">Rekam Medis</a>
+                    <a href="{{ route('rekammedis.show') }}">Rekam Medis</a>
                 @endcan
                 @can('viewAppointment', Auth::user())
                     <a href="{{ route('appointments.show') }}">Appointment</a>

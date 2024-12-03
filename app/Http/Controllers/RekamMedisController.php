@@ -6,6 +6,7 @@ use App\Models\Dokter;
 use App\Models\Pasien;
 use App\Models\Rekammedis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RekamMedisController extends Controller
 {
@@ -88,4 +89,21 @@ class RekamMedisController extends Controller
         $rekamMedis->delete();
         return redirect()->route('info_rekammedis')->with('success', 'Rekam medis berhasil dihapus');
     }
+
+    public function showPatientRecords()
+    {
+        $user = Auth::user();
+        $records = [];
+    
+        if ($user->Role == 'pasien') {
+            $patient = Pasien::where('AccountID', $user->AccountID)->first();
+            if ($patient) {
+                $records = RekamMedis::where('PasienID', $patient->PasienID)
+                    ->with('dokter')
+                    ->get();
+            }
+        }
+    
+        return view('my_rekammedis', compact('records'));
+    }    
 }

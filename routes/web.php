@@ -844,3 +844,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/my-appointments', [AppointmentController::class, 'showAppointments'])->name('appointments.show');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my_rekammedis', [RekamMedisController::class, 'showPatientRecords'])->name('rekammedis.show');
+});

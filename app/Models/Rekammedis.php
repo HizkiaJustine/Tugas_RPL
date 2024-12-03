@@ -21,4 +21,14 @@ class Rekammedis extends Model
         'HasilLab',
     ];
     public $timestamps = false;
+
+    public function dokter()
+    {
+        return $this->belongsTo(Dokter::class, 'DokterID');
+    }
+
+    public function pasien()
+    {
+        return $this->belongsTo(Pasien::class, 'PasienID');
+    }
 }
