@@ -41,8 +41,8 @@ body {
     border-radius: 5px;
 }
 
-/* Notification and Profile*/
-.notification-icon, .profile-icon{
+/* Notification*/
+.notification-icon {
     position: relative;
     display: inline-block;
 }
@@ -50,12 +50,6 @@ body {
 .notification-icon .bi {
     font-size: 24px;
     color: white;
-}
-
-.profile-icon img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
 }
 
 .notification-icon .badge {
@@ -69,7 +63,7 @@ body {
     font-size: 15px;
 }
 
-.notification-icon::before, .profile-icon::before {
+.notification-icon::before {
     content: "";
     position: absolute;
     top: -10px;
@@ -82,16 +76,57 @@ body {
 .dropdown-notifications {
     display: none;
     position: absolute;
-    top: 30px; /* Menempatkan dropdown di bawah ikon */
+    top: 30px; /* Position the dropdown below the icon */
     left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
+    transform: translateX(-60%);
+    width: 300px; /* Increase the width of the dropdown */
     background-color: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 10px;
     padding: 10px;
-    overflow: hidden; /* Menyembunyikan konten yang melampaui batas */
+    overflow: hidden; /* Hide content that overflows */
+}
+
+.dropdown-notifications a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    border-radius: 5px;
+    white-space: normal; /* Allow text to wrap */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis (...) to overflowing text */
+}
+
+.dropdown-notifications a:hover {
+    background-color: #ddd;
+}
+
+.notification-icon:hover .dropdown-notifications {
+    display: block;
+}
+
+/* Profile */
+.profile-icon{
+    position: relative;
+    display: inline-block;
+}
+
+.profile-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.profile-icon::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: transparent;
 }
 
 .dropdown-profile {
@@ -109,7 +144,7 @@ body {
     overflow: hidden; /* Menyembunyikan konten yang melampaui batas */
 }
 
-.dropdown-notifications a, .dropdown-profile a {
+.dropdown-profile a {
     color: black;
     padding: 8px 12px;
     text-decoration: none;
@@ -120,11 +155,11 @@ body {
     text-overflow: ellipsis; /* Menambahkan elipsis (...) pada teks yang terlalu panjang */
 }
 
-.dropdown-notifications a:hover, .dropdown-profile a:hover {
+.dropdown-profile a:hover {
     background-color: #ddd;
 }
 
-.notification-icon:hover .dropdown-notifications, .profile-icon:hover .dropdown-profile {
+.profile-icon:hover .dropdown-profile {
     display: block;
 }
 
