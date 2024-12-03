@@ -44,14 +44,9 @@
               <label for="doctor">Dokter/Spesialis:</label>
               <select id="doctor" name="NamaLayanan" required>
                   <option value="">Pilih Dokter/Spesialis</option>
-                  <option value="Paru-paru">Paru-paru</option>
-                  <option value="Jantung">Jantung</option>
-                  <option value="Obgyn">Obgyn</option>
-                  <option value="Radiologi">Radiologi</option>
-                  <option value="Okupasi">Okupasi</option>
-                  <option value="Rehabilitasi">Rehabilitasi Medik</option>
-                  <option value="Laboratorium">Laboratorium</option>
-                  <option value="Gawat Darurat">Gawat Darurat</option>
+                  @foreach($services as $service)
+                      <option value="{{ $service->NamaLayanan }}">{{ $service->NamaLayanan }}</option>
+                  @endforeach
               </select>
           </div>
 

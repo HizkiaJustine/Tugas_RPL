@@ -570,6 +570,12 @@ Route::get('/payment/delete/{record}', [PaymentController::class, 'destroy'])->n
 Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
 Route::post('/payment/submitted', [PaymentController::class, 'store'])->name('payment.store');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/payment/method', [PaymentController::class, 'showPaymentMethod'])->name('payment.method');
+    Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
+    Route::get('/payment/success', [PaymentController::class, 'showSuccess'])->name('payment.success');
+});
+
 Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index');
 Route::get('/purchase/edit/{record}', [PurchaseController::class, 'edit'])->name('purchase.edit');
 Route::post('/purchase/update/{record}', [PurchaseController::class, 'update'])->name('purchase.update');
@@ -909,4 +915,6 @@ Route::middleware(['auth'])->group(function () {
             abort(403, 'Unauthorized action.');
         }
     })->name('delete_appointment');
+
+    Route::put('/appointments/{id}/cancel', [AppointmentController::class, 'cancel'])->name('appointment.cancel');
 });

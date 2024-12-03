@@ -45,8 +45,9 @@ class AppointmentController extends Controller
     {
         $title = 'Home Page / Reservasi';
         $name = 'Reservasi Janji Temu';
+        $services = Layanan::all(); // Fetch all available services
 
-        return view('appointment', compact('title', 'name'));
+        return view('appointment', compact('title', 'name', 'services'));
     }
 
     /**
@@ -61,37 +62,17 @@ class AppointmentController extends Controller
             'CatatanTambahan' => 'nullable|string',
         ]);
 
-        $user = Auth::user();
-        $account = Account::where('email', $user->email)->first();
-        $patient = Pasien::where('AccountID', $account->AccountID)->first();
-        $patientId = $patient->PasienID;
-
-        $service = Layanan::where('NamaLayanan', $request->NamaLayanan)->first();
-        $serviceId = $service->LayananID;
-
-        $doctor = Dokter::where('LayananID', $serviceId)->first();
-        $doctorId = $doctor->DokterID;
-        $department = $doctor->Departemen;
-
-        $isBooked = Appointment::where('DokterID', $doctorId)
-            ->where('TanggalJanjiTemu', $request->TanggalJanjiTemu)
-            ->where('JamJanjiTemu', $request->JamJanjiTemu)
-            ->exists();
-
-        if ($isBooked) {
-            return redirect()->back()->with('error', 'The selected service is already booked at the chosen date and time.');
-        }
-
-        Appointment::create([
+        // Store appointment data in session
+        $appointmentData = [
             'TanggalJanjiTemu' => $request->TanggalJanjiTemu,
             'JamJanjiTemu' => $request->JamJanjiTemu,
-            'DokterID' => $doctorId,
-            'PasienID' => $patientId,
-            'Tujuan' => 'Konsultasi ' . $department,
-            'Status' => 'Ongoing',
-        ]);
-
-        return redirect()->back()->with('success', 'Appointment created successfully');
+            'NamaLayanan' => $request->NamaLayanan,
+            'CatatanTambahan' => $request->CatatanTambahan
+        ];
+        
+        session(['pending_appointment' => $appointmentData]);
+        
+        return redirect()->route('payment.method');
     }
 
     public function update(Request $request, $id)
@@ -160,5 +141,18 @@ class AppointmentController extends Controller
         }
     
         return view('my_appointment', compact('appointments'));
+    }
+
+    public function cancel($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+        
+        if ($appointment->Status !== 'Ongoing') {
+            return back()->with('error', 'Only ongoing appointments can be cancelled.');
+        }
+        
+        $appointment->update(['Status' => 'Batal']);
+        
+        return back()->with('success', 'Appointment cancelled successfully.');
     }
 }

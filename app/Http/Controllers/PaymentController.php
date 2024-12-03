@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
+use App\Models\Account;
+use App\Models\Pasien;
+use App\Models\Layanan;
+use App\Models\Dokter;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; // Add this line
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -122,5 +128,63 @@ class PaymentController extends Controller
         } else {
             return redirect()->back()->with('error', 'Payment not found or could not be deleted.');
         }
+    }
+
+    public function showPaymentMethod()
+    {
+        if (!session()->has('pending_appointment')) {
+            return redirect()->route('appointment.create');
+        }
+        return view('payment.method');
+    }
+
+    public function processPayment(Request $request)
+    {
+        $request->validate([
+            'MetodePembayaran' => 'required|in:Online,Cash,Credit,Debit card'
+        ]);
+
+        // Get appointment data from session
+        $appointmentData = session('pending_appointment');
+
+        // Find the service and get its price
+        $service = Layanan::where('NamaLayanan', $appointmentData['NamaLayanan'])->first();
+        if (!$service) {
+            return redirect()->back()->with('error', 'Service not found.');
+        }
+
+        $user = Auth::user();
+        $account = Account::where('email', $user->email)->first();
+        $patient = Pasien::where('AccountID', $account->AccountID)->first();
+        $doctor = Dokter::where('LayananID', $service->LayananID)->first();
+
+        // Generate payment record first
+        $payment = Pembayaran::create([
+            'TanggalPembayaran' => now(),
+            'JumlahPembayaran' => floatval($service->HargaLayanan), // Convert to float to ensure proper number formatting
+            'MetodePembayaran' => $request->MetodePembayaran,
+            'LayananID' => $service->LayananID,
+            'PasienID' => $patient->PasienID
+        ]);
+
+        // Create appointment after payment
+        $appointment = Appointment::create([
+            'TanggalJanjiTemu' => $appointmentData['TanggalJanjiTemu'],
+            'JamJanjiTemu' => $appointmentData['JamJanjiTemu'],
+            'DokterID' => $doctor->DokterID,
+            'PasienID' => $patient->PasienID,
+            'Tujuan' => 'Konsultasi ' . $doctor->Departemen,
+            'Status' => 'Ongoing'
+        ]);
+
+        // Clear session data
+        session()->forget('pending_appointment');
+
+        return redirect()->route('payment.success');
+    }
+
+    public function showSuccess()
+    {
+        return view('payment.success');
     }
 }

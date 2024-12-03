@@ -38,6 +38,52 @@
             font-weight: bold;
             color: #007bff;
         }
+        .action-buttons {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .cancel-btn {
+            background: #ff4747;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .cancel-btn:hover {
+            background: #ff3333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 71, 71, 0.2);
+        }
+        .cancel-btn i {
+            font-size: 1.1rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .status-ongoing {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        .status-cancelled {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+        .status-completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
     </style>
 </head>
 <body>
@@ -59,8 +105,26 @@
                     @elseif(Auth::user()->Role == 'dokter')
                         <p>Pasien: {{ $appointment->pasien->NamaPasien }}</p>
                     @endif
-                    <p class="status">Status: {{ $appointment->Status }}</p>
-                    <a href="{{ route('edit_appointment', $appointment->AppointmentID) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                    
+                    <p>
+                        <span class="status-badge status-{{ strtolower($appointment->Status) }}">
+                            Status: {{ $appointment->Status }}
+                        </span>
+                    </p>
+                    
+                    @if($appointment->Status == 'Ongoing')
+                        <div class="action-buttons">
+                            <form action="{{ route('appointment.cancel', $appointment->AppointmentID) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="cancel-btn" 
+                                        onclick="return confirm('Apakah Anda yakin ingin membatalkan janji temu ini?')">
+                                    <i class="bi bi-x-circle"></i>
+                                    Batalkan Janji Temu
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             @endforeach
         </section>
