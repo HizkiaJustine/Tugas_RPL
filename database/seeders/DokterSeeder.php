@@ -49,7 +49,6 @@ class DokterSeeder extends Seeder
             'Departemen' => $layanan1->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
-            'FotoDokter' => 'path/to/photo.jpg',
             'LayananID' => $layanan1->LayananID,
             'AccountID' => $account1->AccountID,
         ]);
@@ -59,7 +58,6 @@ class DokterSeeder extends Seeder
             'Departemen' => $layanan2->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
-            'FotoDokter' => 'path/to/photo.jpg',
             'LayananID' => $layanan2->LayananID,
             'AccountID' => $account2->AccountID,
         ]);
@@ -69,7 +67,6 @@ class DokterSeeder extends Seeder
             'Departemen' => $layanan3->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
-            'FotoDokter' => 'path/to/photo.jpg',
             'LayananID' => $layanan3->LayananID,
             'AccountID' => $account3->AccountID,
         ]);
@@ -79,7 +76,6 @@ class DokterSeeder extends Seeder
             'Departemen' => $layanan4->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
-            'FotoDokter' => 'path/to/photo.jpg',
             'LayananID' => $layanan4->LayananID,
             'AccountID' => $account4->AccountID,
         ]);
@@ -89,7 +85,6 @@ class DokterSeeder extends Seeder
             'Departemen' => $layanan5->NamaLayanan,
             'AlamatDokter' => '123 Main St',
             'NomorHP' => '08123456789',
-            'FotoDokter' => 'path/to/photo.jpg',
             'LayananID' => $layanan5->LayananID,
             'AccountID' => $account5->AccountID,
         ]);
