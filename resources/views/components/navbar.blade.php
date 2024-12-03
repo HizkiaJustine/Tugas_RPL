@@ -25,9 +25,9 @@
         <i class="bi bi-bell"></i>
         <span class="badge">3</span>
         <div class="dropdown-notifications">
-            <a href="#">Notifikasi 1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a>
-            <a href="#">Notifikasi 2</a>
-            <a href="#">Notifikasi 3</a>
+            <a href="#">Anda memiliki jadwal konsultasi dengan dokter John di tanggal 2025/01/01</a>
+            <a href="#">Anda memiliki jadwal konsultasi dengan dokter John di tanggal 2025/01/02</a>
+            <a href="#">Anda memiliki jadwal konsultasi dengan dokter John di tanggal 2025/01/03</a>
         </div>
     </div>
     @auth
