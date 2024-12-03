@@ -9,6 +9,7 @@ use App\Models\Layanan;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Account;
 
 class AppointmentController extends Controller
 {
@@ -37,7 +38,6 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'NamaPasien' => 'required|string',
             'TanggalJanjiTemu' => 'required|date_format:Y-m-d',
             'JamJanjiTemu' => 'required|date_format:H:i',
             'NamaLayanan' => 'required|string',
