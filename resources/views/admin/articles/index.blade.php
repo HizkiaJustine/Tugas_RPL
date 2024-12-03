@@ -3,11 +3,7 @@
     <x-slot:name>Articles Management</x-slot:name>
 
     
-    <div class="flex justify-end mb-4">
-        <a href="{{ route('admin.articles.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Tambah artikel
-        </a>
-    </div>  
+     
     <div class="container">
         <div class="filter-bar mb-4">
             <form action="{{ route('admin.articles.index') }}" method="GET">
@@ -16,7 +12,11 @@
             </form>
         </div>
     </div>
-
+    <div class="flex justify-end mb-4">
+        <a href="{{ route('admin.articles.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Tambah artikel
+        </a>
+    </div> 
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>
