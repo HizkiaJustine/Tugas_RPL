@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +34,7 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">Article ID: {{ $article->articleId }}</h5>
-                                <p class="card-text">{{ $article->content }}</p>
+                                <p class="card-text">{{ Str::limit($article->content, 100) }}</p>
                                 <p class="card-text"><small class="text-muted">Published on: {{ $article->publishDate }}</small></p>
                             </div>
                         </div>

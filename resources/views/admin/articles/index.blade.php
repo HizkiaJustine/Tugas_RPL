@@ -8,7 +8,7 @@
         <div class="filter-bar mb-4">
             <form action="{{ route('admin.articles.index') }}" method="GET">
                 <input id="searchInput" type="text" name="search" placeholder="Search" value="{{ request('search') }}">
-                <button id="filterButton" type="submit">Filter</button>
+                <button style="justify-content:right" id="filterButton" type="submit">Filter</button>
             </form>
         </div>
     </div>
@@ -32,7 +32,7 @@
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $article->articleId }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $article->title }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $article->content }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ Str::limit($article->content, 20) }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $article->publishDate }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <a href="{{ route('admin.articles.edit', $article->articleId) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>

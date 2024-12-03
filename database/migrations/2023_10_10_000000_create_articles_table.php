@@ -10,8 +10,8 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->string('articleId');
-            $table->unsignedBigInteger('dokterID');
-            $table->string('title'); // Add this line
+            $table->string('dokterID');
+            $table->string('title');
             $table->text('content');
             $table->date('publishDate');
             $table->timestamps();

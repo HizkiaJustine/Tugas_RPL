@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dokter extends Model
 {
+    use HasFactory;
 
     protected $table = 'dokter';
     protected $primaryKey = 'DokterID';
@@ -22,4 +23,9 @@ class Dokter extends Model
         'LayananID',
         'AccountID',
     ];
+
+    public function layanan()
+    {
+        return $this->belongsTo(Layanan::class, 'LayananID');
+    }
 }
