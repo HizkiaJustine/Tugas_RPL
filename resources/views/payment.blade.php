@@ -1,7 +1,7 @@
 <x-layout-admin>
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-slot:name>{{ $name }}</x-slot:name>
-    <div class="container">
+    {{-- <div class="container">
         <div class="filter-bar">
             <input type="text" placeholder="Search by product, supplier, or ID...">
             <select>
@@ -11,7 +11,7 @@
             </select>
             <button>Filter</button>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Stats Cards -->
     <div class="stats">
