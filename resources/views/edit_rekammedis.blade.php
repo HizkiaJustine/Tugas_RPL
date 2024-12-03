@@ -38,6 +38,24 @@
                             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="hasilLab">Hasil Lab</label>
                             <textarea name="HasilLab" id="hasilLab" class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" required>{{ $rekamMedis['HasilLab'] }}</textarea>
                         </div>
+                        <div class="w-full px-4 mb-3">
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="hasilKonsultasi">Hasil Konsultasi</label>
+                            <select name="HasilKonsultasi" id="hasilKonsultasi" class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" required>
+                                <option value="Rawat Inap" {{ $rekamMedis['HasilKonsultasi'] == 'Rawat Inap' ? 'selected' : '' }}>Rawat Inap</option>
+                                <option value="Selesai" {{ $rekamMedis['HasilKonsultasi'] == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                                <option value="Rujukan" {{ $rekamMedis['HasilKonsultasi'] == 'Rujukan' ? 'selected' : '' }}>Rujukan</option>
+                            </select>
+                        </div>
+                        <div class="w-full px-4 mb-3" id="rumahSakitRujukanContainer" style="{{ $rekamMedis['HasilKonsultasi'] == 'Rujukan' ? '' : 'display: none;' }}">
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="rumahSakitRujukan">Rumah Sakit Rujukan</label>
+                            <select name="RumahSakitRujukan" id="rumahSakitRujukan" class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full">
+                                <option value="Rumah Sakit Hermina" {{ $rekamMedis['RumahSakitRujukan'] == 'Rumah Sakit Hermina' ? 'selected' : '' }}>Rumah Sakit Hermina</option>
+                                <option value="Rumah Sakit Mitra Keluarga" {{ $rekamMedis['RumahSakitRujukan'] == 'Rumah Sakit Mitra Keluarga' ? 'selected' : '' }}>Rumah Sakit Mitra Keluarga</option>
+                                <option value="Rumah Sakit Cipto Mangunkusumo" {{ $rekamMedis['RumahSakitRujukan'] == 'Rumah Sakit Cipto Mangunkusumo' ? 'selected' : '' }}>Rumah Sakit Cipto Mangunkusumo</option>
+                                <option value="Rumah Sakit Siloam" {{ $rekamMedis['RumahSakitRujukan'] == 'Rumah Sakit Siloam' ? 'selected' : '' }}>Rumah Sakit Siloam</option>
+                                <option value="Rumah Sakit Harapan Kita" {{ $rekamMedis['RumahSakitRujukan'] == 'Rumah Sakit Harapan Kita' ? 'selected' : '' }}>Rumah Sakit Harapan Kita</option>
+                            </select>
+                        </div>
                         <div class="w-full px-4 mt-4">
                             <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Simpan Perubahan</button>
                             <a href="{{ route('info_rekammedis') }}" class="bg-gray-500 text-white font-bold py-2 px-4 rounded">Kembali</a>
@@ -48,3 +66,14 @@
         </div>
     </div>
 </x-layout-admin>
+
+<script>
+    document.getElementById('hasilKonsultasi').addEventListener('change', function () {
+        var rumahSakitRujukanContainer = document.getElementById('rumahSakitRujukanContainer');
+        if (this.value === 'Rujukan') {
+            rumahSakitRujukanContainer.style.display = 'block';
+        } else {
+            rumahSakitRujukanContainer.style.display = 'none';
+        }
+    });
+</script>

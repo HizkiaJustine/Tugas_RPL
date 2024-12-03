@@ -19,6 +19,8 @@ class Rekammedis extends Model
         'Perawatan',
         'ResepObat',
         'HasilLab',
+        'HasilKonsultasi',
+        'RumahSakitRujukan',
     ];
     public $timestamps = false;
 

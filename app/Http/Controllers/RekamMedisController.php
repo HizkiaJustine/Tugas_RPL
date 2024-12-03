@@ -27,7 +27,7 @@ class RekamMedisController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'Tanggal' => 'required|date_format:Y-m-d',
             'NamaPasien' => 'required|string|max:100',
             'NamaDokter' => 'required|string|max:100',
@@ -35,25 +35,29 @@ class RekamMedisController extends Controller
             'Perawatan' => 'required|string',
             'ResepObat' => 'required|string',
             'HasilLab' => 'required|string',
+            'HasilKonsultasi' => 'required|in:Rawat Inap,Selesai,Rujukan',
+            'RumahSakitRujukan' => 'required_if:HasilKonsultasi,Rujukan|in:Rumah Sakit Hermina,Rumah Sakit Mitra Keluarga,Rumah Sakit Cipto Mangunkusumo,Rumah Sakit Siloam,Rumah Sakit Harapan Kita',
         ]);
-
+    
         $pasien = Pasien::where('NamaPasien', $request->NamaPasien)->first();
         $dokter = Dokter::where('NamaDokter', $request->NamaDokter)->first();
-
+    
         if (!$pasien || !$dokter) {
             return redirect()->back()->withErrors(['error' => 'Pasien atau Dokter tidak ditemukan']);
         }
-
+    
         RekamMedis::create([
-            'Tanggal' => $request->Tanggal,
+            'Tanggal' => $validatedData['Tanggal'],
             'PasienID' => $pasien->PasienID,
             'DokterID' => $dokter->DokterID,
-            'HasilDiagnosa' => $request->HasilDiagnosa,
-            'Perawatan' => $request->Perawatan,
-            'ResepObat' => $request->ResepObat,
-            'HasilLab' => $request->HasilLab,
+            'HasilDiagnosa' => $validatedData['HasilDiagnosa'],
+            'Perawatan' => $validatedData['Perawatan'],
+            'ResepObat' => $validatedData['ResepObat'],
+            'HasilLab' => $validatedData['HasilLab'],
+            'HasilKonsultasi' => $validatedData['HasilKonsultasi'],
+            'RumahSakitRujukan' => $validatedData['HasilKonsultasi'] === 'Rujukan' ? $validatedData['RumahSakitRujukan'] : null,
         ]);
-
+    
         return redirect()->route('info_rekammedis')->with('success', 'Data rekam medis berhasil ditambahkan');
     }
 
@@ -67,7 +71,7 @@ class RekamMedisController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'Tanggal' => 'required|date_format:Y-m-d',
             'PasienID' => 'required|string|max:100',
             'DokterID' => 'required|string|max:100',
@@ -75,11 +79,24 @@ class RekamMedisController extends Controller
             'Perawatan' => 'required|string',
             'ResepObat' => 'required|string',
             'HasilLab' => 'required|string',
+            'HasilKonsultasi' => 'required|in:Rawat Inap,Selesai,Rujukan',
+            'RumahSakitRujukan' => 'required_if:HasilKonsultasi,Rujukan|in:Rumah Sakit Hermina,Rumah Sakit Mitra Keluarga,Rumah Sakit Cipto Mangunkusumo,Rumah Sakit Siloam,Rumah Sakit Harapan Kita',
         ]);
-
+    
         $rekamMedis = RekamMedis::findOrFail($id);
-        $rekamMedis->update($request->all());
-
+    
+        $rekamMedis->update([
+            'Tanggal' => $validatedData['Tanggal'],
+            'PasienID' => $validatedData['PasienID'],
+            'DokterID' => $validatedData['DokterID'],
+            'HasilDiagnosa' => $validatedData['HasilDiagnosa'],
+            'Perawatan' => $validatedData['Perawatan'],
+            'ResepObat' => $validatedData['ResepObat'],
+            'HasilLab' => $validatedData['HasilLab'],
+            'HasilKonsultasi' => $validatedData['HasilKonsultasi'],
+            'RumahSakitRujukan' => $validatedData['HasilKonsultasi'] === 'Rujukan' ? $validatedData['RumahSakitRujukan'] : null,
+        ]);
+    
         return redirect()->route('info_rekammedis')->with('success', 'Data rekam medis berhasil diperbarui');
     }
 

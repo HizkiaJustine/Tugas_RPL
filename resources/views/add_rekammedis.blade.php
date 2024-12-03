@@ -67,6 +67,32 @@
                                 <textarea id="HasilLab" name="HasilLab" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Hasil Lab" required></textarea>
                             </div>
                         </div>
+                        <div class="w-full lg:w-12/12 px-4">
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="HasilKonsultasi">
+                                    Hasil Konsultasi
+                                </label>
+                                <select id="HasilKonsultasi" name="HasilKonsultasi" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required>
+                                    <option value="Selesai">Selesai</option>
+                                    <option value="Rawat Inap">Rawat Inap</option>
+                                    <option value="Rujukan">Rujukan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-12/12 px-4" id="RumahSakitRujukanContainer" style="display: none;">
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="RumahSakitRujukan">
+                                    Rumah Sakit Rujukan
+                                </label>
+                                <select id="RumahSakitRujukan" name="RumahSakitRujukan" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                    <option value="Rumah Sakit Hermina">Rumah Sakit Hermina</option>
+                                    <option value="Rumah Sakit Mitra Keluarga">Rumah Sakit Mitra Keluarga</option>
+                                    <option value="Rumah Sakit Cipto Mangunkusumo">Rumah Sakit Cipto Mangunkusumo</option>
+                                    <option value="Rumah Sakit Siloam">Rumah Sakit Siloam</option>
+                                    <option value="Rumah Sakit Harapan Kita">Rumah Sakit Harapan Kita</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="flex justify-end" style="margin-right: 55px; margin-bottom: 20px">
                         <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
@@ -78,3 +104,14 @@
         </div>
     </div>
 </x-layout-admin>
+
+<script>
+    document.getElementById('HasilKonsultasi').addEventListener('change', function () {
+        var rumahSakitRujukanContainer = document.getElementById('RumahSakitRujukanContainer');
+        if (this.value === 'Rujukan') {
+            rumahSakitRujukanContainer.style.display = 'block';
+        } else {
+            rumahSakitRujukanContainer.style.display = 'none';
+        }
+    });
+</script>

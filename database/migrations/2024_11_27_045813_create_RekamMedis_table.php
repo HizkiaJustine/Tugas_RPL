@@ -21,6 +21,8 @@ return new class extends Migration
             $table->text('Perawatan');
             $table->text('ResepObat');
             $table->text('HasilLab');
+            $table->enum('HasilKonsultasi', ['Rawat Inap', 'Selesai', 'Rujukan']);
+            $table->enum('RumahSakitRujukan', ['Rumah Sakit Hermina', 'Rumah Sakit Mitra Keluarga', 'Rumah Sakit Cipto Mangunkusumo', 'Rumah Sakit Siloam', 'Rumah Sakit Harapan Kita'])->nullable();
             $table->foreign(columns: 'DokterID')->references(columns: 'DokterID')->on(table: 'dokter')->onDelete('cascade');
             $table->foreign(columns: 'PasienID')->references(columns: 'PasienID')->on(table: 'pasien')->onDelete('cascade');
         });
