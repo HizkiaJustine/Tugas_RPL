@@ -108,7 +108,13 @@
                     
                     <p>
                         <span class="status-badge status-{{ strtolower($appointment->Status) }}">
-                            Status: {{ $appointment->Status }}
+                            @if($appointment->Status == 'Ongoing')
+                                Sedang Berlangsung
+                            @elseif($appointment->Status == 'Selesai')
+                                Selesai
+                            @else
+                                Dibatalkan
+                            @endif
                         </span>
                     </p>
                     
