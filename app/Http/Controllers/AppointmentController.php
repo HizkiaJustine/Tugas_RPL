@@ -98,7 +98,7 @@ class AppointmentController extends Controller
     {
         $request->validate([
             'TanggalJanjiTemu' => 'required|date',
-            'JamJanjiTemu' => 'required|date_format:H:i',  // Ensures HH:mm format
+            'JamJanjiTemu' => 'required|date_format:H:i',
             'DokterID' => 'required|exists:dokter,DokterID',
             'PasienID' => 'required|exists:pasien,PasienID',
             'Tujuan' => 'required|string',
