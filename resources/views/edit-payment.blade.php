@@ -48,12 +48,18 @@
                     </div>
                     <div class="w-full lg:w-12/12 px-4">
                         <div class="relative w-full mb-3">
-                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                            Metode
-                        </label>
-                        <input type="text" id="metodePembayaran" name="MetodePembayaran" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="{{ $record['MetodePembayaran'] }}">
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="metode">
+                                Metode
+                            </label>
+                            <select id="metodePembayaran" name="MetodePembayaran" class="border-0 px-3 py-3  placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                <option value="" disabled selected>Pilih Metode Pembayaran</option>
+                                <option value="Online" {{ $record['MetodePembayaran'] === 'Online' ? 'selected' : '' }}>Online</option>
+                                <option value="Cash" {{ $record['MetodePembayaran'] === 'Cash' ? 'selected' : '' }}>Tunai</option>
+                                <option value="Credit" {{ $record['MetodePembayaran'] === 'Credit' ? 'selected' : '' }}>Kredit</option>
+                                <option value="Debit card" {{ $record['MetodePembayaran'] === 'Debit card' ? 'selected' : '' }}>Kartu Debit</option>
+                            </select>
                         </div>
-                    </div>
+                    </div> 
                     <div class="w-full lg:w-12/12 px-4">
                         <div class="relative w-full mb-3">
                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
