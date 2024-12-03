@@ -9,6 +9,7 @@ use App\Models\Layanan;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AppointmentController extends Controller
 {
@@ -29,9 +30,12 @@ class AppointmentController extends Controller
     public function edit($id)
     {
         $appointment = Appointment::findOrFail($id);
+        $doctors = Dokter::all();
+        $patients = Pasien::all();
         $title = "Data";
         $name = "Edit Janji Temu";
-        return view('edit_appointment', compact('appointment', 'title', 'name'));
+        
+        return view('edit_appointment', compact('appointment', 'doctors', 'patients', 'title', 'name'));
     }
 
     /**
@@ -93,18 +97,35 @@ class AppointmentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'TanggalJanjiTemu' => 'required|date_format:Y-m-d',
-            'JamJanjiTemu' => 'required|date_format:H:i',
-            'DokterID' => 'required|string|exists:dokter,DokterID',
-            'PasienID' => 'required|string|exists:pasien,PasienID',
-            'Tujuan' => 'required|string|max:255',
+            'TanggalJanjiTemu' => 'required|date',
+            'JamJanjiTemu' => 'required|date_format:H:i',  // Ensures HH:mm format
+            'DokterID' => 'required|exists:dokter,DokterID',
+            'PasienID' => 'required|exists:pasien,PasienID',
+            'Tujuan' => 'required|string',
             'Status' => 'required|in:Selesai,Batal,Ongoing',
         ]);
 
         $appointment = Appointment::findOrFail($id);
-        $appointment->update($request->all());
+        
+        // Format the time to ensure it's stored correctly
+        $data = $request->all();
+        $data['JamJanjiTemu'] = $request->JamJanjiTemu . ':00';
 
-        return redirect()->route('info_appointment')->with('success', 'Janji temu berhasil diperbarui');
+        // Check if the selected time slot is available
+        $isBooked = Appointment::where('DokterID', $request->DokterID)
+            ->where('TanggalJanjiTemu', $request->TanggalJanjiTemu)
+            ->where('JamJanjiTemu', $data['JamJanjiTemu'])
+            ->where('AppointmentID', '!=', $id)
+            ->exists();
+
+        if ($isBooked) {
+            return back()->withErrors(['message' => 'The selected time slot is already booked.']);
+        }
+
+        $appointment->update($data);
+        
+        return redirect()->route('info_appointment')
+            ->with('success', 'Janji temu berhasil diperbarui');
     }
 
     /**

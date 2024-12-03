@@ -60,6 +60,7 @@
                         <p>Pasien: {{ $appointment->pasien->NamaPasien }}</p>
                     @endif
                     <p class="status">Status: {{ $appointment->Status }}</p>
+                    <a href="{{ route('edit_appointment', $appointment->AppointmentID) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                 </div>
             @endforeach
         </section>
