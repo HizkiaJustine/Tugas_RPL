@@ -19,6 +19,7 @@
                 <x-nav-link href="/supplier" :active="request()->is('/supplier')">Supplier</x-nav-link>
                 <x-nav-link href="/dokter" :active="request()->is('/dokter')">Dokter</x-nav-link>
                 <x-nav-link href="/admin/article" :active="request()->is('/admin/article')">Articles</x-nav-link>
+                <x-nav-link href="/appointments" :active="request()->is('/appointments')">Appointment</x-nav-link>
                 <x-nav-link></x-nav-link>
             </div>
             </div>

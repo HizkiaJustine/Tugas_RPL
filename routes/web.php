@@ -848,3 +848,65 @@ Route::get('/my-appointments', [AppointmentController::class, 'showAppointments'
 Route::middleware(['auth'])->group(function () {
     Route::get('/my_rekammedis', [RekamMedisController::class, 'showPatientRecords'])->name('rekammedis.show');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/appointments', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(AppointmentController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_appointment');
+
+    Route::get('/appointments/create', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(AppointmentController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_appointment');
+
+    Route::post('/appointments', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(AppointmentController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_appointment');
+
+    Route::get('/appointments/{id}/edit', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(AppointmentController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_appointment');
+
+    Route::put('/appointments/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(AppointmentController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_appointment');
+
+    Route::delete('/appointments/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(AppointmentController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_appointment');
+});

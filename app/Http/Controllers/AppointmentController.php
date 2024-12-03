@@ -9,7 +9,6 @@ use App\Models\Layanan;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Account;
 
 class AppointmentController extends Controller
 {
@@ -18,7 +17,21 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $appointments = Appointment::all();
+        $title = "Data";
+        $name = "Informasi Janji Temu";
+        return view('info_appointment', compact('appointments', 'title', 'name'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+        $title = "Data";
+        $name = "Edit Janji Temu";
+        return view('edit_appointment', compact('appointment', 'title', 'name'));
     }
 
     /**
@@ -77,36 +90,31 @@ class AppointmentController extends Controller
         return redirect()->back()->with('success', 'Appointment created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(appointment $appointment)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        $request->validate([
+            'TanggalJanjiTemu' => 'required|date_format:Y-m-d',
+            'JamJanjiTemu' => 'required|date_format:H:i',
+            'DokterID' => 'required|string|exists:dokter,DokterID',
+            'PasienID' => 'required|string|exists:pasien,PasienID',
+            'Tujuan' => 'required|string|max:255',
+            'Status' => 'required|in:Selesai,Batal,Ongoing',
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(appointment $appointment)
-    {
-        //
-    }
+        $appointment = Appointment::findOrFail($id);
+        $appointment->update($request->all());
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, appointment $appointment)
-    {
-        //
+        return redirect()->route('info_appointment')->with('success', 'Janji temu berhasil diperbarui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(appointment $appointment)
+    public function destroy($id)
     {
-        //
+        $appointment = Appointment::findOrFail($id);
+        $appointment->delete();
+        return redirect()->route('info_appointment')->with('success', 'Janji temu berhasil dihapus');
     }
 
     public function showAppointments()
