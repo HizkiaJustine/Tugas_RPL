@@ -20,11 +20,12 @@
                 <x-nav-link href="/dokter" :active="request()->is('/dokter')">Dokter</x-nav-link>
                 <x-nav-link href="/admin/article" :active="request()->is('/admin/article')">Articles</x-nav-link>
                 <x-nav-link href="/appointments" :active="request()->is('/appointments')">Appointment</x-nav-link>
-                <x-nav-link></x-nav-link>
+                <x-nav-link href="/karyawan" :active="request()->is('/karyawan')">Karyawan</x-nav-link>
+                <x-nav-link href="/akun" :active="request()->is('/akun')">Account</x-nav-link>
             </div>
             </div>
         </div>
-        <div class="hidden md:block">
+        {{-- <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
             <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span class="absolute -inset-1.5"></span>
@@ -60,7 +61,7 @@
                 </div>
             </div>
             </div>
-        </div>
+        </div> --}}
         <div class="-mr-2 flex md:hidden">
             <!-- Mobile menu button -->
             <button type="button" @click="isOpen = !isOpen"

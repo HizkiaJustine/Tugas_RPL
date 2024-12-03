@@ -2,11 +2,11 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-slot:name>{{ $name }}</x-slot:name>
 
-    <div class="flex justify-end mb-4">
+    {{-- <div class="flex justify-end mb-4">
         <a href="{{ route('create_appointment') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Tambah Janji Temu
         </a>
-    </div>
+    </div> --}}
 
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
