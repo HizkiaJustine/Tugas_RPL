@@ -2,12 +2,12 @@
     <x-slot:title>Articles</x-slot:title>
     <x-slot:name>Articles Management</x-slot:name>
 
+    
     <div class="flex justify-end mb-4">
         <a href="{{ route('admin.articles.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Create New Article
+            Tambah artikel
         </a>
-    </div>
-
+    </div>  
     <div class="container">
         <div class="filter-bar mb-4">
             <form action="{{ route('admin.articles.index') }}" method="GET">
