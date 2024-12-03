@@ -2,13 +2,20 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-slot:name>{{ $name }}</x-slot:name>
 
+    <div class="container">
+        <div class="filter-bar">
+            <input id="searchInput" type="text" placeholder="Search by ID...">
+            <button id="filterButton">Filter</button>
+        </div>
+    </div>
+
     <div class="flex justify-end mb-4">
         <a href="{{ route('create_supplier') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Tambah Supplier
         </a>
     </div>
 
-    <table class="min-w-full divide-y divide-gray-200">
+    <table class="min-w-full divide-y divide-gray-200" id="Table">
         <thead class="bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">ID</th>

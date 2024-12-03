@@ -3,11 +3,10 @@
     <x-slot:name>{{ $name }}</x-slot:name>
     <div class="container">
         <div class="filter-bar">
-            <input id="searchInput" type="text" placeholder="Search by ID pembayaran, ID Layanan, atau ID Pasien">
+            <input id="searchInput" type="text" placeholder="Search by ID pembayaran, ID Layanan, ID Pasien ...">
             <button id="filterButton">Filter</button>
         </div>
     </div>
-
     <!-- Stats Cards -->
     <div class="stats">
         <div class="stat-card">
