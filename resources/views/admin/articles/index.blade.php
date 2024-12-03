@@ -8,6 +8,15 @@
         </a>
     </div>
 
+    <div class="container">
+        <div class="filter-bar mb-4">
+            <form action="{{ route('admin.articles.index') }}" method="GET">
+                <input id="searchInput" type="text" name="search" placeholder="Search" value="{{ request('search') }}">
+                <button id="filterButton" type="submit">Filter</button>
+            </form>
+        </div>
+    </div>
+
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>
