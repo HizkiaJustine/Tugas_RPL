@@ -29,11 +29,11 @@
     @endcan
     <div class="notification-icon">
         <i class="bi bi-bell"></i>
-        <span class="badge">3</span>
+        <span class="badge">{{ $appointments->count() }}</span>
         <div class="dropdown-notifications">
-            <a href="#">Anda memiliki jadwal konsultasi dengan dokter John di tanggal 2025/01/01</a>
-            <a href="#">Anda memiliki jadwal konsultasi dengan dokter John di tanggal 2025/01/02</a>
-            <a href="#">Anda memiliki jadwal konsultasi dengan dokter John di tanggal 2025/01/03</a>
+            @foreach($appointments as $appointment)
+                <a href="#">Anda memiliki jadwal konsultasi di tanggal {{ $appointment->TanggalJanjiTemu }} dengan dokter {{ $appointment->dokter->NamaDokter }}</a>
+            @endforeach
         </div>
     </div>
     @endauth
