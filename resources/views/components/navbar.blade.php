@@ -24,6 +24,9 @@
     @can('viewProfile', Auth::user())
     <a href="{{ route('appointment.create') }}">Reservasi</a>
     @endcan
+    @can('viewAdmin', Auth::user())
+    <a href="/obat">Admin Dashboard</a>
+    @endcan
     <div class="notification-icon">
         <i class="bi bi-bell"></i>
         <span class="badge">3</span>

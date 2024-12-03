@@ -19,6 +19,11 @@ class AccountPolicy
         return $account->Role === 'pasien';
     }
 
+    public function viewAdmin(Account $account)
+    {
+        return $account->Role === 'administrator';
+    }
+
     public function viewAppointment(Account $account)
     {
         return in_array($account->Role, ['pasien', 'dokter']);
