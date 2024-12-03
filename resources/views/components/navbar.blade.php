@@ -20,7 +20,10 @@
     <a href="about" class="{{ request()->is('about') ? 'nav-active' : ''}}">Tentang RSIBDA</a>
     <a href="articles">Artikel</a>
     <a href="/forum">Forum</a>
+    @auth
+    @can('viewProfile', Auth::user())
     <a href="{{ route('appointment.create') }}">Reservasi</a>
+    @endcan
     <div class="notification-icon">
         <i class="bi bi-bell"></i>
         <span class="badge">3</span>
@@ -30,6 +33,7 @@
             <a href="#">Anda memiliki jadwal konsultasi dengan dokter John di tanggal 2025/01/03</a>
         </div>
     </div>
+    @endauth
     @auth
         <!-- Profile Icon -->
         <div class="profile-icon">
