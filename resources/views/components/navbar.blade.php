@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <a href="about" class="{{ request()->is('about') ? 'nav-active' : ''}}">Tentang RSUI</a>
+    <a href="about" class="{{ request()->is('about') ? 'nav-active' : ''}}">Tentang RSIBDA</a>
     <a href="articles">Artikel</a>
     <a href="/forum">Forum</a>
     <a href="{{ route('appointment.create') }}">Reservasi</a>
