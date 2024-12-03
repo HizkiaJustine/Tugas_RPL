@@ -30,6 +30,10 @@ function navigate_to_reservation() {
     window.location.href = '/reservation';
 }
 
+function navigate_to_appointment() {
+    window.location.href = '/appointment';
+}
+
 const dateInput = document.getElementById('date-input');
 
     // Initial placeholder value

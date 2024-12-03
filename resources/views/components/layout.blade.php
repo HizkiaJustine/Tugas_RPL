@@ -13,7 +13,7 @@
 
     <div class="container">
         {{ $slot }}
-        <button class="Btn-Container" onclick="navigate_to_reservation()">
+        <button class="Btn-Container" onclick="navigate_to_appointment()">
             <span class="text">Cari Dokter!</span>
             <span class="icon-Container">
                 <svg
