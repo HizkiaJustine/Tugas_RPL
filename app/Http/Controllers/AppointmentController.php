@@ -35,7 +35,6 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'NamaPasien' => 'required|string',
             'TanggalJanjiTemu' => 'required|date_format:Y-m-d',
@@ -43,38 +42,34 @@ class AppointmentController extends Controller
             'NamaLayanan' => 'required|string',
             'CatatanTambahan' => 'nullable|string',
         ]);
-        
+
+        $user = Auth::user();
+        $account = Account::where('email', $user->email)->first();
+        $patient = Pasien::where('AccountID', $account->AccountID)->first();
+        $patientId = $patient->PasienID;
 
         $service = Layanan::where('NamaLayanan', $request->NamaLayanan)->first();
         $serviceId = $service->LayananID;
 
-
-        // Find the patient by name
-        $patient = Pasien::where('NamaPasien', $request->NamaPasien)->first();
-        $patientId = $patient->PasienID;
-
-        // Find the docter by layananID
         $doctor = Dokter::where('LayananID', $serviceId)->first();
         $doctorId = $doctor->DokterID;
         $department = $doctor->Departemen;
 
-        // Check if the service is already booked at the same date and time
-        $isBooked = appointment::where('DokterID', $doctorId)
+        $isBooked = Appointment::where('DokterID', $doctorId)
             ->where('TanggalJanjiTemu', $request->TanggalJanjiTemu)
             ->where('JamJanjiTemu', $request->JamJanjiTemu)
             ->exists();
 
         if ($isBooked) {
-            return redirect()->back()->with('error', 'The selected service is already booked at the chosen date and time.');        
+            return redirect()->back()->with('error', 'The selected service is already booked at the chosen date and time.');
         }
 
-        // Create a new reservation
-        appointment::create([
+        Appointment::create([
             'TanggalJanjiTemu' => $request->TanggalJanjiTemu,
             'JamJanjiTemu' => $request->JamJanjiTemu,
             'DokterID' => $doctorId,
             'PasienID' => $patientId,
-            'Tujuan' => 'Konsultasi' . $department,
+            'Tujuan' => 'Konsultasi ' . $department,
             'Status' => 'Ongoing',
         ]);
 
