@@ -24,9 +24,16 @@
     @can('viewProfile', Auth::user())
     <a href="{{ route('appointment.create') }}">Reservasi</a>
     @endcan
-    @can('viewAdmin', Auth::user())
+    @can('viewAdminOnly', Auth::user())
     <a href="/obat">Admin Dashboard</a>
     @endcan
+    @can('viewAdminPayment', Auth::user())
+    <a href="/payment">Admin Dashboard</a>
+    @endcan
+    @can('viewAdminRekamMedis', Auth::user())
+    <a href="/rekam-medis">Admin Dashboard</a>
+    @endcan
+    @can('viewNotification', Auth::user())
     <div class="notification-icon">
         <i class="bi bi-bell"></i>
         <span class="badge">{{ $appointments->count() }}</span>
@@ -36,6 +43,7 @@
             @endforeach
         </div>
     </div>
+    @endcan
     @endauth
     @auth
         <!-- Profile Icon -->

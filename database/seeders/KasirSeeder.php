@@ -18,7 +18,7 @@ class KasirSeeder extends Seeder
         // Buat akun kasir
         $account = Account::create([
             'email' => 'kasir1@example.com',
-            'password' => Hash::make('123'), // Password diatur sebagai "123"
+            'password' => Hash::make('password'), // Password diatur sebagai "123"
             'Role' => 'Kasir',
         ]);
 

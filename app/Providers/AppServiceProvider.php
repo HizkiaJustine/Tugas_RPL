@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Appointment;
+use App\Models\Dokter;
 use App\Models\Pasien;
+use App\Models\Appointment;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,16 @@ class AppServiceProvider extends ServiceProvider
                 $patient = Pasien::where('AccountID', $user->AccountID)->first();
                 if ($patient) {
                     $appointments = Appointment::where('PasienID', $patient->PasienID)
+                        ->where('Status', 'Ongoing')
+                        ->orderBy('TanggalJanjiTemu')
+                        ->get();
+                }
+            }
+
+            if ($user && $user->Role == 'dokter') {
+                $dokter = Dokter::where('AccountID', $user->AccountID)->first();
+                if ($dokter) {
+                    $appointments = Appointment::where('DokterID', $dokter->DokterID)
                         ->where('Status', 'Ongoing')
                         ->orderBy('TanggalJanjiTemu')
                         ->get();

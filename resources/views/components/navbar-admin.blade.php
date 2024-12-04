@@ -8,6 +8,7 @@
             <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                @can('viewAdminOnly', Auth::user())
                 <x-nav-link href="/obat" :active="request()->is('/obat')">Obat</x-nav-link>
                 <x-nav-link href="/purchase" :active="request()->is('/purchase')">Pembelian</x-nav-link>
                 <x-nav-link href="/payment" :active="request()->is('/payment')">Pembayaran</x-nav-link>
@@ -22,6 +23,13 @@
                 <x-nav-link href="/appointments" :active="request()->is('/appointments')">Appointment</x-nav-link>
                 <x-nav-link href="/karyawan" :active="request()->is('/karyawan')">Karyawan</x-nav-link>
                 <x-nav-link href="/akun" :active="request()->is('/akun')">Account</x-nav-link>
+                @endcan
+                @can('viewAdminPayment', Auth::user())
+                <x-nav-link href="/payment" :active="request()->is('/payment')">Pembayaran</x-nav-link>
+                @endcan
+                @can('viewAdminRekamMedis', Auth::user())
+                <x-nav-link href="/rekam-medis" :active="request()->is('/rekam-medis')">Rekam Medis</x-nav-link>
+                @endcan
             </div>
             </div>
         </div>

@@ -113,16 +113,13 @@ Route::middleware(['auth'])->group(function () {
             abort(403, 'Unauthorized action.');
         }
     });
-    Route::post('/resepobat', [ResepObatController::class, 'store'])->name('store_resepobat');
-    Route::get('/resepobat/create', [ResepObatController::class, 'create'])->name('create_resepobat');
-    Route::post('/resepobat', [ResepObatController::class, 'store'])->name('info_resepobat');
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/obat', function () {
         $user = Auth::user();
         $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
-        if ($role === 'administrator') {
+        if ($role === 'administrator' or $role === 'dokter' or $role === 'kasir') {
             return app(ObatController::class)->index();
         } else {
             abort(403, 'Unauthorized action.');
@@ -305,12 +302,67 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::get('/layanan', [LayananController::class, 'index'])->name('info_layanan');
-Route::get('/edit_layanan/{id}', [LayananController::class, 'edit'])->name('edit_layanan');
-Route::delete('/delete_layanan/{id}', [LayananController::class, 'destroy'])->name('delete_layanan');
-Route::put('/update_layanan/{id}', [LayananController::class, 'update'])->name('update_layanan');
-Route::get('/layanan/create', [LayananController::class, 'create'])->name('create_layanan');
-Route::post('/layanan/store', [LayananController::class, 'store'])->name('store_layanan');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/layanan', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(LayananController::class)->index();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('info_layanan');
+
+    Route::get('/edit_layanan/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(LayananController::class)->edit($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('edit_layanan');
+
+    Route::delete('/delete_layanan/{id}', function ($id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(LayananController::class)->destroy($id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('delete_layanan');
+
+    Route::put('/update_layanan/{id}', function (Request $request, $id) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(LayananController::class)->update($request, $id);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('update_layanan');
+
+    Route::get('/layanan/create', function () {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(LayananController::class)->create();
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('create_layanan');
+
+    Route::post('/layanan/store', function (Request $request) {
+        $user = Auth::user();
+        $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
+        if ($role === 'administrator') {
+            return app(LayananController::class)->store($request);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    })->name('store_layanan');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/karyawan', function () {
@@ -667,7 +719,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rekam-medis', function () {
         $user = Auth::user();
         $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
-        if ($role === 'administrator') {
+        if ($role === 'administrator' or $role === 'dokter') {
             return app(RekamMedisController::class)->index();
         } else {
             abort(403, 'Unauthorized action.');
@@ -677,7 +729,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rekam-medis/create', function () {
         $user = Auth::user();
         $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
-        if ($role === 'administrator') {
+        if ($role === 'administrator' or $role === 'dokter') {
             return app(RekamMedisController::class)->create();
         } else {
             abort(403, 'Unauthorized action.');
@@ -687,7 +739,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/rekam-medis', function (Request $request) {
         $user = Auth::user();
         $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
-        if ($role === 'administrator') {
+        if ($role === 'administrator' or $role === 'dokter') {
             return app(RekamMedisController::class)->store($request);
         } else {
             abort(403, 'Unauthorized action.');
@@ -697,7 +749,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rekam-medis/{id}/edit', function ($id) {
         $user = Auth::user();
         $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
-        if ($role === 'administrator') {
+        if ($role === 'administrator' or $role === 'dokter') {
             return app(RekamMedisController::class)->edit($id);
         } else {
             abort(403, 'Unauthorized action.');
@@ -707,7 +759,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/rekam-medis/{id}', function (Request $request, $id) {
         $user = Auth::user();
         $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
-        if ($role === 'administrator') {
+        if ($role === 'administrator' or $role === 'dokter') {
             return app(RekamMedisController::class)->update($request, $id);
         } else {
             abort(403, 'Unauthorized action.');
@@ -717,7 +769,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/rekam-medis/{id}', function ($id) {
         $user = Auth::user();
         $role = Account::where('email', $user->email)->first()->Role ?? 'Role not set';
-        if ($role === 'administrator') {
+        if ($role === 'administrator' or $role === 'dokter') {
             return app(RekamMedisController::class)->destroy($id);
         } else {
             abort(403, 'Unauthorized action.');
